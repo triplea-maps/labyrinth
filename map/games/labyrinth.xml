@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<!DOCTYPE game SYSTEM "game.dtd">
+<game>
+    <info name="Twelve Clans" version="1.0"/>
+    <loader javaClass="games.strategy.triplea.TripleA"/>
+    <triplea minimumVersion="1.9"/>
+    <diceSides value="8"/>
+
+</game>
