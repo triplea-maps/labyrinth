@@ -1,4 +1,2 @@
-Hero  (2056,4021) 
-Maze  (50,50) 
-Hero_large  (50,50) 
-Maze_large  (50,50) 
+Endgame  (1928,1917) 
+The Precipice  (2070,4019) 
