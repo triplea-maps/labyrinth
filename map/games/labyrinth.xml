@@ -1,9 +1,533 @@
 <?xml version="1.0"?>
 <!DOCTYPE game SYSTEM "game.dtd">
 <game>
-    <info name="Twelve Clans" version="1.0"/>
+    <info name="Labyrinth" version="1.0"/>
     <loader javaClass="games.strategy.triplea.TripleA"/>
     <triplea minimumVersion="1.9"/>
     <diceSides value="8"/>
+
+    <map>
+        <!-- Territory Definitions -->
+        <territory name="Outer Northwestern Ridge"/>
+        <territory name="Outer NW Path 6"/>
+        <territory name="Outer NW Path 7"/>
+        <territory name="Outer NW Path 8"/>
+        <territory name="Outer NW Path 9"/>
+        <territory name="Outer NW Path 10"/>
+        <territory name="Outer North Path"/>
+        <territory name="Outer NE Path 10"/>
+        <territory name="Outer NE Path 9"/>
+        <territory name="Outer NE Path 8"/>
+        <territory name="Outer NE Path 7"/>
+        <territory name="Outer NE Path 6"/>
+        <territory name="Outer Northeastern Ridge"/>
+        <territory name="Outer NW Path 5"/>
+        <territory name="Inner Northwestern Ridge 1"/>
+        <territory name="Inner NW Path 4"/>
+        <territory name="Inner NW Path 3"/>
+        <territory name="Inner NW Path 2"/>
+        <territory name="Inner NW Path 1"/>
+        <territory name="Inner North Path 1"/>
+        <territory name="Inner NE Path 1"/>
+        <territory name="Inner NE Path 2"/>
+        <territory name="Inner NE Path 3"/>
+        <territory name="Inner NE Path 4"/>
+        <territory name="Inner Northeastern Ridge 1"/>
+        <territory name="Outer NE Path 5"/>
+        <territory name="Outer NW Path 4"/>
+        <territory name="Inner NW Path 5"/>
+        <territory name="Inner Northwestern Ridge 2"/>
+        <territory name="Inner NW Path 12"/>
+        <territory name="Inner NW Path 13"/>
+        <territory name="Inner NW Path 14"/>
+        <territory name="Inner North Path 2"/>
+        <territory name="Inner NE Path 14"/>
+        <territory name="Inner NE Path 13"/>
+        <territory name="Inner NE Path 12"/>
+        <territory name="Inner Northeastern Ridge 2"/>
+        <territory name="Inner NE Path 5"/>
+        <territory name="Outer NE Path 4"/>
+        <territory name="Outer NW Path 3"/>
+        <territory name="Inner NW Path 6"/>
+        <territory name="Inner NW Path 11"/>
+        <territory name="Inner Northwestern Ridge 3"/>
+        <territory name="Inner NW Path 16"/>
+        <territory name="Inner NW Path 15"/>
+        <territory name="Inner North Path 3"/>
+        <territory name="Inner NE Path 15"/>
+        <territory name="Inner NE Path 16"/>
+        <territory name="Inner Northeastern Ridge 3"/>
+        <territory name="Inner NE Path 11"/>
+        <territory name="Inner NE Path 6"/>
+        <territory name="Outer NE Path 3"/>
+        <territory name="Outer NW Path 2"/>
+        <territory name="Inner NW Path 7"/>
+        <territory name="Inner NW Path 10"/>
+        <territory name="Inner NW Path 17"/>
+        <territory name="Inner Northwestern Ridge 4"/>
+        <territory name="Inner NW Path 20"/>
+        <territory name="Inner North Path 4"/>
+        <territory name="Inner NE Path 20"/>
+        <territory name="Inner Northeastern Ridge 4"/>
+        <territory name="Inner NE Path 17"/>
+        <territory name="Inner NE Path 10"/>
+        <territory name="Inner NE Path 7"/>
+        <territory name="Outer NE Path 2"/>
+        <territory name="Outer NW Path 1"/>
+        <territory name="Inner NW Path 8"/>
+        <territory name="Inner NW Path 9"/>
+        <territory name="Inner NW Path 18"/>
+        <territory name="Inner NW Path 19"/>
+        <territory name="Inner Northwestern Ridge 5"/>
+        <territory name="Inner NW Path 21"/>
+        <territory name="Inner North Ridge"/>
+        <territory name="Inner Northeastern Ridge 5"/>
+        <territory name="Inner NE Path 19"/>
+        <territory name="Inner NE Path 18"/>
+        <territory name="Inner NE Path 9"/>
+        <territory name="Inner NE Path 8"/>
+        <territory name="Outer NE Path 1"/>
+        <territory name="Outer West Path North"/>
+        <territory name="Inner West Path North 1"/>
+        <territory name="Inner West Path North 2"/>
+        <territory name="Inner West Path North 3"/>
+        <territory name="Inner West Path North 4"/>
+        <territory name="Inner West Path North 5"/>
+        <territory name="Endgame"/>
+        <territory name="Inner East Path North 5"/>
+        <territory name="Inner East Path North 4"/>
+        <territory name="Inner East Path North 3"/>
+        <territory name="Inner East Path North 2"/>
+        <territory name="Inner East Path North 1"/>
+        <territory name="Outer East Path North"/>
+        <territory name="Outer West Path South"/>
+        <territory name="Inner West Path South 1"/>
+        <territory name="Inner West Path South 2"/>
+        <territory name="Inner West Path South 3"/>
+        <territory name="Inner West Path South 4"/>
+        <territory name="Inner West Path South 5"/>
+        <territory name="Final Boss"/>
+        <territory name="Inner East Path South 5"/>
+        <territory name="Inner East Path South 4"/>
+        <territory name="Inner East Path South 3"/>
+        <territory name="Inner East Path South 2"/>
+        <territory name="Inner East Path South 1"/>
+        <territory name="Outer East Path South"/>
+        <territory name="Outer SW Path 9"/>
+        <territory name="Inner SW Path 1"/>
+        <territory name="Inner SW Path 13"/>
+        <territory name="Inner SW Path 14"/>
+        <territory name="Inner SW Path 20"/>
+        <territory name="Inner Southwestern Ridge 5"/>
+        <territory name="Scenic Vista"/>
+        <territory name="Inner Southeastern Ridge 5"/>
+        <territory name="Inner SE Path 19"/>
+        <territory name="Inner SE Path 14"/>
+        <territory name="Inner SE Path 13"/>
+        <territory name="Inner SE Path 1"/>
+        <territory name="Outer SE Path 9"/>
+        <territory name="Outer SW Path 8"/>
+        <territory name="Inner SW Path 2"/>
+        <territory name="Inner SW Path 12"/>
+        <territory name="Inner SW Path 15"/>
+        <territory name="Inner Southwestern Ridge 4"/>
+        <territory name="Inner SW Path 19"/>
+        <territory name="Inner SW Path 18"/>
+        <territory name="Inner South Path 2"/>
+        <territory name="Inner SE Path 18"/>
+        <territory name="Inner Southeastern Ridge 4"/>
+        <territory name="Inner SE Path 15"/>
+        <territory name="Inner SE Path 12"/>
+        <territory name="Inner SE Path 2"/>
+        <territory name="Outer SE Path 8"/>
+        <territory name="Outer SW Path 7"/>
+        <territory name="Inner SW Path 3"/>
+        <territory name="Inner SW Path 11"/>
+        <territory name="Inner Southwestern Ridge 3"/>
+        <territory name="Inner SW Path 16"/>
+        <territory name="Inner SW Path 17"/>
+        <territory name="South Ridge 2"/>
+        <territory name="Inner SE Path 17"/>
+        <territory name="Inner SE Path 16"/>
+        <territory name="Inner Southeastern Ridge 3"/>
+        <territory name="Inner SE Path 11"/>
+        <territory name="Inner SE Path 3"/>
+        <territory name="Outer SE Path 7"/>
+        <territory name="Outer SW Path 6"/>
+        <territory name="Inner SW Path 4"/>
+        <territory name="Inner Southwestern Ridge 2"/>
+        <territory name="Inner SW Path 10"/>
+        <territory name="Inner SW Path 9"/>
+        <territory name="Inner SW Path 8"/>
+        <territory name="Inner South Path 1"/>
+        <territory name="Inner SE Path 8"/>
+        <territory name="Inner SE Path 9"/>
+        <territory name="Inner SE Path 10"/>
+        <territory name="Inner Southeastern Ridge 2"/>
+        <territory name="Inner SE Path 4"/>
+        <territory name="Outer SE Path 6"/>
+        <territory name="Outer SW Path 5"/>
+        <territory name="Inner Southwestern Ridge 1"/>
+        <territory name="Inner SW Path 5"/>
+        <territory name="Inner SW Path 6"/>
+        <territory name="Inner SW Path 7"/>
+        <territory name="South Ridge 1"/>
+        <territory name="Inner SE Path 7"/>
+        <territory name="Inner SE Path 6"/>
+        <territory name="Inner SE Path 5"/>
+        <territory name="Inner Southeastern Ridge 1"/>
+        <territory name="Outer SE Path 5"/>
+        <territory name="Outer Southwestern Ridge"/>
+        <territory name="Outer SW Path 4"/>
+        <territory name="Outer SW Path 3"/>
+        <territory name="Outer SW Path 2"/>
+        <territory name="Outer SW Path 1"/>
+        <territory name="Entrance"/>
+        <territory name="Outer SE Path 1"/>
+        <territory name="Outer SE Path 2"/>
+        <territory name="Outer SE Path 3"/>
+        <territory name="Outer SE Path 4"/>
+        <territory name="Outer Southeastern Ridge"/>
+        <territory name="The Precipice"/>
+
+        <!-- Territory Connections -->
+        <connection t1="The Precipice" t2="Entrance"/>
+        <connection t1="Entrance" t2="Outer SW Path 1"/>
+        <connection t1="Entrance" t2="Outer SE Path 1"/>
+        <connection t1="Outer SW Path 1" t2="Outer SW Path 2"/>
+        <connection t1="Outer SW Path 2" t2="Outer SW Path 3"/>
+        <connection t1="Outer SW Path 3" t2="Outer SW Path 4"/>
+        <connection t1="Outer SW Path 4" t2="Outer Southwestern Ridge"/>
+        <connection t1="Outer SE Path 1" t2="Outer SE Path 2"/>
+        <connection t1="Outer SE Path 2" t2="Outer SE Path 3"/>
+        <connection t1="Outer SE Path 3" t2="Outer SE Path 4"/>
+        <connection t1="Outer SE Path 4" t2="Outer Southeastern Ridge"/>
+        <connection t1="Outer Southwestern Ridge" t2="Outer SW Path 5"/>
+        <connection t1="Outer SW Path 5" t2="Outer SW Path 6"/>
+        <connection t1="Outer SW Path 6" t2="Outer SW Path 7"/>
+        <connection t1="Outer SW Path 7" t2="Outer SW Path 8"/>
+        <connection t1="Outer SW Path 8" t2="Outer SW Path 9"/>
+        <connection t1="Outer SW Path 9" t2="Outer West Path South"/>
+        <connection t1="Outer West Path South" t2="Outer West Path North"/>
+        <connection t1="Outer West path North" t2="Outer NW Path 1"/>
+        <connection t1="Outer NW Path 1" t2="Outer NW Path 2"/>
+        <connection t1="Outer NW Path 2" t2="Outer NW Path 3"/>
+        <connection t1="Outer NW Path 3" t2="Outer NW Path 4"/>
+        <connection t1="Outer NW Path 4" t2="Outer NW Path 5"/>
+        <connection t1="Outer NW Path 5" t2="Outer Northwestern Ridge"/>
+        <connection t1="Outer Southeastern Ridge" t2="Outer SE Path 5"/>
+        <connection t1="Outer SE Path 5" t2="Outer SE Path 6"/>
+        <connection t1="Outer SE Path 6" t2="Outer SE Path 7"/>
+        <connection t1="Outer SE Path 7" t2="Outer SE Path 8"/>
+        <connection t1="Outer SE Path 8" t2="Outer SE Path 9"/>
+        <connection t1="Outer SE Path 9" t2="Outer East Path South"/>
+        <connection t1="Outer East Path South" t2="Outer East Path North"/>
+        <connection t1="Outer East Path North" t2="Outer NE Path 1"/>
+        <connection t1="Outer NE Path 1" t2="Outer NE Path 2"/>
+        <connection t1="Outer NE Path 2" t2="Outer NE Path 3"/>
+        <connection t1="Outer NE Path 3" t2="Outer NE Path 4"/>
+        <connection t1="Outer NE Path 4" t2="Outer NE Path 5"/>
+        <connection t1="Outer NE Path 5" t2="Outer Northeastern Ridge"/>
+        <connection t1="Outer Northwestern Ridge" t2="Outer NW Path 6"/>
+        <connection t1="Outer NW Path 6" t2="Outer NW Path 7"/>
+        <connection t1="Outer NW Path 7" t2="Outer NW Path 8"/>
+        <connection t1="Outer NW Path 8" t2="Outer NW Path 9"/>
+        <connection t1="Outer NW Path 9" t2="Outer NW Path 10"/>
+        <connection t1="Outer NW Path 10" t2="Outer North Path"/>
+        <connection t1="Outer Northeastern Ridge" t2="Outer NE Path 6"/>
+        <connection t1="Outer NE Path 6" t2="Outer NE Path 7"/>
+        <connection t1="Outer NE Path 7" t2="Outer NE Path 8"/>
+        <connection t1="Outer NE Path 8" t2="Outer NE Path 9"/>
+        <connection t1="Outer NE Path 9" t2="Outer NE Path 10"/>
+        <connection t1="Outer NE Path 10" t2="Outer North Path"/>
+        <connection t1="Outer North Path" t2="Inner North Path 1"/>
+        <connection t1="Inner North Path 1" t2="Inner NW Path 1"/>
+        <connection t1="Inner North Path 1" t2="Inner NE Path 1"/>
+        <connection t1="Inner NW Path 1" t2="Inner NW Path 2"/>
+        <connection t1="Inner NW Path 2" t2="Inner NW Path 3"/>
+        <connection t1="Inner NW Path 3" t2="Inner NW Path 4"/>
+        <connection t1="Inner NW Path 4" t2="Inner Northwestern Ridge 1"/>
+        <connection t1="Inner NE Path 1" t2="Inner NE Path 2"/>
+        <connection t1="Inner NE Path 2" t2="Inner NE Path 3"/>
+        <connection t1="Inner NE Path 3" t2="Inner NE Path 4"/>
+        <connection t1="Inner NE Path 4" t2="Inner Northeastern Ridge 1"/>
+        <connection t1="Inner Northwestern Ridge 1" t2="Inner NW Path 5"/>
+        <connection t1="Inner NW Path 5" t2="Inner NW Path 6"/>
+        <connection t1="Inner NW Path 6" t2="Inner NW Path 7"/>
+        <connection t1="Inner NW Path 7" t2="Inner NW Path 8"/>
+        <connection t1="Inner NW Path 8" t2="Inner West Path North 1"/>
+        <connection t1="Inner West Path North 1" t2="Inner West Path South 1"/>
+        <connection t1="Inner West Path South 1" t2="Inner SW Path 1"/>
+        <connection t1="Inner SW Path 1" t2="Inner SW Path 2"/>
+        <connection t1="Inner SW Path 2" t2="Inner SW Path 3"/>
+        <connection t1="Inner SW Path 3" t2="Inner SW Path 4"/>
+        <connection t1="Inner SW Path 4" t2="Inner Southwestern Ridge 1"/>
+        <connection t1="Inner Northeastern Ridge 1" t2="Inner NE Path 5"/>
+        <connection t1="Inner NE Path 5" t2="Inner NE Path 6"/>
+        <connection t1="Inner NE Path 6" t2="Inner NE Path 7"/>
+        <connection t1="Inner NE Path 7" t2="Inner NE Path 8"/>
+        <connection t1="Inner NE Path 8" t2="Inner East Path North 1"/>
+        <connection t1="Inner East Path North 1" t2="Inner East Path South 1"/>
+        <connection t1="Inner East Path South 1" t2="Inner SE Path 1"/>
+        <connection t1="Inner SE Path 1" t2="Inner SE Path 2"/>
+        <connection t1="Inner SE Path 2" t2="Inner SE Path 3"/>
+        <connection t1="Inner SE Path 3" t2="Inner SE Path 4"/>
+        <connection t1="Inner SE Path 4" t2="Inner Southeastern Ridge 1"/>
+        <connection t1="Inner Southwestern Ridge 1" t2="Inner SW Path 5"/>
+        <connection t1="Inner SW Path 5" t2="Inner SW Path 6"/>
+        <connection t1="Inner SW Path 6" t2="Inner SW Path 7"/>
+        <connection t1="Inner SW Path 7" t2="South Ridge 1"/>
+        <connection t1="Inner Southeastern Ridge 1" t2="Inner SE Path 5"/>
+        <connection t1="Inner SE Path 5" t2="Inner SE Path 6"/>
+        <connection t1="Inner SE Path 6" t2="Inner SE Path 7"/>
+        <connection t1="Inner SE Path 7" t2="South Ridge 1"/>
+        <connection t1="South Ridge 1" t2="Inner South Path 1"/>
+        <connection t1="Inner South Path 1" t2="Inner SW Path 8"/>
+        <connection t1="Inner South Path 1" t2="Inner SE Path 8"/>
+        <connection t1="Inner SW Path 8" t2="Inner SW Path 9"/>
+        <connection t1="Inner SW Path 9" t2="Inner SW Path 10"/>
+        <connection t1="Inner SW Path 10" t2="Inner Southwestern Ridge 2"/>
+        <connection t1="Inner SE Path 8" t2="Inner SE Path 9"/>
+        <connection t1="Inner SE Path 9" t2="Inner SE Path 10"/>
+        <connection t1="Inner SE Path 10" t2="Inner Southeastern Ridge 2"/>
+        <connection t1="Inner Southwestern Ridge 2" t2="Inner SW Path 11"/>
+        <connection t1="Inner SW Path 11" t2="Inner SW Path 12"/>
+        <connection t1="Inner SW Path 12" t2="Inner SW Path 13"/>
+        <connection t1="Inner SW Path 13" t2="Inner West Path South 2"/>
+        <connection t1="Inner West Path South 2" t2="Inner West Path North 2"/>
+        <connection t1="Inner West Path North 2" t2="Inner NW Path 9"/>
+        <connection t1="Inner NW Path 9" t2="Inner NW Path 10"/>
+        <connection t1="Inner NW Path 10" t2="Inner NW Path 11"/>
+        <connection t1="Inner NW Path 11" t2="Inner Northwestern Ridge 2"/>
+        <connection t1="Inner Southeastern Ridge 2" t2="Inner SE Path 11"/>
+        <connection t1="Inner SE Path 11" t2="Inner SE Path 12"/>
+        <connection t1="Inner SE Path 12" t2="Inner SE Path 13"/>
+        <connection t1="Inner SE Path 13" t2="Inner East Path South 2"/>
+        <connection t1="Inner East Path South 2" t2="Inner East Path North 2"/>
+        <connection t1="Inner East Path North 2" t2="Inner NE Path 9"/>
+        <connection t1="Inner NE Path 9" t2="Inner NE Path 10"/>
+        <connection t1="Inner NE Path 10" t2="Inner NE Path 11"/>
+        <connection t1="Inner NE Path 11" t2="Inner Northeastern Ridge 2"/>
+        <connection t1="Inner Northwestern Ridge 2" t2="Inner NW Path 12"/>
+        <connection t1="Inner NW Path 12" t2="Inner NW Path 13"/>
+        <connection t1="Inner NW Path 13" t2="Inner NW Path 14"/>
+        <connection t1="Inner NW Path 14" t2="Inner North Path 2"/>
+        <connection t1="Inner Northeastern Ridge 2" t2="Inner NE Path 12"/>
+        <connection t1="Inner NE Path 12" t2="Inner NE Path 13"/>
+        <connection t1="Inner NE Path 13" t2="Inner NE Path 14"/>
+        <connection t1="Inner NE Path 14" t2="Inner North Path 2"/>
+        <connection t1="Inner North Path 2" t2="Inner North Path 3"/>
+        <connection t1="Inner North Path 3" t2="Inner NW Path 15"/>
+        <connection t1="Inner North Path 3" t2="Inner NE Path 15"/>
+        <connection t1="Inner NW Path 15" t2="Inner NW Path 16"/>
+        <connection t1="Inner NW Path 16" t2="Inner Northwestern Ridge 3"/>
+        <connection t1="Inner NE Path 15" t2="Inner NE Path 16"/>
+        <connection t1="Inner NE Path 16" t2="Inner Northeastern Ridge 3"/>
+        <connection t1="Inner Northwestern Ridge 3" t2="Inner NW Path 17"/>
+        <connection t1="Inner NW Path 17" t2="Inner NW Path 18"/>
+        <connection t1="Inner NW Path 18" t2="Inner West Path North 3"/>
+        <connection t1="Inner West Path North 3" t2="Inner West Path South 3"/>
+        <connection t1="Inner West Path South 3" t2="Inner SW Path 14"/>
+        <connection t1="Inner SW Path 14" t2="Inner SW Path 15"/>
+        <connection t1="Inner SW Path 15" t2="Inner Southwestern Ridge 3"/>
+        <connection t1="Inner Northeastern Ridge 3" t2="Inner NE Path 17"/>
+        <connection t1="Inner NE Path 17" t2="Inner NE Path 18"/>
+        <connection t1="Inner NE Path 18" t2="Inner East Path North 3"/>
+        <connection t1="Inner East Path North 3" t2="Inner East Path South 3"/>
+        <connection t1="Inner East Path South 3" t2="Inner SE Path 14"/>
+        <connection t1="Inner SE Path 14" t2="Inner SE Path 15"/>
+        <connection t1="Inner SE Path 15" t2="Inner Southeastern Ridge 3"/>
+        <connection t1="Inner Southwestern Ridge 3" t2="Inner SW Path 16"/>
+        <connection t1="Inner SW Path 16" t2="Inner SW Path 17"/>
+        <connection t1="Inner SW Path 17" t2="South Ridge 2"/>
+        <connection t1="Inner Southeastern Ridge 3" t2="Inner SE Path 16"/>
+        <connection t1="Inner SE Path 16" t2="Inner SE Path 17"/>
+        <connection t1="Inner SE Path 17" t2="South Ridge 2"/>
+        <connection t1="South Ridge 2" t2="Inner South Path 2"/>
+        <connection t1="Inner South Path 2" t2="Inner SW Path 18"/>
+        <connection t1="Inner South Path 2" t2="Inner SE Path 18"/>
+        <connection t1="Inner SW Path 18" t2="Inner SW Path 19"/>
+        <connection t1="Inner SW Path 19" t2="Inner Southwestern Ridge 4"/>
+        <connection t1="Inner SE Path 18" t2="Inner Southeastern Ridge 4"/>
+        <connection t1="Inner Southwestern Ridge 4" t2="Inner SW Path 20"/>
+        <connection t1="Inner SW Path 20" t2="Inner West Path South 4"/>
+        <connection t1="Inner West Path South 4" t2="Inner West Path North 4"/>
+        <connection t1="Inner West Path North 4" t2="Inner NW Path 19"/>
+        <connection t1="Inner NW Path 19" t2="Inner Northwestern Ridge 4"/>
+        <connection t1="Inner Southeastern Ridge 4" t2="Inner SE Path 19"/>
+        <connection t1="Inner SE Path 19" t2="Inner East Path South 4"/>
+        <connection t1="Inner East Path South 4" t2="Inner East Path North 4"/>
+        <connection t1="Inner East Path North 4" t2="Inner NE Path 19"/>
+        <connection t1="Inner NE Path 19" t2="Inner Northeastern Ridge 4"/>
+        <connection t1="Inner Northwestern Ridge 4" t2="Inner NW Path 20"/>
+        <connection t1="Inner NW Path 20" t2="Inner North Path 4"/>
+        <connection t1="Inner Northeastern Ridge 4" t2="Inner NE Path 20"/>
+        <connection t1="Inner NE Path 20" t2="Inner North Path 4"/>
+        <connection t1="Inner North Path 4" t2="Inner North Ridge"/>
+        <connection t1="Inner North Ridge" t2="Inner NW Path 21"/>
+        <connection t1="Inner North Ridge" t2="Inner Northeastern Ridge 5"/>
+        <connection t1="Inner NW Path 21" t2="Inner Northwestern Ridge 5"/>
+        <connection t1="Inner Northwestern Ridge 5" t2="Inner West Path North 5"/>
+        <connection t1="Inner West Path North 5" t2="Inner West Path South 5"/>
+        <connection t1="Inner West Path South 5" t2="Inner Southwestern Ridge 5"/>
+        <connection t1="Inner Northeastern Ridge 5" t2="Inner East Path North 5"/>
+        <connection t1="Inner East Path North 5" t2="Inner East Path South 5"/>
+        <connection t1="Inner East Path South 5" t2="Inner Southeastern Ridge 5"/>
+        <connection t1="Inner Southwestern Ridge 5" t2="Scenic Vista"/>
+        <connection t1="Inner Southeastern Ridge 5" t2="Scenic Vista"/>
+        <connection t1="Scenic Vista" t2="Final Boss"/>
+        <connection t1="Final Boss" t2="Endgame"/>
+    </map>
+
+    <resourceList>
+	    <resource name="PUs"/>
+        <resource name="Gold"/>
+        <resource name="XP"/>
+    </resourceList>
+
+    <playerList>
+        <player name="Hero" optional="true"/>
+        <player name="Maze" optional="true" canBeDisabled="false" isHidden="true"/>
+    </playerList>
+
+    <unitList>
+
+    </unitList>
+
+
+    <propertyList>
+        <property name="Hero bid" value="0" editable="false"></property>
+        <property name="Maze bid" value="0" editable="false"></property>
+        <property name="Low Luck" value="false" editable="true"><boolean/></property>
+        <property name="Place in Any Territory" value="true" editable="false"><boolean/></property>        
+        <property name="Projection of Power" value="false" editable="false"><boolean/></property>
+        <property name="Suicide and Munition Casualties Restricted" value="true" editable="false"><boolean/></property>
+        <property name="Triggered Victory" value="true" editable="false"><boolean/></property>
+        <property name="Unplaced units live when not placed" value="true" editable="false"><boolean/></property>
+        <property name="Units Repair Hits End Turn" value="false" editable="false"><boolean/></property>
+        <property name="Units Repair Hits Start Turn" value="false" editable="false"><boolean/></property>
+        <property name="Use Triggers" value="true" editable="false"><boolean/></property>
+        <property name="Use Politics" value="false" editable="false"><boolean/></property>
+        <property name="Unlimited Constructions" value="true" editable="false"><boolean/></property>
+        
+        <property name="mapName" value="labyrinth" editable="false"><string/></property>
+        <property name="notes">
+            <string/>
+            <value>
+                <![CDATA[
+                    <html>
+                        <body bgcolor="000000" align="left">
+                            <div style="padding:10px;text-align:justify">
+                                <br><img src="Prologue.png"/><br>
+                                <h3 style="font-size:16px;color:F0D06B">By:</h3>
+                                <p style="font-size:14px;color:FFFFFF">Michael Hoover</p><br>
+                                <h3 style="font-size:16px;color:F0D06B">About:</h3>
+                                <p style="font-size:14px;color:FFFFFF">
+                                    In Twelve Clans (a Shogun type variant heavily inspired by the Samurai Warriors series of games) fight to expand your clan and become the dominant power in Japan.
+                                    As you conquer rival clans, they will become your vassals (allied to you), but your vassals' true loyalties belong only to their own clan's interests.
+                                    A clan will become vassal to another for self-preservation. If another clan conquers one of your vassals, their allegiance will change to the conquering clan.
+                                    However, if you are conquered, your vassals will join you in switching sides.
+                                </p><br>
+                                <h3 style="font-size:16px;color:F0D06B">Victory Conditions:</h3>
+                                <p style="font-size:14px;color:FFFFFF">
+                                    Once you are defeated, you simply switch sides. If one of your allies wins then you win a minor victory.
+                                    Beware! No one trusts a traitor, and if you or another clan switch sides to many times, you will likely be shown no mercy should your capital fall again...
+                                    There can only be one shogun. If a player conquers 7 rival clans that player achieves Total Victory, becoming the shogun. Any players who are not the first 7 to join the shogun have lost.
+                                </p><br>
+                                <h3 style="font-size:16px;color:F0D06B">Other Game Modes:</h3>
+                                <p style="font-size:14px;color:FFFFFF">
+                                    In the 2 (Sekigahara), 3 (Coalitions), 4 (Triads) and 6 (Bloodpact) player alliance variants included the Vassal system is removed and the traditional alliance
+                                    system is in place. You can choose to play this like any other game where multiple players can be a part of any particular alliance or one player can control
+                                    the entire alliance. Once a clan is taken out in these variants, they are out for good. Victory in these variants is based on alliance control of 10, 9, 8, or 8
+                                    clan strongholds respectively (or all 12 if you are feeling frisky).
+                                </p><br>
+                                <h3 style="font-size:16px;color:F0D06B">Unit Information:</h3>
+                                <p style="font-size:14px;color:FFFFFF">
+                                    Ashigaru: Peasant recruits that are either conscripted or voluntarily join the ranks of their clan's army. Clan leaders and Nobori inspire peasants to enlist.
+	                                    <br>&nbsp;&nbsp;&nbsp;&nbsp;-Cannot be purchased. Spawn from a Nobori or a Leader.<br><br>
+                                    Bushi: Warriors; samurai were sometimes referred to as "Bushi" because of the prominence of the samurai class and their monopoly of the soldier role. However, bushi are simply warriors not to be confused with samurai.<br><br>
+                                    Teppo: Gunners; deadly in an offensive role. Known as an anti-cavalry unit for their volley fire tactics, which were invented by Oda Nobunaga. Gunners were more expensive to deploy than archers but required less training to be as effective.<br><br>
+                                    Kyudoka: Archers; make a solid defense given their high rate of fire compared to matchlock firearms. Archers also had more readily available and cheaper ammunition in the form of arrows. Generally, more skilled than a gunner in terms of training. <br><br>
+                                    Ronin: Mercanaries for hire. Former samurai that have either abandoned or lost their lord. They now roam Japan looking for a way to make ends meet or to find and serve another lord.
+                                        <br>&nbsp;&nbsp;&nbsp;&nbsp;-Ronin can be purchased and placed on any of your territories and do not count towards the production limit, as they are constructions. Ronin require 2 PUs upkeep per round else they will leave your service.<br><br>
+                                    Nobori: Flagbearers. They are responsible for denoting units in armies and also managing troop morale. Nobori actually refers to the flag itself and not the soldier with it. The Nobori may also inspire the peasants and encourage them to enlist.
+                                        <br>&nbsp;&nbsp;&nbsp;&nbsp;-Nobori spawn 2 Ashigaru every round, and give +1 defense to 10 Ashigaru. This "Resolve" Bonus does not stack on the same units.<br><br>
+                                    Samurai: High ranking and highly skilled nobility that serve as retainers to the Daimyo (whom may also be samurai). Their presence on the battlefield and ability to lead inspire their troops.
+                                        <br>&nbsp;&nbsp;&nbsp;&nbsp;-Samurai give a +1 attack to 10 Ashigaru. This "Courage" bonus does not stack on the same units.<br><br>
+                                    Mawari: Cavalry; known for the swift charges that decimate enemy lines. Cavalry can travel quickly and carry others with them on horseback.
+                                        <br>&nbsp;&nbsp;&nbsp;&nbsp;-Can blitz. Can carry one unit, if the unit is land transportable.<br><br>
+                                    Ninja: Also known as Shinobi, they are the spies of Japan. Ninja conduct covert operations involving espionage, deception, and assassination.
+                                        <br>&nbsp;&nbsp;&nbsp;&nbsp;-Can blitz. Rolls two dice for attack and defense. Inflicts a -1 attack on 5 enemy Ashigaru. This "Fear" bonus does not stack on the same units.<br><br>
+                                    Sashimono: Clan Banner. Essentially the symbol of a clan's power and influence. As you conquer territory you will see your sashimono spread. Units can be recruited from any sashimono that belongs to the player.
+	                                    <br>&nbsp;&nbsp;&nbsp;&nbsp;-Acts as a factory, allowing any and all unit production up to the territory's value (except for Ronin - see above).
+                                </p><br>
+                                <h3 style="font-size:16px;color:F0D06B">Clan Advantages and Objectives:</h3>
+                                <p style="font-size:14px;color:FFFFFF">
+                                    <b><u>Oda</u></b><br>
+                                    The Oda are rightly respected for their skills as inspiring battlefield commanders of ashigaru. "Others may covet titles, but ashigaru, common spearmen, are the bedrock of Oda might."<br>
+                                    (Improved Nobori bonus and cap allowance)<br><br>
+                                    The Oda clan seeks to unite the lands of the Kansai Prefecture before making the push for Shogun. Take control of Oda, Iga, Shima, Kawachi, Kii, and Miyoshi to earn an additional 18 PUs per round!<br><br>
+                                    <b><u>Miyoshi</u></b><br>
+                                    The Miyoshi clan have great influence and are mainly supported by their retainers, the Matsunaga clan. Their influence has faded over the years and in an attempt to keep from fading completely and being conquered the Miyoshi have placed an emphasis on defensive tactics.<br>
+                                    (Improved Kyudoka Defense)<br><br>
+                                    The Miyoshi clan seeks to unite the lands of the Kansai Prefecture before making the push for Shogun. Take control of Miyoshi, Yamato, Iga, Settsu, Kawachi, and Kii to earn an additional 18 PUs per round!<br><br>
+                                    <b><u>Chosokabe</u></b><br>
+                                    The Chosokabe clan claim descent from the Chinese Emperor Qin Shi Huang. Despite their long history, the Chosokabe clan has had mixed fortunes. The current clan leader, Motochika Chosokabe, is fighting to unite his island of Shikoku and has enlisted the help of Magoichi Saika the leader of the Saika Renegades. The Saika are renowned for their sharpshooters.<br>
+                                    (Improved Teppo Defense)<br><br>
+                                    The Chosokabe clan seeks to unite the lands of the Shikoku Prefecture before making the push for Shogun. Take control of Chosokabe, Iyo, Awa, Sanuki, and Awaji to earn an additional 15 PUs per round!<br><br>
+                                    <b><u>Otomo</u></b><br>
+                                    The Otomo Clan is the first to convert to Christianity and is disliked by all other clans due to religious differences (all others are Buddhist). However, the will of the Otomo men to fight for their beliefs gives them an unyielding determination.<br>
+                                    (Improved Bushi Defense)<br><br>
+                                    The Otomo clan seeks to unite the lands of the Kyushu Prefecture before making the push for Shogun. Take control of Otomo, Chikuzen, Hizen, Higo, Osumi, and Shimazu to earn an additional 18 PUs per round!<br><br>
+                                    <b><u>Shimazu</u></b><br>
+                                    The Shimazu are a proud clan, with a long history worthy of their pride. They can trace their ancestry back to the Minamoto, the founders of the Kamakura shogunate. To the Shimazu, loyalty is everything, and their samurai are especially disciplined in Bushido.<br>
+                                    (Improved Samurai Offense)<br><br>
+                                    The Shimazu clan seeks to unite the lands of the Kyushu Prefecture before making the push for Shogun. Take control of Shimazu, Osumi, Higo, Hizen, Chikuzen, and Otomo to earn an additional 18 PUs per round!<br><br>
+                                    <b><u>Mori</u></b><br>
+                                    The Mori have a long history of seafaring and are sea masters without equal. This resulted in an increase of experienced archers for counter attacks at sea.<br>
+                                    (Improved Kyudoka Offense)<br><br>
+                                    The Mori clan seeks to unite the lands of the Chugoku Prefecture before making the push for Shogun. Take control of Mori, Nagato, Iwami, Izumo, and Bizen to earn an additional 15 PUs per round!<br><br>
+                                    <b><u>Azai</u></b><br>
+                                    Loyalty and fighting for a just cause are at the core of the Azai. This is reflected in the determination of their samurai, which greatly inspires others. The clan leader, Azai Nagamasa, married Oda Nobunaga's sister, Oichi, in 1564 and formed an alliance. However, in 1570 Oda Nobunaga declared war on the Asakura family of Echizen. The Asakura and Azai had been allies since the time of Nagamasa's grandfather. In the end, the Azai clan chose to honor the generations-old alliance with the Asakura and came to their aid.<br>
+                                    (Improved Samurai bonus to Ashigaru)<br><br>
+                                    The Azai clan seeks to unite the lands of the Chubu Prefecture before making the push for Shogun. Take control of Azai, Sado, Hida, Omi, Yamashiro, and Tango to earn an additional 18 PUs per round!<br><br>
+                                    <b><u>Uesugi</u></b><br>
+                                    The Uesugi are proud of their Buddhist faith, and rightly too. They are a pious and worthy people. The warrior monks of the Uesugi impart their training to Uesugi's warriors.<br>
+                                    (Improved Bushi Offense)<br><br>
+                                    The Uesugi clan seeks to unite the lands of the Tohoku Prefecture before making the push for Shogun. Take control of Uesugi, Dewa, Sado, Date, Kozuke, and Mutsu to earn an additional 18 PUs per round!<br><br>
+                                    <b><u>Date</u></b><br>
+                                    Date warriors are loyal to the ideals of bushido and possess an attacking spirit. Masamune has an affinity for firearms and has influenced his army to increase their arms training.<br>
+                                    (Improved Teppo Offense)<br><br>
+                                    The Date clan seeks to unite the lands of the Tohoku Prefecture before making the push for Shogun. Take control of Date, Dewa, Mutsu, Uesugi, Kozuke, and Hitachi to earn an additional 18 PUs per round!<br><br>
+                                    <b><u>Hojo</u></b><br>
+                                    The Hojo are an old and powerful clan. The Hojo clan created the first Shogunate. Their influence can be felt around Japan and has gained them formidable allies. The Fūma ninja lead by Kotaro support the Hojo.<br>
+                                    (Improved Ninja Offense)<br><br>
+                                    The Hojo clan seeks to unite the lands of the Kanto Prefecture before making the push for Shogun. Take control of Hojo, Izu, Shimosa, Takeda, Hitachi, and Kozuke to earn an additional 18 PUs per round!<br><br>
+                                    <b><u>Takeda</u></b><br>
+                                    Takeda men are almost born in the saddle, and they are rightly respected for their mastery of horses and cavalry warfare. Takeda has opportunities and threats on all sides. Under their daimyo, Takeda Shingen, They have fought off repeated invasions from the neighboring Shinano province and battled against the Hojo and Imagawa clans. This has made them formidable warriors.<br>
+                                    (Improved Mawari Offense)<br><br>
+                                    The Takeda clan seeks to unite the lands of the Kanto Prefecture before making the push for Shogun. Take control of Takeda, Izu, Shimosa, Hojo, Shinano, and Kozuke to earn an additional 18 PUs per round!<br><br>
+                                    <b><u>Tokugawa</u></b><br>
+                                    Although the Tokugawa are an ancient family, claiming descent from Minamoto no Yoritomo, the first shogun of the Kamakura shogunate, they have known hard times. The Tokugawa have been squeezed between two powerful and ambitious clans: The Imagawa to the east, and the Oda to the west, a most uncomfortable position. By accepting the protection of the Imagawa, the Tokugawa only guaranteed that they were frequently attacked by the Oda. This goes some way to explaining their superior diplomatic skills, their training and use of very good kisho ninja.<br>
+                                    (Improved Ninja Defense)<br><br>
+                                    The Tokugawa clan seeks to unite the lands of the Chubu Prefecture before making the push for Shogun. Take control of Tokugawa, Mikawa, Omi, Shinano, and Hida to earn an additional 15 PUs per round!
+                                </p><br>
+                                <h3 style="font-size:16px;color:F0D06B">Credits:</h3>
+                                <ul>
+                                    <li style="font-size:14px;color:FFFFFF">The general map outline thanks to Rolf Larsson's Feudal Japan map</li>
+                                    <li style="font-size:14px;color:FFFFFF">Thanks to Frostion's Dragon War map for inspiration on unit design and xml trigger management</li>
+                                    <li style="font-size:14px;color:FFFFFF">Shield dice images are made by TripleA community member Cernel</li>
+                                    <li style="font-size:14px;color:FFFFFF">Unit images are based on various public domain sources, mostly pictures of painted miniatures I tooled around with in photoshop</li>
+                                    <li style="font-size:14px;color:FFFFFF">The Samurai Warrior portraits and music clips are from the Samurai Warriors wiki, youtube, and other fan sites</li>
+                                    <li style="font-size:14px;color:FFFFFF">Additional inspiration courtesy of the "Total War: Shogun 2" video game, also taking place in Sengoku Period Japan</li>
+                                    <li style="font-size:14px;color:FFFFFF">Special Thanks to Connor Hoover for assisting with documentation, play testing, game balancing, and brainstorming good ideas</li>
+                                </ul>
+                            </div>
+                        </body>
+                    </html>
+                ]]>
+            </value>
+        </property>
+    </propertyList>
 
 </game>
