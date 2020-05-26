@@ -1,0 +1,4 @@
+Hero  (2056,4021) 
+Maze  (50,50) 
+Hero_large  (50,50) 
+Maze_large  (50,50) 
