@@ -443,6 +443,19 @@
         <unit name="Knight-(b)"/>
         <unit name="Champion-(b)"/>
 
+        <!-- Item Units -->
+        <unit name="Potion-of-Healing"/>
+        <unit name="Potion-of-Confusion"/>
+        <unit name="Potion-of-Accuracy"/>
+        <unit name="Potion-of-Wisdom"/>
+        <unit name="Potion-of-Fortune"/>
+        <unit name="Spell-of-Death"/>
+        <unit name="Spell-of-Fireball"/>
+        <unit name="Spell-of-Lightning-Bolt"/>
+        <unit name="Spell-of-Ice-Storm"/>
+        <unit name="Spell-of-Earthquake"/>
+        <unit name="Shield-Runes"/>
+
         <!-- Maze Units -->
         <unit name="Air-Elemental"/>
         <unit name="Banshee"/>
@@ -470,11 +483,12 @@
         <unit name="Skeleton"/>
         <unit name="Spectre"/>
         <unit name="Succubus"/>
-        <unit name="Treant"/>        
+        <unit name="Treant"/>
+        <unit name="Unknown"/>
         <unit name="Water-Elemental"/>
         <unit name="Werewolf"/>
         <unit name="Wight"/>
-        <unit name="Wraith"/>
+        <unit name="Wraith"/>        
         <unit name="Zombie"/>
     </unitList>
 
@@ -496,7 +510,27 @@
         <delegate name="endTurnNoPU" javaClass="games.strategy.triplea.delegate.NoPUEndTurnDelegate" display="Turn Complete"/>
         <delegate name="endRound" javaClass="games.strategy.triplea.delegate.EndRoundDelegate" display="Round Complete"/>
 
+        <sequence>
+            <step name="gameInitDelegate" delegate="initDelegate" display="Initializing Delegates" maxRunCount="1"/>
+            <step name="HeroOriginPurchase" delegate="purchase" player="Hero" display="Choose Character" maxRunCount="1"/>
+            <step name="HeroOriginPlace" delegate="place" player="Hero" display="Place Character at The Precipice" maxRunCount="1"/>
+
+            <step name="HeroMove" delegate="move" player="Hero"/>
+            <step name="HeroEncounter" delegate="battle" player="Hero"/>
+            <step name="HeroEvent" delegate="userActions" player="Hero"/>
+            <step name="HeroPurchase" delegate="purchase" player="Hero"/>
+            <step name="HeroPlace" delegate="place" player="Hero"/>
+            <step name="HeroEndTurn" delegate="endTurn" player="Hero"/>
+
+            <step name="MazeEndTurn" delegate="endTurn" player="Maze" display="Turn Complete"/>
+            <step name="endRoundStep" delegate="endRound" display="Round Complete"/>
+        </sequence>
+        <offset round="0"/>        
     </gamePlay>
+
+    <production>
+        <!-- placeholder -->
+    </production>
 
 
     <initialize>
@@ -685,7 +719,186 @@
         </ownerInitialize>
 
         <unitInitialize>
-            <!-- placeholder -->
+            <unitPlacement unitType="Unknown" territory="Outer Northwestern Ridge" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Outer NW Path 6" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Outer NW Path 7" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Outer NW Path 8" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Outer NW Path 9" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Outer NW Path 10" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Outer North Path" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Outer NE Path 10" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Outer NE Path 9" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Outer NE Path 8" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Outer NE Path 7" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Outer NE Path 6" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Outer Northeastern Ridge" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Outer NW Path 5" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner Northwestern Ridge 1" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner NW Path 4" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner NW Path 3" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner NW Path 2" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner NW Path 1" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner North Path 1" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner NE Path 1" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner NE Path 2" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner NE Path 3" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner NE Path 4" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner Northeastern Ridge 1" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Outer NE Path 5" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Outer NW Path 4" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner NW Path 5" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner Northwestern Ridge 2" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner NW Path 12" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner NW Path 13" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner NW Path 14" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner North Path 2" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner NE Path 14" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner NE Path 13" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner NE Path 12" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner Northeastern Ridge 2" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner NE Path 5" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Outer NE Path 4" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Outer NW Path 3" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner NW Path 6" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner NW Path 11" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner Northwestern Ridge 3" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner NW Path 16" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner NW Path 15" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner North Path 3" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner NE Path 15" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner NE Path 16" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner Northeastern Ridge 3" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner NE Path 11" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner NE Path 6" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Outer NE Path 3" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Outer NW Path 2" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner NW Path 7" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner NW Path 10" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner NW Path 17" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner Northwestern Ridge 4" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner NW Path 20" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner North Path 4" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner NE Path 20" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner Northeastern Ridge 4" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner NE Path 17" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner NE Path 10" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner NE Path 7" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Outer NE Path 2" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Outer NW Path 1" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner NW Path 8" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner NW Path 9" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner NW Path 18" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner NW Path 19" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner Northwestern Ridge 5" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner NW Path 21" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner North Ridge" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner Northeastern Ridge 5" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner NE Path 19" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner NE Path 18" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner NE Path 9" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner NE Path 8" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Outer NE Path 1" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Outer West Path North" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner West Path North 1" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner West Path North 2" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner West Path North 3" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner West Path North 4" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner West Path North 5" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Endgame" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner East Path North 5" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner East Path North 4" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner East Path North 3" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner East Path North 2" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner East Path North 1" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Outer East Path North" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Outer West Path South" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner West Path South 1" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner West Path South 2" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner West Path South 3" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner West Path South 4" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner West Path South 5" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Final Boss" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner East Path South 5" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner East Path South 4" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner East Path South 3" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner East Path South 2" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner East Path South 1" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Outer East Path South" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Outer SW Path 9" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner SW Path 1" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner SW Path 13" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner SW Path 14" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner SW Path 20" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner Southwestern Ridge 5" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Scenic Vista" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner Southeastern Ridge 5" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner SE Path 19" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner SE Path 14" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner SE Path 13" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner SE Path 1" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Outer SE Path 9" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Outer SW Path 8" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner SW Path 2" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner SW Path 12" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner SW Path 15" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner Southwestern Ridge 4" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner SW Path 19" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner SW Path 18" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner South Path 2" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner SE Path 18" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner Southeastern Ridge 4" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner SE Path 15" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner SE Path 12" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner SE Path 2" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Outer SE Path 8" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Outer SW Path 7" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner SW Path 3" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner SW Path 11" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner Southwestern Ridge 3" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner SW Path 16" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner SW Path 17" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="South Ridge 2" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner SE Path 17" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner SE Path 16" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner Southeastern Ridge 3" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner SE Path 11" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner SE Path 3" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Outer SE Path 7" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Outer SW Path 6" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner SW Path 4" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner Southwestern Ridge 2" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner SW Path 10" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner SW Path 9" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner SW Path 8" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner South Path 1" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner SE Path 8" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner SE Path 9" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner SE Path 10" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner Southeastern Ridge 2" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner SE Path 4" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Outer SE Path 6" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Outer SW Path 5" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner Southwestern Ridge 1" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner SW Path 5" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner SW Path 6" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner SW Path 7" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="South Ridge 1" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner SE Path 7" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner SE Path 6" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner SE Path 5" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Inner Southeastern Ridge 1" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Outer SE Path 5" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Outer Southwestern Ridge" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Outer SW Path 4" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Outer SW Path 3" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Outer SW Path 2" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Outer SW Path 1" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Entrance" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Outer SE Path 1" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Outer SE Path 2" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Outer SE Path 3" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Outer SE Path 4" quantity="1" owner= "Maze"/>
+            <unitPlacement unitType="Unknown" territory="Outer Southeastern Ridge" quantity="1" owner= "Maze"/>
         </unitInitialize>
 
         <resourceInitialize>
@@ -703,7 +916,7 @@
     <propertyList>
         <property name="Hero bid" value="0" editable="false"></property>
         <property name="Maze bid" value="0" editable="false"></property>
-        <property name="Low Luck" value="false" editable="true"><boolean/></property>
+        <property name="Low Luck" value="false" editable="false"><boolean/></property>
         <property name="Place in Any Territory" value="true" editable="false"><boolean/></property>        
         <property name="Projection of Power" value="false" editable="false"><boolean/></property>
         <property name="Suicide and Munition Casualties Restricted" value="true" editable="false"><boolean/></property>
