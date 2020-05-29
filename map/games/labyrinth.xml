@@ -520,18 +520,863 @@
             <step name="HeroEvent" delegate="userActions" player="Hero"/>
             <step name="HeroPurchase" delegate="purchase" player="Hero"/>
             <step name="HeroPlace" delegate="place" player="Hero"/>
-            <step name="HeroEndTurn" delegate="endTurn" player="Hero"/>
+            <step name="HeroEndTurn" delegate="endTurnNoPU" player="Hero"/>
 
-            <step name="MazeEndTurn" delegate="endTurn" player="Maze" display="Turn Complete"/>
+            <step name="MazeEndTurn" delegate="endTurnNoPU" player="Maze" display="Turn Complete"/>
             <step name="endRoundStep" delegate="endRound" display="Round Complete"/>
         </sequence>
         <offset round="0"/>        
     </gamePlay>
 
     <production>
-        <!-- placeholder -->
+        <!-- characters -->
+        <productionRule name="buyCrusader">
+            <cost resource="PUs" quantity="1"/>
+            <result resourceOrUnit="Crusader" quantity="1"/>
+        </productionRule>
+        <productionRule name="buyCrusader-Level-2">
+            <cost resource="XP" quantity="25"/>
+            <result resourceOrUnit="Expert-Crusader" quantity="1"/>
+        </productionRule>
+        <productionRule name="buyCrusader-Level-3">
+            <cost resource="XP" quantity="50"/>
+            <result resourceOrUnit="Master-Crusader" quantity="1"/>
+        </productionRule>
+        <productionRule name="buyBard">
+            <cost resource="PUs" quantity="1"/>
+            <result resourceOrUnit="Bard" quantity="1"/>
+        </productionRule>
+        <productionRule name="buyBard-Level-2">
+            <cost resource="XP" quantity="25"/>
+            <result resourceOrUnit="Expert-Bard" quantity="1"/>
+        </productionRule>
+        <productionRule name="buyCrusader-Level-3">
+            <cost resource="XP" quantity="50"/>
+            <result resourceOrUnit="Master-Bard" quantity="1"/>
+        </productionRule>
+        <productionRule name="buyHunter">
+            <cost resource="PUs" quantity="1"/>
+            <result resourceOrUnit="Hunter" quantity="1"/>
+        </productionRule>
+        <productionRule name="buyHunter-Level-2">
+            <cost resource="XP" quantity="25"/>
+            <result resourceOrUnit="Expert-Hunter" quantity="1"/>
+        </productionRule>
+        <productionRule name="buyHunter-Level-3">
+            <cost resource="XP" quantity="50"/>
+            <result resourceOrUnit="Master-Hunter" quantity="1"/>
+        </productionRule>
+        <productionRule name="buyRanger">
+            <cost resource="PUs" quantity="1"/>
+            <result resourceOrUnit="Ranger" quantity="1"/>
+        </productionRule>
+        <productionRule name="buyRanger-Level-2">
+            <cost resource="XP" quantity="25"/>
+            <result resourceOrUnit="Expert-Ranger" quantity="1"/>
+        </productionRule>
+        <productionRule name="buyRanger-Level-3">
+            <cost resource="XP" quantity="50"/>
+            <result resourceOrUnit="Master-Ranger" quantity="1"/>
+        </productionRule>
+        <productionRule name="buyPriestess">
+            <cost resource="PUs" quantity="1"/>
+            <result resourceOrUnit="Priestess" quantity="1"/>
+        </productionRule>
+        <productionRule name="buyPriestess-Level-2">
+            <cost resource="XP" quantity="25"/>
+            <result resourceOrUnit="Expert-Priestess" quantity="1"/>
+        </productionRule>
+        <productionRule name="buyPriestess-Level-3">
+            <cost resource="XP" quantity="50"/>
+            <result resourceOrUnit="Master-Priestess" quantity="1"/>
+        </productionRule>
+        <productionRule name="buyRaider">
+            <cost resource="PUs" quantity="1"/>
+            <result resourceOrUnit="Raider" quantity="1"/>
+        </productionRule>
+        <productionRule name="buyRaider-Level-2">
+            <cost resource="XP" quantity="25"/>
+            <result resourceOrUnit="Expert-Raider" quantity="1"/>
+        </productionRule>
+        <productionRule name="buyRaider-Level-3">
+            <cost resource="XP" quantity="50"/>
+            <result resourceOrUnit="Master-Raider" quantity="1"/>
+        </productionRule>
+        <productionRule name="buyGladiator">
+            <cost resource="PUs" quantity="1"/>
+            <result resourceOrUnit="Gladiator" quantity="1"/>
+        </productionRule>
+        <productionRule name="buyGladiator-Level-2">
+            <cost resource="XP" quantity="25"/>
+            <result resourceOrUnit="Expert-Gladiator" quantity="1"/>
+        </productionRule>
+        <productionRule name="buyGladiator-Level-3">
+            <cost resource="XP" quantity="50"/>
+            <result resourceOrUnit="Master-Gladiator" quantity="1"/>
+        </productionRule>
+        <productionRule name="buyScourge">
+            <cost resource="PUs" quantity="1"/>
+            <result resourceOrUnit="Scourge" quantity="1"/>
+        </productionRule>
+        <productionRule name="buyScourge-Level-2">
+            <cost resource="XP" quantity="25"/>
+            <result resourceOrUnit="Expert-Scourge" quantity="1"/>
+        </productionRule>
+        <productionRule name="buyScourge-Level-3">
+            <cost resource="XP" quantity="50"/>
+            <result resourceOrUnit="Master-Scourge" quantity="1"/>
+        </productionRule>
+
+        <!-- retainers -->
+        <productionRule name="buySquire-w">
+            <cost resource="Gold" quantity="4"/>
+            <result resourceOrUnit="Squire-(w)" quantity="1"/>
+        </productionRule>
+        <productionRule name="buyKnight-w">
+            <cost resource="Gold" quantity="15"/>
+            <result resourceOrUnit="Knight-(w)" quantity="1"/>
+        </productionRule>
+        <productionRule name="buyChampion-w">
+            <cost resource="Gold" quantity="24"/>
+            <result resourceOrUnit="Champion-(w)" quantity="1"/>
+        </productionRule>
+        <productionRule name="buySquire-w-LevelUp">
+            <cost resource="XP" quantity="15"/>
+            <result resourceOrUnit="Knight-(w)" quantity="1"/>
+        </productionRule>
+        <productionRule name="buyKnight-w-LevelUp">
+            <cost resource="XP" quantity="35"/>
+            <result resourceOrUnit="Champion-(w)" quantity="1"/>
+        </productionRule>
+        <productionRule name="buySquire-p">
+            <cost resource="Gold" quantity="4"/>
+            <result resourceOrUnit="Squire-(p)" quantity="1"/>
+        </productionRule>
+        <productionRule name="buyKnight-p">
+            <cost resource="Gold" quantity="15"/>
+            <result resourceOrUnit="Knight-(p)" quantity="1"/>
+        </productionRule>
+        <productionRule name="buyChampion-p">
+            <cost resource="Gold" quantity="24"/>
+            <result resourceOrUnit="Champion-(p)" quantity="1"/>
+        </productionRule>
+        <productionRule name="buySquire-p-LevelUp">
+            <cost resource="XP" quantity="15"/>
+            <result resourceOrUnit="Knight-(p)" quantity="1"/>
+        </productionRule>
+        <productionRule name="buyKnight-p-LevelUp">
+            <cost resource="XP" quantity="35"/>
+            <result resourceOrUnit="Champion-(p)" quantity="1"/>
+        </productionRule>
+        <productionRule name="buySquire-u">
+            <cost resource="Gold" quantity="4"/>
+            <result resourceOrUnit="Squire-(u)" quantity="1"/>
+        </productionRule>
+        <productionRule name="buyKnight-u">
+            <cost resource="Gold" quantity="15"/>
+            <result resourceOrUnit="Knight-(u)" quantity="1"/>
+        </productionRule>
+        <productionRule name="buyChampion-u">
+            <cost resource="Gold" quantity="24"/>
+            <result resourceOrUnit="Champion-(u)" quantity="1"/>
+        </productionRule>
+        <productionRule name="buySquire-u-LevelUp">
+            <cost resource="XP" quantity="15"/>
+            <result resourceOrUnit="Knight-(u)" quantity="1"/>
+        </productionRule>
+        <productionRule name="buyKnight-u-LevelUp">
+            <cost resource="XP" quantity="35"/>
+            <result resourceOrUnit="Champion-(u)" quantity="1"/>
+        </productionRule>
+        <productionRule name="buySquire-w">
+            <cost resource="Gold" quantity="4"/>
+            <result resourceOrUnit="Squire-(w)" quantity="1"/>
+        </productionRule>
+        <productionRule name="buyKnight-g">
+            <cost resource="Gold" quantity="15"/>
+            <result resourceOrUnit="Knight-(g)" quantity="1"/>
+        </productionRule>
+        <productionRule name="buyChampion-g">
+            <cost resource="Gold" quantity="24"/>
+            <result resourceOrUnit="Champion-(g)" quantity="1"/>
+        </productionRule>
+        <productionRule name="buySquire-g-LevelUp">
+            <cost resource="XP" quantity="15"/>
+            <result resourceOrUnit="Knight-(g)" quantity="1"/>
+        </productionRule>
+        <productionRule name="buyKnight-g-LevelUp">
+            <cost resource="XP" quantity="35"/>
+            <result resourceOrUnit="Champion-(g)" quantity="1"/>
+        </productionRule>
+        <productionRule name="buySquire-w">
+            <cost resource="Gold" quantity="4"/>
+            <result resourceOrUnit="Squire-(w)" quantity="1"/>
+        </productionRule>
+        <productionRule name="buyKnight-w">
+            <cost resource="Gold" quantity="15"/>
+            <result resourceOrUnit="Knight-(w)" quantity="1"/>
+        </productionRule>
+        <productionRule name="buyChampion-y">
+            <cost resource="Gold" quantity="24"/>
+            <result resourceOrUnit="Champion-(y)" quantity="1"/>
+        </productionRule>
+        <productionRule name="buySquire-y-LevelUp">
+            <cost resource="XP" quantity="15"/>
+            <result resourceOrUnit="Knight-(y)" quantity="1"/>
+        </productionRule>
+        <productionRule name="buyKnight-y-LevelUp">
+            <cost resource="XP" quantity="35"/>
+            <result resourceOrUnit="Champion-(y)" quantity="1"/>
+        </productionRule>
+        <productionRule name="buySquire-w">
+            <cost resource="Gold" quantity="4"/>
+            <result resourceOrUnit="Squire-(w)" quantity="1"/>
+        </productionRule>
+        <productionRule name="buyKnight-o">
+            <cost resource="Gold" quantity="15"/>
+            <result resourceOrUnit="Knight-(o)" quantity="1"/>
+        </productionRule>
+        <productionRule name="buyChampion-o">
+            <cost resource="Gold" quantity="24"/>
+            <result resourceOrUnit="Champion-(o)" quantity="1"/>
+        </productionRule>
+        <productionRule name="buySquire-o-LevelUp">
+            <cost resource="XP" quantity="15"/>
+            <result resourceOrUnit="Knight-(o)" quantity="1"/>
+        </productionRule>
+        <productionRule name="buyKnight-o-LevelUp">
+            <cost resource="XP" quantity="35"/>
+            <result resourceOrUnit="Champion-(o)" quantity="1"/>
+        </productionRule>
+        <productionRule name="buySquire-w">
+            <cost resource="Gold" quantity="4"/>
+            <result resourceOrUnit="Squire-(w)" quantity="1"/>
+        </productionRule>
+        <productionRule name="buyKnight-r">
+            <cost resource="Gold" quantity="15"/>
+            <result resourceOrUnit="Knight-(r)" quantity="1"/>
+        </productionRule>
+        <productionRule name="buyChampion-r">
+            <cost resource="Gold" quantity="24"/>
+            <result resourceOrUnit="Champion-(r)" quantity="1"/>
+        </productionRule>
+        <productionRule name="buySquire-r-LevelUp">
+            <cost resource="XP" quantity="15"/>
+            <result resourceOrUnit="Knight-(r)" quantity="1"/>
+        </productionRule>
+        <productionRule name="buyKnight-r-LevelUp">
+            <cost resource="XP" quantity="35"/>
+            <result resourceOrUnit="Champion-(r)" quantity="1"/>
+        </productionRule>
+        <productionRule name="buySquire-b">
+            <cost resource="Gold" quantity="4"/>
+            <result resourceOrUnit="Squire-(b)" quantity="1"/>
+        </productionRule>
+        <productionRule name="buyKnight-b">
+            <cost resource="Gold" quantity="15"/>
+            <result resourceOrUnit="Knight-(b)" quantity="1"/>
+        </productionRule>
+        <productionRule name="buyChampion-b">
+            <cost resource="Gold" quantity="24"/>
+            <result resourceOrUnit="Champion-(b)" quantity="1"/>
+        </productionRule>
+        <productionRule name="buySquire-b-LevelUp">
+            <cost resource="XP" quantity="15"/>
+            <result resourceOrUnit="Knight-(b)" quantity="1"/>
+        </productionRule>
+        <productionRule name="buyKnight-b-LevelUp">
+            <cost resource="XP" quantity="35"/>
+            <result resourceOrUnit="Champion-(b)" quantity="1"/>
+        </productionRule>
+
+        <!-- items -->
+        <productionRule name="buyHealingPotion">
+            <cost resource="Gold" quantity="5"/>
+            <result resourceOrUnit="Potion-of-Healing" quantity="1"/>
+        </productionRule>
+        <productionRule name="buyConfusionPotion">
+            <cost resource="Gold" quantity="7"/>
+            <result resourceOrUnit="Potion-of-Confusion" quantity="1"/>
+        </productionRule>
+        <productionRule name="buyAccuracyPotion">
+            <cost resource="Gold" quantity="3"/>
+            <result resourceOrUnit="Potion-of-Accuracy" quantity="1"/>
+        </productionRule>
+        <productionRule name="buyDeathSpell">
+            <cost resource="Gold" quantity="5"/>
+            <result resourceOrUnit="Spell-of-Death" quantity="1"/>
+        </productionRule>
+        <productionRule name="buyFireballSpell">
+            <cost resource="Gold" quantity="4"/>
+            <result resourceOrUnit="Spell-of-Fireball" quantity="1"/>
+        </productionRule>
+        <productionRule name="buyLightningBoltSpell">
+            <cost resource="Gold" quantity="7"/>
+            <result resourceOrUnit="Spell-of-Lightning-Bolt" quantity="1"/>
+        </productionRule>
+        <productionRule name="buyIceStormSpell">
+            <cost resource="Gold" quantity="8"/>
+            <result resourceOrUnit="Spell-of-Ice-Storm" quantity="1"/>
+        </productionRule>
+        <productionRule name="buyEarthquakeSpell">
+            <cost resource="Gold" quantity="10"/>
+            <result resourceOrUnit="Spell-of-Earthquake" quantity="1"/>
+        </productionRule>
+        <productionRule name="buyShieldRunes">
+            <cost resource="Gold" quantity="1"/>
+            <result resourceOrUnit="Shield-Runes" quantity="1"/>
+        </productionRule>
+
+        <!-- Frontiers -->
+        <productionFrontier name="character-selection">
+            <frontierRules name="buyCrusader"/>
+            <frontierRules name="buyBard"/>
+            <frontierRules name="buyHunter"/>
+            <frontierRules name="buyRanger"/>
+            <frontierRules name="buyPriestess"/>
+            <frontierRules name="buyRaider"/>
+            <frontierRules name="buyGladiator"/>
+            <frontierRules name="buyScourge"/>
+        </productionFrontier>
+
+        <!-- after character selection we switch to the appropriate below frontier for normal progression, until the player hits a shop... -->
+        <!-- also, these frontiers will get modified via triggers as the character and/or retainers level up, but we start with all level 2 options -->
+        <productionFrontier name="level-up-crusader">
+            <frontierRules name="buyCrusader-Level-2"/>
+            <frontierRules name="buySquire-w-LevelUp"/>
+        </productionFrontier>
+        <productionFrontier name="level-up-bard">
+            <frontierRules name="buyBard-Level-2"/>
+            <frontierRules name="buySquire-p-LevelUp"/>
+        </productionFrontier>
+        <productionFrontier name="level-up-hunter">
+            <frontierRules name="buyHunter-Level-2"/>
+            <frontierRules name="buySquire-u-LevelUp"/>
+        </productionFrontier>
+        <productionFrontier name="level-up-ranger">
+            <frontierRules name="buyRanger-Level-2"/>
+            <frontierRules name="buySquire-g-LevelUp"/>
+        </productionFrontier>
+        <productionFrontier name="level-up-priestess">
+            <frontierRules name="buyPriestess-Level-2"/>
+            <frontierRules name="buySquire-y-LevelUp"/>
+        </productionFrontier>
+        <productionFrontier name="level-up-raider">
+            <frontierRules name="buyRaider-Level-2"/>
+            <frontierRules name="buySquire-o-LevelUp"/>
+        </productionFrontier>
+        <productionFrontier name="level-up-gladiator">
+            <frontierRules name="buyGladiator-Level-2"/>
+            <frontierRules name="buySquire-r-LevelUp"/>
+        </productionFrontier>
+        <productionFrontier name="level-up-scourge">
+            <frontierRules name="buyScourge-Level-2"/>
+            <frontierRules name="buySquire-b-LevelUp"/>
+        </productionFrontier>
+
+        <productionFrontier name="shop-tier-1">
+            <!-- the appropriate squire gets added here via trigger below (based on character selection) -->
+            <frontierRules name="buyHealingPotion"/>
+            <frontierRules name="buyAccuracyPotion"/>
+            <frontierRules name="buyDeathSpell"/>
+            <frontierRules name="buyFireballSpell"/>
+            <frontierRules name="buyShield-Runes"/>
+        </productionFrontier>
+
+        <productionFrontier name="shop-tier-2">
+            <!-- the appropriate squire gets added here via trigger below (based on character selection) -->
+            <!-- the appropriate knight gets added here via trigger below (based on character selection) -->
+            <frontierRules name="buyHealingPotion"/>
+            <frontierRules name="buyAccuracyPotion"/>
+            <frontierRules name="buyConfusionPotion"/>
+            <frontierRules name="buyDeathSpell"/>
+            <frontierRules name="buyFireballSpell"/>
+            <frontierRules name="buyLightningBoltSpell"/>
+            <frontierRules name="buyIceStormSpell"/>
+            <frontierRules name="buyShield-Runes"/>
+        </productionFrontier>
+
+        <productionFrontier name="shop-tier-3">
+            <!-- the appropriate squire gets added here via trigger below (based on character selection) -->
+            <!-- the appropriate knight gets added here via trigger below (based on character selection) -->
+            <!-- the appropriate champion gets added here via trigger below (based on character selection) -->
+            <frontierRules name="buyHealingPotion"/>
+            <frontierRules name="buyAccuracyPotion"/>
+            <frontierRules name="buyConfusionPotion"/>
+            <frontierRules name="buyDeathSpell"/>
+            <frontierRules name="buyFireballSpell"/>
+            <frontierRules name="buyLightningBoltSpell"/>
+            <frontierRules name="buyIceStormSpell"/>
+            <frontierRules name="buyEarthquakeSpell"/>
+            <frontierRules name="buyShield-Runes"/>
+        </productionFrontier>
+
+        <!-- begin game with the character frontier -->
+        <playerProduction player="Hero" frontier="character-selection"/>
     </production>
 
+    <technology>
+        <technologies>
+            <techname name="mechanizedInfantry"/>
+        </technologies>
+        <playerTech player="Hero">
+            <category name="Technology Advances">
+                <tech name="mechanizedInfantry"/>
+            </category>
+        </playerTech>
+    </technology>
+
+    <attachmentList>
+        <!-- relationship attachments -->
+        <attachment name="relationshipTypeAttachment" attachTo="Allied" javaClass="games.strategy.triplea.attachments.RelationshipTypeAttachment" type="relationship">
+            <option name="archeType" value="allied"/>
+        </attachment>
+        <attachment name="relationshipTypeAttachment" attachTo="War" javaClass="games.strategy.triplea.attachments.RelationshipTypeAttachment" type="relationship">
+            <option name="archeType" value="war"/>
+        </attachment>
+        <attachment name="relationshipTypeAttachment" attachTo="None" javaClass="games.strategy.triplea.attachments.RelationshipTypeAttachment" type="relationship">
+            <option name="archeType" value="neutral"/>
+        </attachment>
+
+        <!-- tech attachments -->
+        <attachment name="techAttachment" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TechAttachment" type="player">
+            <option name="mechanizedInfantry" value="true"/>
+        </attachment>
+
+        <!-- rule attachments -->
+        <attachment name="rulesAttachment" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="placementCapturedTerritory" value="true"/>
+            <option name="placementAnyTerritory" value="true"/>
+	    </attachment>
+
+        <!-- player attachments -->
+        <attachment name="playerAttachment" attachTo="Hero" javaClass="games.strategy.triplea.attachments.PlayerAttachment" type="player">
+            <option name="retainCapitalProduceNumber" value="0"/>
+            <option name="retainCapitalNumber" value="0"/>
+        </attachment>
+
+        <!-- unit attachments - characters -->
+        <attachment name="unitAttachment" attachTo="Crusader" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="4"/>
+            <option name="defense" value="4"/>
+            <option name="movement" value="1"/>
+            <option name="hitPoints" value="5"/>
+            <option name="isLandTransport" value="true"/>
+            <option name="transportCapacity" value="3"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Expert-Crusader" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="5"/>
+            <option name="defense" value="5"/>
+            <option name="movement" value="1"/>
+            <option name="hitPoints" value="5"/>
+            <option name="isLandTransport" value="true"/>
+            <option name="transportCapacity" value="3"/>
+            <option name="consumesUnits" value="1:Crusader"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Master-Crusader" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="6"/>
+            <option name="defense" value="6"/>
+            <option name="movement" value="1"/>
+            <option name="hitPoints" value="5"/>
+            <option name="isLandTransport" value="true"/>
+            <option name="transportCapacity" value="3"/>
+            <option name="consumesUnits" value="1:Expert-Crusader"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Bard" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="4"/>
+            <option name="defense" value="4"/>
+            <option name="movement" value="1"/>
+            <option name="hitPoints" value="4"/>
+            <option name="isLandTransport" value="true"/>
+            <option name="transportCapacity" value="3"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Expert-Bard" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="4"/>
+            <option name="defense" value="4"/>
+            <option name="movement" value="1"/>
+            <option name="hitPoints" value="5"/>
+            <option name="isLandTransport" value="true"/>
+            <option name="transportCapacity" value="3"/>
+            <option name="consumesUnits" value="1:Bard"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Master-Bard" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="5"/>
+            <option name="defense" value="5"/>
+            <option name="movement" value="1"/>
+            <option name="hitPoints" value="5"/>
+            <option name="isLandTransport" value="true"/>
+            <option name="transportCapacity" value="3"/>
+            <option name="consumesUnits" value="1:Expert-Bard"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Hunter" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="5"/>
+            <option name="defense" value="5"/>
+            <option name="movement" value="1"/>
+            <option name="hitPoints" value="4"/>
+            <option name="isLandTransport" value="true"/>
+            <option name="transportCapacity" value="3"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Expert-Hunter" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="5"/>
+            <option name="defense" value="5"/>
+            <option name="movement" value="1"/>
+            <option name="hitPoints" value="5"/>
+            <option name="isLandTransport" value="true"/>
+            <option name="transportCapacity" value="3"/>
+            <option name="consumesUnits" value="1:Hunter"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Master-Hunter" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="6"/>
+            <option name="defense" value="6"/>
+            <option name="movement" value="1"/>
+            <option name="hitPoints" value="5"/>
+            <option name="isLandTransport" value="true"/>
+            <option name="transportCapacity" value="3"/>
+            <option name="consumesUnits" value="1:Expert-Hunter"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Ranger" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="5"/>
+            <option name="defense" value="5"/>
+            <option name="movement" value="1"/>
+            <option name="hitPoints" value="5"/>
+            <option name="isLandTransport" value="true"/>
+            <option name="transportCapacity" value="3"/>            
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Expert-Ranger" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="6"/>
+            <option name="defense" value="6"/>
+            <option name="movement" value="1"/>
+            <option name="hitPoints" value="5"/>
+            <option name="isLandTransport" value="true"/>
+            <option name="transportCapacity" value="3"/>
+            <option name="consumesUnits" value="1:Ranger"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Master-Ranger" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="6"/>
+            <option name="defense" value="6"/>
+            <option name="movement" value="1"/>
+            <option name="hitPoints" value="5"/>
+            <option name="isLandTransport" value="true"/>
+            <option name="transportCapacity" value="3"/>
+            <option name="consumesUnits" value="1:Expert-Ranger"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Priestess" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="4"/>
+            <option name="defense" value="4"/>
+            <option name="movement" value="1"/>
+            <option name="hitPoints" value="3"/>
+            <option name="isLandTransport" value="true"/>
+            <option name="transportCapacity" value="3"/>
+            <option name="repairsUnits" value="1:Priestess:Squire-(y):Knight-(y):Champion-(y)"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Expert-Priestess" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="4"/>
+            <option name="defense" value="4"/>
+            <option name="movement" value="1"/>
+            <option name="hitPoints" value="4"/>
+            <option name="isLandTransport" value="true"/>
+            <option name="transportCapacity" value="3"/>
+            <option name="repairsUnits" value="1:Priestess:Squire-(y):Knight-(y):Champion-(y)"/>
+            <option name="consumesUnits" value="1:Priestess"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Master-Priestess" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="5"/>
+            <option name="defense" value="5"/>
+            <option name="movement" value="1"/>
+            <option name="hitPoints" value="4"/>
+            <option name="isLandTransport" value="true"/>
+            <option name="transportCapacity" value="3"/>
+            <option name="repairsUnits" value="1:Priestess:Squire-(y):Knight-(y):Champion-(y)"/>
+            <option name="consumesUnits" value="1:Expert-Priestess"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Raider" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="5"/>
+            <option name="defense" value="5"/>
+            <option name="movement" value="1"/>
+            <option name="hitPoints" value="4"/>
+            <option name="isLandTransport" value="true"/>
+            <option name="transportCapacity" value="3"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Expert-Raider" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="5"/>
+            <option name="defense" value="5"/>
+            <option name="movement" value="1"/>
+            <option name="hitPoints" value="5"/>
+            <option name="isLandTransport" value="true"/>
+            <option name="transportCapacity" value="3"/>
+            <option name="consumesUnits" value="1:Raider"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Master-Raider" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="6"/>
+            <option name="defense" value="6"/>
+            <option name="movement" value="1"/>
+            <option name="hitPoints" value="5"/>
+            <option name="isLandTransport" value="true"/>
+            <option name="transportCapacity" value="3"/>
+            <option name="consumesUnits" value="1:Expert-Raider"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Gladiator" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="6"/>
+            <option name="defense" value="6"/>
+            <option name="movement" value="1"/>
+            <option name="hitPoints" value="5"/>
+            <option name="isLandTransport" value="true"/>
+            <option name="transportCapacity" value="3"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Expert-Gladiator" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="6"/>
+            <option name="defense" value="6"/>
+            <option name="movement" value="1"/>
+            <option name="hitPoints" value="5"/>
+            <option name="isLandTransport" value="true"/>
+            <option name="transportCapacity" value="3"/>
+            <option name="consumesUnits" value="1:Gladiator"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Master-Gladiator" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="6"/>
+            <option name="defense" value="6"/>
+            <option name="movement" value="1"/>
+            <option name="hitPoints" value="5"/>
+            <option name="isLandTransport" value="true"/>
+            <option name="transportCapacity" value="3"/>
+            <option name="consumesUnits" value="1:Expert-Gladiator"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Scourge" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="5"/>
+            <option name="defense" value="5"/>
+            <option name="movement" value="1"/>
+            <option name="hitPoints" value="3"/>
+            <option name="isLandTransport" value="true"/>
+            <option name="transportCapacity" value="3"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Expert-Scourge" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="5"/>
+            <option name="defense" value="5"/>
+            <option name="movement" value="1"/>
+            <option name="hitPoints" value="4"/>
+            <option name="isLandTransport" value="true"/>
+            <option name="transportCapacity" value="3"/>
+            <option name="consumesUnits" value="1:Scourge"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Master-Scourge" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="6"/>
+            <option name="defense" value="6"/>
+            <option name="movement" value="1"/>
+            <option name="hitPoints" value="4"/>
+            <option name="isLandTransport" value="true"/>
+            <option name="transportCapacity" value="3"/>
+            <option name="consumesUnits" value="1:Expert-Scourge"/>
+        </attachment>
+
+        <!-- unit attachments - retainers -->
+        <attachment name="unitAttachment" attachTo="Squire-(w)" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="3"/>
+            <option name="defense" value="3"/>
+            <option name="hitPoints" value="2"/>
+            <option name="isLandTransportable" value="true"/>
+            <option name="transportCost" value="1"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Knight-(w)" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="4"/>
+            <option name="defense" value="4"/>
+            <option name="hitPoints" value="3"/>
+            <option name="isLandTransportable" value="true"/>
+            <option name="transportCost" value="1"/>
+            <option name="consumesUnits" value="1:Squire-(w)"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Champion-(w)" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="5"/>
+            <option name="defense" value="5"/>
+            <option name="hitPoints" value="4"/>
+            <option name="isLandTransportable" value="true"/>
+            <option name="transportCost" value="1"/>
+            <option name="consumesUnits" value="1:Knight-(w)"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Squire-(p)" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="3"/>
+            <option name="defense" value="3"/>
+            <option name="hitPoints" value="2"/>
+            <option name="isLandTransportable" value="true"/>
+            <option name="transportCost" value="1"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Knight-(p)" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="4"/>
+            <option name="defense" value="4"/>
+            <option name="hitPoints" value="3"/>
+            <option name="isLandTransportable" value="true"/>
+            <option name="transportCost" value="1"/>
+            <option name="consumesUnits" value="1:Squire-(p)"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Champion-(p)" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="5"/>
+            <option name="defense" value="5"/>
+            <option name="hitPoints" value="4"/>
+            <option name="isLandTransportable" value="true"/>
+            <option name="transportCost" value="1"/>
+            <option name="consumesUnits" value="1:Knight-(p)"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Squire-(u)" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="3"/>
+            <option name="defense" value="3"/>
+            <option name="hitPoints" value="2"/>
+            <option name="isLandTransportable" value="true"/>
+            <option name="transportCost" value="1"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Knight-(u)" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="4"/>
+            <option name="defense" value="4"/>
+            <option name="hitPoints" value="3"/>
+            <option name="isLandTransportable" value="true"/>
+            <option name="transportCost" value="1"/>
+            <option name="consumesUnits" value="1:Squire-(u)"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Champion-(u)" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="5"/>
+            <option name="defense" value="5"/>
+            <option name="hitPoints" value="4"/>
+            <option name="isLandTransportable" value="true"/>
+            <option name="transportCost" value="1"/>
+            <option name="consumesUnits" value="1:Knight-(u)"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Squire-(g)" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="3"/>
+            <option name="defense" value="3"/>
+            <option name="hitPoints" value="2"/>
+            <option name="isLandTransportable" value="true"/>
+            <option name="transportCost" value="1"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Knight-(g)" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="4"/>
+            <option name="defense" value="4"/>
+            <option name="hitPoints" value="3"/>
+            <option name="isLandTransportable" value="true"/>
+            <option name="transportCost" value="1"/>
+            <option name="consumesUnits" value="1:Squire-(g)"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Champion-(g)" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="5"/>
+            <option name="defense" value="5"/>
+            <option name="hitPoints" value="4"/>
+            <option name="isLandTransportable" value="true"/>
+            <option name="transportCost" value="1"/>
+            <option name="consumesUnits" value="1:Knight-(g)"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Squire-(y)" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="3"/>
+            <option name="defense" value="3"/>
+            <option name="hitPoints" value="2"/>
+            <option name="isLandTransportable" value="true"/>
+            <option name="transportCost" value="1"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Knight-(y)" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="4"/>
+            <option name="defense" value="4"/>
+            <option name="hitPoints" value="3"/>
+            <option name="isLandTransportable" value="true"/>
+            <option name="transportCost" value="1"/>
+            <option name="consumesUnits" value="1:Squire-(y)"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Champion-(y)" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="5"/>
+            <option name="defense" value="5"/>
+            <option name="hitPoints" value="4"/>
+            <option name="isLandTransportable" value="true"/>
+            <option name="transportCost" value="1"/>
+            <option name="consumesUnits" value="1:Knight-(y)"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Squire-(o)" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="3"/>
+            <option name="defense" value="3"/>
+            <option name="hitPoints" value="2"/>
+            <option name="isLandTransportable" value="true"/>
+            <option name="transportCost" value="1"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Knight-(o)" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="4"/>
+            <option name="defense" value="4"/>
+            <option name="hitPoints" value="3"/>
+            <option name="isLandTransportable" value="true"/>
+            <option name="transportCost" value="1"/>
+            <option name="consumesUnits" value="1:Squire-(o)"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Champion-(o)" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="5"/>
+            <option name="defense" value="5"/>
+            <option name="hitPoints" value="4"/>
+            <option name="isLandTransportable" value="true"/>
+            <option name="transportCost" value="1"/>
+            <option name="consumesUnits" value="1:Knight-(o)"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Squire-(r)" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="3"/>
+            <option name="defense" value="3"/>
+            <option name="hitPoints" value="2"/>
+            <option name="isLandTransportable" value="true"/>
+            <option name="transportCost" value="1"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Knight-(r)" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="4"/>
+            <option name="defense" value="4"/>
+            <option name="hitPoints" value="3"/>
+            <option name="isLandTransportable" value="true"/>
+            <option name="transportCost" value="1"/>
+            <option name="consumesUnits" value="1:Squire-(r)"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Champion-(r)" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="5"/>
+            <option name="defense" value="5"/>
+            <option name="hitPoints" value="4"/>
+            <option name="isLandTransportable" value="true"/>
+            <option name="transportCost" value="1"/>
+            <option name="consumesUnits" value="1:Knight-(r)"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Squire-(b)" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="3"/>
+            <option name="defense" value="3"/>
+            <option name="hitPoints" value="2"/>
+            <option name="isLandTransportable" value="true"/>
+            <option name="transportCost" value="1"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Knight-(b)" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="4"/>
+            <option name="defense" value="4"/>
+            <option name="hitPoints" value="3"/>
+            <option name="isLandTransportable" value="true"/>
+            <option name="transportCost" value="1"/>
+            <option name="consumesUnits" value="1:Squire-(b)"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Champion-(b)" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="5"/>
+            <option name="defense" value="5"/>
+            <option name="hitPoints" value="4"/>
+            <option name="isLandTransportable" value="true"/>
+            <option name="transportCost" value="1"/>
+            <option name="consumesUnits" value="1:Knight-(b)"/>
+        </attachment>
+
+        <!-- unit attachments - items -->
+        <attachment name="unitAttachment" attachTo="Potion-of-Healing" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="isInfrastructure" value="true"/>
+            <option name="maxBuiltPerPlayer" value="3"/>
+            <option name="movement" value="1"/>
+
+        </attachment>
+
+
+
+        <!-- unit attachments - monsters -->
+        <attachment name="unitAttachment" attachTo="Chompy" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="2"/>
+            <option name="defense" value="2"/>
+            <option name="whenHitPointsDamagedChangesInto" value="1:false:Dead-Chompy"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Dead-Chompy" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="isInfrastructure" value="true"/>
+            <option name="createsResourcesList" value="1:XP"/>
+            <option name="createsResourcesList" value="0:Gold"/>
+        </attachment>
+
+    </attachmentList>
 
     <initialize>
         <ownerInitialize>
@@ -919,6 +1764,7 @@
         <property name="Low Luck" value="false" editable="false"><boolean/></property>
         <property name="Place in Any Territory" value="true" editable="false"><boolean/></property>        
         <property name="Projection of Power" value="false" editable="false"><boolean/></property>
+        <property name="Selectable Zero Movement Units" value="true" editable="false"><boolean/></property>
         <property name="Suicide and Munition Casualties Restricted" value="true" editable="false"><boolean/></property>
         <property name="Triggered Victory" value="true" editable="false"><boolean/></property>
         <property name="Unplaced units live when not placed" value="true" editable="false"><boolean/></property>

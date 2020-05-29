@@ -1,0 +1,268 @@
+<attachment name="conditionStartGame" attachTo="Nature" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+    <option name="rounds" value="1"/>
+</attachment>
+
+<attachment name="unitAttachment" attachTo="Centaur-Outrunners" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+    <option name="defense" value="4"/>
+    <option name="whenHitPointsDamagedChangesInto" value="1:false:Loot-Level-3"/>
+</attachment>
+
+<!-- Start Beta Info popup -->
+<attachment name="triggerAttachmentBeta_Info" attachTo="Nature" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+    <option name="conditions" value="conditionStartGame"/>
+    <option name="notification" value="BetaInfo"/>
+    <option name="players" value="Humans:Dwarves:Gnomes:Night-Elves:Orcs:Tauren:Undead:Trolls"/>
+    <option name="when" value="before:gameInitDelegate"/>
+    <option name="uses" value="1"/>
+</attachment>
+
+<!-- Start Humans Level-Up Actions -->
+<attachment name="conditionAttachment_Humans_can_buy_level_2" attachTo="Humans" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+    <option name="directPresenceTerritories" value="map" count="1"/>
+    <option name="unitPresence" value="Humans-Level-1" count="1"/>
+</attachment>
+<attachment name="triggerAttachment_Arthur_has_reached_level_2_A" attachTo="Humans" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+    <option name="unitType" value="Arthur"/>
+    <option name="unitProperty" value="repairsUnits" count="2:Arthur"/>
+    <option name="when" value="before:HumansPurchase"/>
+    <option name="uses" value="1"/>
+</attachment>
+<attachment name="triggerAttachment_Arthur_has_reached_level_2_B" attachTo="Humans" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+    <option name="removeUnits" value="Arthur Levels:Humans-Level-1" count="1"/>
+    <option name="placement" value="Arthur Levels:Humans-Level-2" count="1"/>
+    <option name="uses" value="1"/>
+</attachment>
+<attachment name="triggerAttachment_Arthur_has_reached_level_2_C" attachTo="Humans" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+    <option name="notification" value="levelup"/>
+    <option name="players" value="$AllPlayers$"/>
+    <option name="uses" value="1"/>
+</attachment>
+<attachment name="userActionAttachment_Humans_buy_level_2" attachTo="Humans" javaClass="games.strategy.triplea.attachments.UserActionAttachment" type="player">
+    <option name="conditions" value="conditionAttachment_Humans_can_buy_level_2"/>
+    <option name="activateTrigger" value="triggerAttachment_Arthur_has_reached_level_2_A:1:false:false:false:false"/>
+    <option name="activateTrigger" value="triggerAttachment_Arthur_has_reached_level_2_B:1:false:false:false:false"/>
+    <option name="activateTrigger" value="triggerAttachment_Arthur_has_reached_level_2_C:1:false:false:false:false"/>
+    <option name="text" value="Arthur_Level_2"/>
+    <option name="costResources" value="50:XP"/>
+</attachment>
+
+<!-- Pact of Steel User Action Attachment sample -->
+<attachment name="conditionAttachment_Americans_Aid_UK" attachTo="Americans" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+    <option name="switch" value="true"/>
+</attachment>
+<attachment name="triggerAttachment_Americans_Aid_UK" attachTo="Americans" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+    <option name="resource" value="PUs"/>
+    <option name="resourceCount" value="6"/>
+    <option name="players" value="British"/>
+</attachment>
+<attachment name="userActionAttachment_Americans_Aid_UK" attachTo="Americans" javaClass="games.strategy.triplea.attachments.UserActionAttachment" type="player">
+    <option name="conditions" value="conditionAttachment_Americans_Aid_UK"/>
+    <option name="activateTrigger" value="triggerAttachment_Americans_Aid_UK:1:false:false:false:false"/>
+    <option name="text" value="AMERICANS_AID_UK"/>
+    <option name="chance" value="6:6"/>
+    <option name="costResources" value="PUs" count="10"/>
+    <!--<option name="costResources" value="Fuel" count="5"/>-->
+    <option name="attemptsPerTurn" value="1"/>
+    <!--<option name="actionAccept" value="British"/>-->
+</attachment>
+
+<!-- actionstext.properties formatting samples below -->
+AMERICANS_AID_UK.BUTTON=[cost=10 PUs] Send British 6 PUs
+AMERICANS_AID_UK.DESCRIPTION=Send aid and equipment worth 6 production units to the United Kingdom
+AMERICANS_AID_UK.NOTIFICATION_SUCCESS=Aid and equipment worth 6 production units have been sent.
+AMERICANS_AID_UK.OTHER_NOTIFICATION_SUCCESS=The British have received 6 production units of aid and equipment from the Americans.
+AMERICANS_AID_UK.NOTIFICATION_FAILURE=Our aid and equipment has been lost in the Atlantic to U-Boat attacks!
+AMERICANS_AID_UK.OTHER_NOTIFICATION_FAILURE=American convoys of aid and equipment bound for the United Kingdom have been lost at sea in the Atlantic. U-Boat attacks blamed!
+AMERICANS_AID_UK.ACCEPT_QUESTION=Do you accept aid from the Americans?
+
+Arthur_Level_2.BUTTON=
+Arthur_Level_2.DESCRIPTION=Advance Hero to level 2 (Miraculous-Healing)
+Arthur_Level_2.NOTIFICATION_SUCCESS=Arthur has reached level 2 (Miraculous-Healing)
+Arthur_Level_2.OTHER_NOTIFICATION_SUCCESS=Arthur has reached level 2 (Miraculous-Healing)
+Arthur_Level_2.NOTIFICATION_FAILURE=NONE
+Arthur_Level_2.OTHER_NOTIFICATION_FAILURE=NONE
+Arthur_Level_2.ACCEPT_QUESTION=NONE
+
+<!-- since unit property changes occur at end of turn, we have this trigger as attached to British so that it happens at the end of their turn (British go right before Japan does) -->
+<attachment name="triggerAttachmentJapanese7_KamikazeAttack" attachTo="British" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+    <option name="conditions" value="conditionAttachmentJapaneseKamikaze1:conditionAttachmentJapaneseKamikaze2"/>
+    <option name="unitType" value="jp_fighter"/>
+    <option name="unitProperty" value="attack" count="5"/>
+    <option name="unitProperty" value="defense" count="3"/>
+    <option name="unitProperty" value="movement" count="3"/>
+    <option name="unitProperty" value="isSuicide" count="true"/>
+    <option name="unitProperty" value="isKamikaze" count="true"/>
+    <option name="uses" value="1"/>
+</attachment>
+
+<!-- Start All hero Fishing-Item fishing triggers -->
+<attachment name="conditionAttachmentHumansHaveTheFishingPole" attachTo="Humans" javaClass="RulesAttachment" type="player">
+    <option name="directPresenceTerritories" value="Arthur Backpack" count="1"/>
+    <option name="unitPresence" value="Fishing-Pole" count="1"/>
+</attachment>
+<attachment name="conditionAttachmentHumansFish1" attachTo="Humans" javaClass="RulesAttachment" type="player">
+    <option name="switch" value="true"/>
+</attachment>
+<attachment name="conditionAttachmentHumansFish2" attachTo="Humans" javaClass="RulesAttachment" type="player">
+    <option name="switch" value="true"/>
+</attachment>
+<attachment name="conditionAttachmentHumansFish3" attachTo="Humans" javaClass="RulesAttachment" type="player">
+    <option name="switch" value="true"/>
+</attachment>
+<attachment name="conditionAttachmentHumansFish4" attachTo="Humans" javaClass="RulesAttachment" type="player">
+    <option name="switch" value="true"/>
+</attachment>
+<attachment name="conditionAttachmentHumansFish5" attachTo="Humans" javaClass="RulesAttachment" type="player">
+    <option name="switch" value="true"/>
+</attachment>
+<attachment name="conditionAttachmentHumansFish6" attachTo="Humans" javaClass="RulesAttachment" type="player">
+    <option name="switch" value="true"/>
+</attachment>
+
+<attachment name="triggerAttachment_-_Arthur_goes_fishing_-_Level_6" attachTo="Humans" javaClass="TriggerAttachment" type="player">
+    <option name="players" value="Humans"/>
+    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachmentHumansFish6"/>
+    <option name="playerProperty" value="switch" count="false"/>
+    <option name="chance" value="1:3"/>
+</attachment>
+<attachment name="triggerAttachment_-_Arthur_goes_fishing_-_Level_5" attachTo="Humans" javaClass="TriggerAttachment" type="player">
+    <option name="players" value="Humans"/>
+    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachmentHumansFish5"/>
+    <option name="playerProperty" value="switch" count="false"/>
+    <option name="activateTrigger" value="triggerAttachment_-_Arthur_goes_fishing_-_Level_6:1:false:false:false:true"/>
+    <option name="chance" value="1:3"/>
+</attachment>
+<attachment name="triggerAttachment_-_Arthur_goes_fishing_-_Level_4" attachTo="Humans" javaClass="TriggerAttachment" type="player">
+    <option name="players" value="Humans"/>
+    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachmentHumansFish4"/>
+    <option name="playerProperty" value="switch" count="false"/>
+    <option name="activateTrigger" value="triggerAttachment_-_Arthur_goes_fishing_-_Level_5:1:false:false:false:true"/>
+    <option name="chance" value="1:3"/>
+</attachment>
+<attachment name="triggerAttachment_-_Arthur_goes_fishing_-_Level_3" attachTo="Humans" javaClass="TriggerAttachment" type="player">
+    <option name="players" value="Humans"/>
+    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachmentHumansFish3"/>
+    <option name="playerProperty" value="switch" count="false"/>
+    <option name="activateTrigger" value="triggerAttachment_-_Arthur_goes_fishing_-_Level_4:1:false:false:false:true"/>
+    <option name="chance" value="1:3"/>
+</attachment>
+<attachment name="triggerAttachment_-_Arthur_goes_fishing_-_Level_2" attachTo="Humans" javaClass="TriggerAttachment" type="player">
+    <option name="players" value="Humans"/>
+    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachmentHumansFish2"/>
+    <option name="playerProperty" value="switch" count="false"/>
+    <option name="activateTrigger" value="triggerAttachment_-_Arthur_goes_fishing_-_Level_3:1:false:false:false:true"/>
+    <option name="chance" value="1:3"/>
+</attachment>
+<attachment name="triggerAttachment_-_Arthur_goes_fishing_-_Level_1" attachTo="Humans" javaClass="TriggerAttachment" type="player">
+    <option name="conditions" value="conditionAttachmentHumansHaveTheFishingPole"/>
+    <option name="when" value="before:HumansFishing"/>
+    <option name="players" value="Humans"/>
+    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachmentHumansFish1"/>
+    <option name="playerProperty" value="switch" count="false"/>
+    <option name="activateTrigger" value="triggerAttachment_-_Arthur_goes_fishing_-_Level_2:1:false:false:false:true"/>
+    <option name="chance" value="1:3"/>
+</attachment>
+
+<attachment name="triggerAttachment_-_Arthur_catches_a_small_fish" attachTo="Humans" javaClass="TriggerAttachment" type="player">
+    <option name="conditions" value="conditionAttachmentHumansFish1:conditionAttachmentHumansFish2"/>
+    <option name="conditionType" value="1"/>
+    <option name="resource" value="Food"/>
+    <option name="resourceCount" value="1"/>
+    <option name="notification" value="HumansFishingFood1"/>
+    <option name="players" value="Humans"/>
+    <option name="when" value="after:HumansFishing"/>
+</attachment>
+<attachment name="triggerAttachment_-_Arthur_catches_a_large_fish" attachTo="Humans" javaClass="TriggerAttachment" type="player">
+    <option name="conditions" value="conditionAttachmentHumansFish2:conditionAttachmentHumansFish3"/>
+    <option name="conditionType" value="1"/>
+    <option name="resource" value="Food"/>
+    <option name="resourceCount" value="5"/>
+    <option name="notification" value="HumansFishingFood5"/>
+    <option name="players" value="Humans"/>
+    <option name="when" value="after:HumansFishing"/>
+</attachment>
+<attachment name="triggerAttachment_-_Arthur_finds_a_small_treasure_in_the_water" attachTo="Humans" javaClass="TriggerAttachment" type="player">
+    <option name="conditions" value="conditionAttachmentHumansFish3:conditionAttachmentHumansFish4"/>
+    <option name="conditionType" value="1"/>
+    <option name="resource" value="Gold"/>
+    <option name="resourceCount" value="25"/>
+    <option name="notification" value="HumansFishingGold25"/>
+    <option name="players" value="Humans"/>
+    <option name="when" value="after:HumansFishing"/>
+</attachment>
+<attachment name="triggerAttachment_-_Arthur_finds_a_large_treasure_in_the_water" attachTo="Humans" javaClass="TriggerAttachment" type="player">
+    <option name="conditions" value="conditionAttachmentHumansFish4:conditionAttachmentHumansFish5"/>
+    <option name="conditionType" value="1"/>
+    <option name="resource" value="Gold"/>
+    <option name="resourceCount" value="50"/>
+    <option name="notification" value="HumansFishingGold50"/>
+    <option name="players" value="Humans"/>
+    <option name="when" value="after:HumansFishing"/>
+</attachment>
+<attachment name="triggerAttachment_-_Arthur_finds_a_flask_of_mana_in_the_water" attachTo="Humans" javaClass="TriggerAttachment" type="player">
+    <option name="conditions" value="conditionAttachmentHumansFish5:conditionAttachmentHumansFish6"/>
+    <option name="conditionType" value="1"/>
+    <option name="resource" value="Mana"/>
+    <option name="resourceCount" value="100"/>
+    <option name="notification" value="HumansFishingMana100"/>
+    <option name="players" value="Humans"/>
+    <option name="when" value="after:HumansFishing"/>
+</attachment>
+<attachment name="triggerAttachment_-_Arthur_finds_an_old_scripture_in_the_water" attachTo="Humans" javaClass="TriggerAttachment" type="player">
+    <option name="conditions" value="conditionAttachmentHumansFish6"/>
+    <option name="conditionType" value="0"/>
+    <option name="resource" value="XP"/>
+    <option name="resourceCount" value="100"/>
+    <option name="notification" value="HumansFishingXP100"/>
+    <option name="players" value="Humans"/>
+    <option name="when" value="after:HumansFishing"/>
+</attachment>
+
+<attachment name="triggerAttachment_Set_Condition_True_HumansFish1" attachTo="Humans" javaClass="TriggerAttachment" type="player">
+    <option name="conditions" value="conditionAttachmentHumansFish1"/>
+    <option name="conditionType" value="0"/>
+    <option name="when" value="after:HumansFishing"/>
+    <option name="players" value="Humans"/>
+    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachmentHumansFish1"/>
+    <option name="playerProperty" value="switch" count="true"/>
+</attachment>
+<attachment name="triggerAttachment_Set_Condition_True_HumansFish2" attachTo="Humans" javaClass="TriggerAttachment" type="player">
+    <option name="conditions" value="conditionAttachmentHumansFish2"/>
+    <option name="conditionType" value="0"/>
+    <option name="when" value="after:HumansFishing"/>
+    <option name="players" value="Humans"/>
+    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachmentHumansFish2"/>
+    <option name="playerProperty" value="switch" count="true"/>
+</attachment>
+<attachment name="triggerAttachment_Set_Condition_True_HumansFish3" attachTo="Humans" javaClass="TriggerAttachment" type="player">
+    <option name="conditions" value="conditionAttachmentHumansFish3"/>
+    <option name="conditionType" value="0"/>
+    <option name="when" value="after:HumansFishing"/>
+    <option name="players" value="Humans"/>
+    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachmentHumansFish3"/>
+    <option name="playerProperty" value="switch" count="true"/>
+</attachment>
+<attachment name="triggerAttachment_Set_Condition_True_HumansFish4" attachTo="Humans" javaClass="TriggerAttachment" type="player">
+    <option name="conditions" value="conditionAttachmentHumansFish4"/>
+    <option name="conditionType" value="0"/>
+    <option name="when" value="after:HumansFishing"/>
+    <option name="players" value="Humans"/>
+    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachmentHumansFish4"/>
+    <option name="playerProperty" value="switch" count="true"/>
+</attachment>
+<attachment name="triggerAttachment_Set_Condition_True_HumansFish5" attachTo="Humans" javaClass="TriggerAttachment" type="player">
+    <option name="conditions" value="conditionAttachmentHumansFish5"/>
+    <option name="conditionType" value="0"/>
+    <option name="when" value="after:HumansFishing"/>
+    <option name="players" value="Humans"/>
+    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachmentHumansFish5"/>
+    <option name="playerProperty" value="switch" count="true"/>
+</attachment>
+<attachment name="triggerAttachment_Set_Condition_True_HumansFish6" attachTo="Humans" javaClass="TriggerAttachment" type="player">
+    <option name="conditions" value="conditionAttachmentHumansFish6"/>
+    <option name="conditionType" value="0"/>
+    <option name="when" value="after:HumansFishing"/>
+    <option name="players" value="Humans"/>
+    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachmentHumansFish6"/>
+    <option name="playerProperty" value="switch" count="true"/>
+</attachment>
