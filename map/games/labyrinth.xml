@@ -209,7 +209,7 @@
         <connection t1="Outer SW Path 8" t2="Outer SW Path 9"/>
         <connection t1="Outer SW Path 9" t2="Outer West Path South"/>
         <connection t1="Outer West Path South" t2="Outer West Path North"/>
-        <connection t1="Outer West path North" t2="Outer NW Path 1"/>
+        <connection t1="Outer West Path North" t2="Outer NW Path 1"/>
         <connection t1="Outer NW Path 1" t2="Outer NW Path 2"/>
         <connection t1="Outer NW Path 2" t2="Outer NW Path 3"/>
         <connection t1="Outer NW Path 3" t2="Outer NW Path 4"/>
@@ -418,30 +418,30 @@
         <unit name="Master-Scourge"/>
 
         <!-- Follower Units -->
-        <unit name="Squire-(w)"/>
-        <unit name="Knight-(w)"/>
-        <unit name="Champion-(w)"/>
-        <unit name="Squire-(p)"/>
-        <unit name="Knight-(p)"/>
-        <unit name="Champion-(p)"/>
-        <unit name="Squire-(u)"/>
-        <unit name="Knight-(u)"/>
-        <unit name="Champion-(u)"/>
-        <unit name="Squire-(g)"/>
-        <unit name="Knight-(g)"/>
-        <unit name="Champion-(g)"/>
-        <unit name="Squire-(y)"/>
-        <unit name="Knight-(y)"/>
-        <unit name="Champion-(y)"/>
-        <unit name="Squire-(o)"/>
-        <unit name="Knight-(o)"/>
-        <unit name="Champion-(o)"/>
-        <unit name="Squire-(r)"/>
-        <unit name="Knight-(r)"/>
-        <unit name="Champion-(r)"/>
-        <unit name="Squire-(b)"/>
-        <unit name="Knight-(b)"/>
-        <unit name="Champion-(b)"/>
+        <unit name="Squire-w"/>
+        <unit name="Knight-w"/>
+        <unit name="Champion-w"/>
+        <unit name="Squire-p"/>
+        <unit name="Knight-p"/>
+        <unit name="Champion-p"/>
+        <unit name="Squire-u"/>
+        <unit name="Knight-u"/>
+        <unit name="Champion-u"/>
+        <unit name="Squire-g"/>
+        <unit name="Knight-g"/>
+        <unit name="Champion-g"/>
+        <unit name="Squire-y"/>
+        <unit name="Knight-y"/>
+        <unit name="Champion-y"/>
+        <unit name="Squire-o"/>
+        <unit name="Knight-o"/>
+        <unit name="Champion-o"/>
+        <unit name="Squire-r"/>
+        <unit name="Knight-r"/>
+        <unit name="Champion-r"/>
+        <unit name="Squire-b"/>
+        <unit name="Knight-b"/>
+        <unit name="Champion-b"/>
 
         <!-- Item Units -->
         <unit name="Potion-of-Healing"/>
@@ -484,12 +484,46 @@
         <unit name="Spectre"/>
         <unit name="Succubus"/>
         <unit name="Treant"/>
-        <unit name="Unknown"/>
         <unit name="Water-Elemental"/>
         <unit name="Werewolf"/>
         <unit name="Wight"/>
-        <unit name="Wraith"/>        
+        <unit name="Wraith"/>
         <unit name="Zombie"/>
+
+        <unit name="Dead-Air-Elemental"/>
+        <unit name="Dead-Banshee"/>
+        <unit name="Dead-Chompy"/>
+        <unit name="Dead-Clockwork-Golem"/>
+        <unit name="Dead-Crystal-Golem"/>
+        <unit name="Dead-Dragon"/>
+        <unit name="Dead-Earth-Elemental"/>
+        <unit name="Dead-Fire-Elemental"/>
+        <unit name="Dead-Gazer"/>
+        <unit name="Dead-Ghast"/>
+        <unit name="Dead-Ghost"/>
+        <unit name="Dead-Ghoul"/>
+        <unit name="Dead-Giant-Crab"/>
+        <unit name="Dead-Giant-Scorpion"/>
+        <unit name="Dead-Giant-Spider"/>
+        <unit name="Dead-Grave-Golem"/>
+        <unit name="Dead-Hag"/>
+        <unit name="Dead-Lich"/>
+        <unit name="Dead-Magma-Golem"/>
+        <unit name="Dead-Mummy"/>
+        <unit name="Dead-Ooze"/>
+        <unit name="Dead-Rakshasa"/>
+        <unit name="Dead-Revenant"/>
+        <unit name="Dead-Skeleton"/>
+        <unit name="Dead-Spectre"/>
+        <unit name="Dead-Succubus"/>
+        <unit name="Dead-Treant"/>
+        <unit name="Dead-Water-Elemental"/>
+        <unit name="Dead-Werewolf"/>
+        <unit name="Dead-Wight"/>
+        <unit name="Dead-Wraith"/>
+        <unit name="Dead-Zombie"/>        
+        
+        <unit name="Unknown"/>
     </unitList>
 
     <relationshipTypes>
@@ -512,10 +546,17 @@
 
         <sequence>
             <step name="gameInitDelegate" delegate="initDelegate" display="Initializing Delegates" maxRunCount="1"/>
+
+            <!-- character selection steps (only once) -->
             <step name="HeroOriginPurchase" delegate="purchase" player="Hero" display="Choose Character" maxRunCount="1"/>
             <step name="HeroOriginPlace" delegate="place" player="Hero" display="Place Character at The Precipice" maxRunCount="1"/>
 
-            <step name="HeroMove" delegate="move" player="Hero"/>
+            <!-- Precipice shop step (only once) -->
+            <step name="HeroFirstPurchase" delegate="purchase" player="Hero" display="Choose Starting Gear" maxRunCount="1"/>
+            <step name="HeroFirstPlace" delegate="place" player="Hero" maxRunCount="1"/>
+
+            <!-- standard steps -->
+            <step name="HeroCombatMove" delegate="move" player="Hero"/>
             <step name="HeroEncounter" delegate="battle" player="Hero"/>
             <step name="HeroEvent" delegate="userActions" player="Hero"/>
             <step name="HeroPurchase" delegate="purchase" player="Hero"/>
@@ -524,8 +565,7 @@
 
             <step name="MazeEndTurn" delegate="endTurnNoPU" player="Maze" display="Turn Complete"/>
             <step name="endRoundStep" delegate="endRound" display="Round Complete"/>
-        </sequence>
-        <offset round="0"/>        
+        </sequence>        
     </gamePlay>
 
     <production>
@@ -550,7 +590,7 @@
             <cost resource="XP" quantity="25"/>
             <result resourceOrUnit="Expert-Bard" quantity="1"/>
         </productionRule>
-        <productionRule name="buyCrusader-Level-3">
+        <productionRule name="buyBard-Level-3">
             <cost resource="XP" quantity="50"/>
             <result resourceOrUnit="Master-Bard" quantity="1"/>
         </productionRule>
@@ -629,164 +669,164 @@
 
         <!-- retainers -->
         <productionRule name="buySquire-w">
-            <cost resource="Gold" quantity="4"/>
-            <result resourceOrUnit="Squire-(w)" quantity="1"/>
+            <cost resource="Gold" quantity="6"/>
+            <result resourceOrUnit="Squire-w" quantity="1"/>
         </productionRule>
         <productionRule name="buyKnight-w">
             <cost resource="Gold" quantity="15"/>
-            <result resourceOrUnit="Knight-(w)" quantity="1"/>
+            <result resourceOrUnit="Knight-w" quantity="1"/>
         </productionRule>
         <productionRule name="buyChampion-w">
             <cost resource="Gold" quantity="24"/>
-            <result resourceOrUnit="Champion-(w)" quantity="1"/>
+            <result resourceOrUnit="Champion-w" quantity="1"/>
         </productionRule>
         <productionRule name="buySquire-w-LevelUp">
             <cost resource="XP" quantity="15"/>
-            <result resourceOrUnit="Knight-(w)" quantity="1"/>
+            <result resourceOrUnit="Knight-w" quantity="1"/>
         </productionRule>
         <productionRule name="buyKnight-w-LevelUp">
             <cost resource="XP" quantity="35"/>
-            <result resourceOrUnit="Champion-(w)" quantity="1"/>
+            <result resourceOrUnit="Champion-w" quantity="1"/>
         </productionRule>
         <productionRule name="buySquire-p">
-            <cost resource="Gold" quantity="4"/>
-            <result resourceOrUnit="Squire-(p)" quantity="1"/>
+            <cost resource="Gold" quantity="6"/>
+            <result resourceOrUnit="Squire-p" quantity="1"/>
         </productionRule>
         <productionRule name="buyKnight-p">
             <cost resource="Gold" quantity="15"/>
-            <result resourceOrUnit="Knight-(p)" quantity="1"/>
+            <result resourceOrUnit="Knight-p" quantity="1"/>
         </productionRule>
         <productionRule name="buyChampion-p">
             <cost resource="Gold" quantity="24"/>
-            <result resourceOrUnit="Champion-(p)" quantity="1"/>
+            <result resourceOrUnit="Champion-p" quantity="1"/>
         </productionRule>
         <productionRule name="buySquire-p-LevelUp">
             <cost resource="XP" quantity="15"/>
-            <result resourceOrUnit="Knight-(p)" quantity="1"/>
+            <result resourceOrUnit="Knight-p" quantity="1"/>
         </productionRule>
         <productionRule name="buyKnight-p-LevelUp">
             <cost resource="XP" quantity="35"/>
-            <result resourceOrUnit="Champion-(p)" quantity="1"/>
+            <result resourceOrUnit="Champion-p" quantity="1"/>
         </productionRule>
         <productionRule name="buySquire-u">
-            <cost resource="Gold" quantity="4"/>
-            <result resourceOrUnit="Squire-(u)" quantity="1"/>
+            <cost resource="Gold" quantity="6"/>
+            <result resourceOrUnit="Squire-u" quantity="1"/>
         </productionRule>
         <productionRule name="buyKnight-u">
             <cost resource="Gold" quantity="15"/>
-            <result resourceOrUnit="Knight-(u)" quantity="1"/>
+            <result resourceOrUnit="Knight-u" quantity="1"/>
         </productionRule>
         <productionRule name="buyChampion-u">
             <cost resource="Gold" quantity="24"/>
-            <result resourceOrUnit="Champion-(u)" quantity="1"/>
+            <result resourceOrUnit="Champion-u" quantity="1"/>
         </productionRule>
         <productionRule name="buySquire-u-LevelUp">
             <cost resource="XP" quantity="15"/>
-            <result resourceOrUnit="Knight-(u)" quantity="1"/>
+            <result resourceOrUnit="Knight-u" quantity="1"/>
         </productionRule>
         <productionRule name="buyKnight-u-LevelUp">
             <cost resource="XP" quantity="35"/>
-            <result resourceOrUnit="Champion-(u)" quantity="1"/>
+            <result resourceOrUnit="Champion-u" quantity="1"/>
         </productionRule>
-        <productionRule name="buySquire-w">
-            <cost resource="Gold" quantity="4"/>
-            <result resourceOrUnit="Squire-(w)" quantity="1"/>
+        <productionRule name="buySquire-g">
+            <cost resource="Gold" quantity="6"/>
+            <result resourceOrUnit="Squire-g" quantity="1"/>
         </productionRule>
         <productionRule name="buyKnight-g">
             <cost resource="Gold" quantity="15"/>
-            <result resourceOrUnit="Knight-(g)" quantity="1"/>
+            <result resourceOrUnit="Knight-g" quantity="1"/>
         </productionRule>
         <productionRule name="buyChampion-g">
             <cost resource="Gold" quantity="24"/>
-            <result resourceOrUnit="Champion-(g)" quantity="1"/>
+            <result resourceOrUnit="Champion-g" quantity="1"/>
         </productionRule>
         <productionRule name="buySquire-g-LevelUp">
             <cost resource="XP" quantity="15"/>
-            <result resourceOrUnit="Knight-(g)" quantity="1"/>
+            <result resourceOrUnit="Knight-g" quantity="1"/>
         </productionRule>
         <productionRule name="buyKnight-g-LevelUp">
             <cost resource="XP" quantity="35"/>
-            <result resourceOrUnit="Champion-(g)" quantity="1"/>
+            <result resourceOrUnit="Champion-g" quantity="1"/>
         </productionRule>
-        <productionRule name="buySquire-w">
-            <cost resource="Gold" quantity="4"/>
-            <result resourceOrUnit="Squire-(w)" quantity="1"/>
+        <productionRule name="buySquire-y">
+            <cost resource="Gold" quantity="6"/>
+            <result resourceOrUnit="Squire-y" quantity="1"/>
         </productionRule>
-        <productionRule name="buyKnight-w">
+        <productionRule name="buyKnight-y">
             <cost resource="Gold" quantity="15"/>
-            <result resourceOrUnit="Knight-(w)" quantity="1"/>
+            <result resourceOrUnit="Knight-y" quantity="1"/>
         </productionRule>
         <productionRule name="buyChampion-y">
             <cost resource="Gold" quantity="24"/>
-            <result resourceOrUnit="Champion-(y)" quantity="1"/>
+            <result resourceOrUnit="Champion-y" quantity="1"/>
         </productionRule>
         <productionRule name="buySquire-y-LevelUp">
             <cost resource="XP" quantity="15"/>
-            <result resourceOrUnit="Knight-(y)" quantity="1"/>
+            <result resourceOrUnit="Knight-y" quantity="1"/>
         </productionRule>
         <productionRule name="buyKnight-y-LevelUp">
             <cost resource="XP" quantity="35"/>
-            <result resourceOrUnit="Champion-(y)" quantity="1"/>
+            <result resourceOrUnit="Champion-y" quantity="1"/>
         </productionRule>
-        <productionRule name="buySquire-w">
-            <cost resource="Gold" quantity="4"/>
-            <result resourceOrUnit="Squire-(w)" quantity="1"/>
+        <productionRule name="buySquire-o">
+            <cost resource="Gold" quantity="6"/>
+            <result resourceOrUnit="Squire-o" quantity="1"/>
         </productionRule>
         <productionRule name="buyKnight-o">
             <cost resource="Gold" quantity="15"/>
-            <result resourceOrUnit="Knight-(o)" quantity="1"/>
+            <result resourceOrUnit="Knight-o" quantity="1"/>
         </productionRule>
         <productionRule name="buyChampion-o">
             <cost resource="Gold" quantity="24"/>
-            <result resourceOrUnit="Champion-(o)" quantity="1"/>
+            <result resourceOrUnit="Champion-o" quantity="1"/>
         </productionRule>
         <productionRule name="buySquire-o-LevelUp">
             <cost resource="XP" quantity="15"/>
-            <result resourceOrUnit="Knight-(o)" quantity="1"/>
+            <result resourceOrUnit="Knight-o" quantity="1"/>
         </productionRule>
         <productionRule name="buyKnight-o-LevelUp">
             <cost resource="XP" quantity="35"/>
-            <result resourceOrUnit="Champion-(o)" quantity="1"/>
+            <result resourceOrUnit="Champion-o" quantity="1"/>
         </productionRule>
-        <productionRule name="buySquire-w">
-            <cost resource="Gold" quantity="4"/>
-            <result resourceOrUnit="Squire-(w)" quantity="1"/>
+        <productionRule name="buySquire-r">
+            <cost resource="Gold" quantity="6"/>
+            <result resourceOrUnit="Squire-r" quantity="1"/>
         </productionRule>
         <productionRule name="buyKnight-r">
             <cost resource="Gold" quantity="15"/>
-            <result resourceOrUnit="Knight-(r)" quantity="1"/>
+            <result resourceOrUnit="Knight-r" quantity="1"/>
         </productionRule>
         <productionRule name="buyChampion-r">
             <cost resource="Gold" quantity="24"/>
-            <result resourceOrUnit="Champion-(r)" quantity="1"/>
+            <result resourceOrUnit="Champion-r" quantity="1"/>
         </productionRule>
         <productionRule name="buySquire-r-LevelUp">
             <cost resource="XP" quantity="15"/>
-            <result resourceOrUnit="Knight-(r)" quantity="1"/>
+            <result resourceOrUnit="Knight-r" quantity="1"/>
         </productionRule>
         <productionRule name="buyKnight-r-LevelUp">
             <cost resource="XP" quantity="35"/>
-            <result resourceOrUnit="Champion-(r)" quantity="1"/>
+            <result resourceOrUnit="Champion-r" quantity="1"/>
         </productionRule>
         <productionRule name="buySquire-b">
-            <cost resource="Gold" quantity="4"/>
-            <result resourceOrUnit="Squire-(b)" quantity="1"/>
+            <cost resource="Gold" quantity="6"/>
+            <result resourceOrUnit="Squire-b" quantity="1"/>
         </productionRule>
         <productionRule name="buyKnight-b">
             <cost resource="Gold" quantity="15"/>
-            <result resourceOrUnit="Knight-(b)" quantity="1"/>
+            <result resourceOrUnit="Knight-b" quantity="1"/>
         </productionRule>
         <productionRule name="buyChampion-b">
             <cost resource="Gold" quantity="24"/>
-            <result resourceOrUnit="Champion-(b)" quantity="1"/>
+            <result resourceOrUnit="Champion-b" quantity="1"/>
         </productionRule>
         <productionRule name="buySquire-b-LevelUp">
             <cost resource="XP" quantity="15"/>
-            <result resourceOrUnit="Knight-(b)" quantity="1"/>
+            <result resourceOrUnit="Knight-b" quantity="1"/>
         </productionRule>
         <productionRule name="buyKnight-b-LevelUp">
             <cost resource="XP" quantity="35"/>
-            <result resourceOrUnit="Champion-(b)" quantity="1"/>
+            <result resourceOrUnit="Champion-b" quantity="1"/>
         </productionRule>
 
         <!-- items -->
@@ -822,7 +862,7 @@
             <cost resource="Gold" quantity="10"/>
             <result resourceOrUnit="Spell-of-Earthquake" quantity="1"/>
         </productionRule>
-        <productionRule name="buyShieldRunes">
+        <productionRule name="buyShield-Runes">
             <cost resource="Gold" quantity="1"/>
             <result resourceOrUnit="Shield-Runes" quantity="1"/>
         </productionRule>
@@ -927,7 +967,7 @@
     </technology>
 
     <attachmentList>
-        <!-- relationship attachments -->
+    <!-- relationship attachments -->
         <attachment name="relationshipTypeAttachment" attachTo="Allied" javaClass="games.strategy.triplea.attachments.RelationshipTypeAttachment" type="relationship">
             <option name="archeType" value="allied"/>
         </attachment>
@@ -937,434 +977,559 @@
         <attachment name="relationshipTypeAttachment" attachTo="None" javaClass="games.strategy.triplea.attachments.RelationshipTypeAttachment" type="relationship">
             <option name="archeType" value="neutral"/>
         </attachment>
+    <!-- end relationship attachments -->
 
-        <!-- tech attachments -->
+    <!-- tech attachments -->
         <attachment name="techAttachment" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TechAttachment" type="player">
             <option name="mechanizedInfantry" value="true"/>
         </attachment>
+    <!-- end tech attachments -->
 
-        <!-- rule attachments -->
+    <!-- rule attachments -->
         <attachment name="rulesAttachment" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
             <option name="placementCapturedTerritory" value="true"/>
             <option name="placementAnyTerritory" value="true"/>
 	    </attachment>
+    <!-- end rule attachments -->
 
-        <!-- player attachments -->
+    <!-- player attachments -->
         <attachment name="playerAttachment" attachTo="Hero" javaClass="games.strategy.triplea.attachments.PlayerAttachment" type="player">
             <option name="retainCapitalProduceNumber" value="0"/>
             <option name="retainCapitalNumber" value="0"/>
         </attachment>
+    <!-- end player attachments -->
 
-        <!-- unit attachments - characters -->
+    <!-- unit attachments - characters -->
         <attachment name="unitAttachment" attachTo="Crusader" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="4"/>
             <option name="defense" value="4"/>
             <option name="movement" value="1"/>
             <option name="hitPoints" value="5"/>
-            <option name="isLandTransport" value="true"/>
-            <option name="transportCapacity" value="3"/>
+            <option name="isConstruction" value="true"/>
+            <option name="constructionType" value="Hero"/>
+            <option name="constructionsPerTerrPerTypePerTurn" value="1"/>
+	        <option name="maxConstructionsPerTypePerTerr" value="1"/>
+            <option name="canProduceUnits" value="true"/>
+            <option name="canProduceXUnits" value="30"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Expert-Crusader" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="5"/>
             <option name="defense" value="5"/>
             <option name="movement" value="1"/>
             <option name="hitPoints" value="5"/>
-            <option name="isLandTransport" value="true"/>
-            <option name="transportCapacity" value="3"/>
             <option name="consumesUnits" value="1:Crusader"/>
+            <option name="isConstruction" value="true"/>
+            <option name="constructionType" value="Hero"/>
+            <option name="constructionsPerTerrPerTypePerTurn" value="1"/>
+	        <option name="maxConstructionsPerTypePerTerr" value="1"/>
+            <option name="canProduceUnits" value="true"/>
+            <option name="canProduceXUnits" value="30"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Master-Crusader" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="6"/>
             <option name="defense" value="6"/>
             <option name="movement" value="1"/>
             <option name="hitPoints" value="5"/>
-            <option name="isLandTransport" value="true"/>
-            <option name="transportCapacity" value="3"/>
             <option name="consumesUnits" value="1:Expert-Crusader"/>
+            <option name="isConstruction" value="true"/>
+            <option name="constructionType" value="Hero"/>
+            <option name="constructionsPerTerrPerTypePerTurn" value="1"/>
+	        <option name="maxConstructionsPerTypePerTerr" value="1"/>
+            <option name="canProduceUnits" value="true"/>
+            <option name="canProduceXUnits" value="30"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Bard" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="4"/>
             <option name="defense" value="4"/>
             <option name="movement" value="1"/>
             <option name="hitPoints" value="4"/>
-            <option name="isLandTransport" value="true"/>
-            <option name="transportCapacity" value="3"/>
+            <option name="isConstruction" value="true"/>
+            <option name="constructionType" value="Hero"/>
+            <option name="constructionsPerTerrPerTypePerTurn" value="1"/>
+	        <option name="maxConstructionsPerTypePerTerr" value="1"/>
+            <option name="canProduceUnits" value="true"/>
+            <option name="canProduceXUnits" value="30"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Expert-Bard" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="4"/>
             <option name="defense" value="4"/>
             <option name="movement" value="1"/>
             <option name="hitPoints" value="5"/>
-            <option name="isLandTransport" value="true"/>
-            <option name="transportCapacity" value="3"/>
             <option name="consumesUnits" value="1:Bard"/>
+            <option name="isConstruction" value="true"/>
+            <option name="constructionType" value="Hero"/>
+            <option name="constructionsPerTerrPerTypePerTurn" value="1"/>
+	        <option name="maxConstructionsPerTypePerTerr" value="1"/>
+            <option name="canProduceUnits" value="true"/>
+            <option name="canProduceXUnits" value="30"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Master-Bard" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="5"/>
             <option name="defense" value="5"/>
             <option name="movement" value="1"/>
             <option name="hitPoints" value="5"/>
-            <option name="isLandTransport" value="true"/>
-            <option name="transportCapacity" value="3"/>
             <option name="consumesUnits" value="1:Expert-Bard"/>
+            <option name="isConstruction" value="true"/>
+            <option name="constructionType" value="Hero"/>
+            <option name="constructionsPerTerrPerTypePerTurn" value="1"/>
+	        <option name="maxConstructionsPerTypePerTerr" value="1"/>
+            <option name="canProduceUnits" value="true"/>
+            <option name="canProduceXUnits" value="30"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Hunter" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="5"/>
             <option name="defense" value="5"/>
             <option name="movement" value="1"/>
             <option name="hitPoints" value="4"/>
-            <option name="isLandTransport" value="true"/>
-            <option name="transportCapacity" value="3"/>
+            <option name="isConstruction" value="true"/>
+            <option name="constructionType" value="Hero"/>
+            <option name="constructionsPerTerrPerTypePerTurn" value="1"/>
+	        <option name="maxConstructionsPerTypePerTerr" value="1"/>
+            <option name="canProduceUnits" value="true"/>
+            <option name="canProduceXUnits" value="30"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Expert-Hunter" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="5"/>
             <option name="defense" value="5"/>
             <option name="movement" value="1"/>
             <option name="hitPoints" value="5"/>
-            <option name="isLandTransport" value="true"/>
-            <option name="transportCapacity" value="3"/>
             <option name="consumesUnits" value="1:Hunter"/>
+            <option name="isConstruction" value="true"/>
+            <option name="constructionType" value="Hero"/>
+            <option name="constructionsPerTerrPerTypePerTurn" value="1"/>
+	        <option name="maxConstructionsPerTypePerTerr" value="1"/>
+            <option name="canProduceUnits" value="true"/>
+            <option name="canProduceXUnits" value="30"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Master-Hunter" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="6"/>
             <option name="defense" value="6"/>
             <option name="movement" value="1"/>
             <option name="hitPoints" value="5"/>
-            <option name="isLandTransport" value="true"/>
-            <option name="transportCapacity" value="3"/>
             <option name="consumesUnits" value="1:Expert-Hunter"/>
+            <option name="isConstruction" value="true"/>
+            <option name="constructionType" value="Hero"/>
+            <option name="constructionsPerTerrPerTypePerTurn" value="1"/>
+	        <option name="maxConstructionsPerTypePerTerr" value="1"/>
+            <option name="canProduceUnits" value="true"/>
+            <option name="canProduceXUnits" value="30"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Ranger" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="5"/>
             <option name="defense" value="5"/>
             <option name="movement" value="1"/>
             <option name="hitPoints" value="5"/>
-            <option name="isLandTransport" value="true"/>
-            <option name="transportCapacity" value="3"/>            
+            <option name="isConstruction" value="true"/>
+            <option name="constructionType" value="Hero"/>
+            <option name="constructionsPerTerrPerTypePerTurn" value="1"/>
+	        <option name="maxConstructionsPerTypePerTerr" value="1"/>
+            <option name="canProduceUnits" value="true"/>
+            <option name="canProduceXUnits" value="30"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Expert-Ranger" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="6"/>
             <option name="defense" value="6"/>
             <option name="movement" value="1"/>
             <option name="hitPoints" value="5"/>
-            <option name="isLandTransport" value="true"/>
-            <option name="transportCapacity" value="3"/>
             <option name="consumesUnits" value="1:Ranger"/>
+            <option name="isConstruction" value="true"/>
+            <option name="constructionType" value="Hero"/>
+            <option name="constructionsPerTerrPerTypePerTurn" value="1"/>
+	        <option name="maxConstructionsPerTypePerTerr" value="1"/>
+            <option name="canProduceUnits" value="true"/>
+            <option name="canProduceXUnits" value="30"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Master-Ranger" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="6"/>
             <option name="defense" value="6"/>
             <option name="movement" value="1"/>
             <option name="hitPoints" value="5"/>
-            <option name="isLandTransport" value="true"/>
-            <option name="transportCapacity" value="3"/>
             <option name="consumesUnits" value="1:Expert-Ranger"/>
+            <option name="isConstruction" value="true"/>
+            <option name="constructionType" value="Hero"/>
+            <option name="constructionsPerTerrPerTypePerTurn" value="1"/>
+	        <option name="maxConstructionsPerTypePerTerr" value="1"/>
+            <option name="canProduceUnits" value="true"/>
+            <option name="canProduceXUnits" value="30"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Priestess" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="4"/>
             <option name="defense" value="4"/>
             <option name="movement" value="1"/>
             <option name="hitPoints" value="3"/>
-            <option name="isLandTransport" value="true"/>
-            <option name="transportCapacity" value="3"/>
-            <option name="repairsUnits" value="1:Priestess:Squire-(y):Knight-(y):Champion-(y)"/>
+            <option name="repairsUnits" value="1:Priestess:Squire-y:Knight-y:Champion-y"/>
+            <option name="isConstruction" value="true"/>
+            <option name="constructionType" value="Hero"/>
+            <option name="constructionsPerTerrPerTypePerTurn" value="1"/>
+	        <option name="maxConstructionsPerTypePerTerr" value="1"/>
+            <option name="canProduceUnits" value="true"/>
+            <option name="canProduceXUnits" value="30"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Expert-Priestess" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="4"/>
             <option name="defense" value="4"/>
             <option name="movement" value="1"/>
             <option name="hitPoints" value="4"/>
-            <option name="isLandTransport" value="true"/>
-            <option name="transportCapacity" value="3"/>
-            <option name="repairsUnits" value="1:Priestess:Squire-(y):Knight-(y):Champion-(y)"/>
+            <option name="repairsUnits" value="1:Priestess:Squire-y:Knight-y:Champion-y"/>
             <option name="consumesUnits" value="1:Priestess"/>
+            <option name="isConstruction" value="true"/>
+            <option name="constructionType" value="Hero"/>
+            <option name="constructionsPerTerrPerTypePerTurn" value="1"/>
+	        <option name="maxConstructionsPerTypePerTerr" value="1"/>
+            <option name="canProduceUnits" value="true"/>
+            <option name="canProduceXUnits" value="30"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Master-Priestess" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="5"/>
             <option name="defense" value="5"/>
             <option name="movement" value="1"/>
             <option name="hitPoints" value="4"/>
-            <option name="isLandTransport" value="true"/>
-            <option name="transportCapacity" value="3"/>
-            <option name="repairsUnits" value="1:Priestess:Squire-(y):Knight-(y):Champion-(y)"/>
+            <option name="repairsUnits" value="1:Priestess:Squire-y:Knight-y:Champion-y"/>
             <option name="consumesUnits" value="1:Expert-Priestess"/>
+            <option name="isConstruction" value="true"/>
+            <option name="constructionType" value="Hero"/>
+            <option name="constructionsPerTerrPerTypePerTurn" value="1"/>
+	        <option name="maxConstructionsPerTypePerTerr" value="1"/>
+            <option name="canProduceUnits" value="true"/>
+            <option name="canProduceXUnits" value="30"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Raider" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="5"/>
             <option name="defense" value="5"/>
             <option name="movement" value="1"/>
             <option name="hitPoints" value="4"/>
-            <option name="isLandTransport" value="true"/>
-            <option name="transportCapacity" value="3"/>
+            <option name="isConstruction" value="true"/>
+            <option name="constructionType" value="Hero"/>
+            <option name="constructionsPerTerrPerTypePerTurn" value="1"/>
+	        <option name="maxConstructionsPerTypePerTerr" value="1"/>
+            <option name="canProduceUnits" value="true"/>
+            <option name="canProduceXUnits" value="30"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Expert-Raider" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="5"/>
             <option name="defense" value="5"/>
             <option name="movement" value="1"/>
             <option name="hitPoints" value="5"/>
-            <option name="isLandTransport" value="true"/>
-            <option name="transportCapacity" value="3"/>
             <option name="consumesUnits" value="1:Raider"/>
+            <option name="isConstruction" value="true"/>
+            <option name="constructionType" value="Hero"/>
+            <option name="constructionsPerTerrPerTypePerTurn" value="1"/>
+	        <option name="maxConstructionsPerTypePerTerr" value="1"/>
+            <option name="canProduceUnits" value="true"/>
+            <option name="canProduceXUnits" value="30"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Master-Raider" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="6"/>
             <option name="defense" value="6"/>
             <option name="movement" value="1"/>
             <option name="hitPoints" value="5"/>
-            <option name="isLandTransport" value="true"/>
-            <option name="transportCapacity" value="3"/>
             <option name="consumesUnits" value="1:Expert-Raider"/>
+            <option name="isConstruction" value="true"/>
+            <option name="constructionType" value="Hero"/>
+            <option name="constructionsPerTerrPerTypePerTurn" value="1"/>
+	        <option name="maxConstructionsPerTypePerTerr" value="1"/>
+            <option name="canProduceUnits" value="true"/>
+            <option name="canProduceXUnits" value="30"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Gladiator" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="6"/>
             <option name="defense" value="6"/>
             <option name="movement" value="1"/>
             <option name="hitPoints" value="5"/>
-            <option name="isLandTransport" value="true"/>
-            <option name="transportCapacity" value="3"/>
+            <option name="isConstruction" value="true"/>
+            <option name="constructionType" value="Hero"/>
+            <option name="constructionsPerTerrPerTypePerTurn" value="1"/>
+	        <option name="maxConstructionsPerTypePerTerr" value="1"/>
+            <option name="canProduceUnits" value="true"/>
+            <option name="canProduceXUnits" value="30"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Expert-Gladiator" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="6"/>
             <option name="defense" value="6"/>
             <option name="movement" value="1"/>
             <option name="hitPoints" value="5"/>
-            <option name="isLandTransport" value="true"/>
-            <option name="transportCapacity" value="3"/>
             <option name="consumesUnits" value="1:Gladiator"/>
+            <option name="isConstruction" value="true"/>
+            <option name="constructionType" value="Hero"/>
+            <option name="constructionsPerTerrPerTypePerTurn" value="1"/>
+	        <option name="maxConstructionsPerTypePerTerr" value="1"/>
+            <option name="canProduceUnits" value="true"/>
+            <option name="canProduceXUnits" value="30"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Master-Gladiator" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="6"/>
             <option name="defense" value="6"/>
             <option name="movement" value="1"/>
             <option name="hitPoints" value="5"/>
-            <option name="isLandTransport" value="true"/>
-            <option name="transportCapacity" value="3"/>
             <option name="consumesUnits" value="1:Expert-Gladiator"/>
+            <option name="isConstruction" value="true"/>
+            <option name="constructionType" value="Hero"/>
+            <option name="constructionsPerTerrPerTypePerTurn" value="1"/>
+	        <option name="maxConstructionsPerTypePerTerr" value="1"/>
+            <option name="canProduceUnits" value="true"/>
+            <option name="canProduceXUnits" value="30"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Scourge" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="5"/>
             <option name="defense" value="5"/>
             <option name="movement" value="1"/>
             <option name="hitPoints" value="3"/>
-            <option name="isLandTransport" value="true"/>
-            <option name="transportCapacity" value="3"/>
+            <option name="isConstruction" value="true"/>
+            <option name="constructionType" value="Hero"/>
+            <option name="constructionsPerTerrPerTypePerTurn" value="1"/>
+	        <option name="maxConstructionsPerTypePerTerr" value="1"/>
+            <option name="canProduceUnits" value="true"/>
+            <option name="canProduceXUnits" value="30"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Expert-Scourge" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="5"/>
             <option name="defense" value="5"/>
             <option name="movement" value="1"/>
             <option name="hitPoints" value="4"/>
-            <option name="isLandTransport" value="true"/>
-            <option name="transportCapacity" value="3"/>
             <option name="consumesUnits" value="1:Scourge"/>
+            <option name="isConstruction" value="true"/>
+            <option name="constructionType" value="Hero"/>
+            <option name="constructionsPerTerrPerTypePerTurn" value="1"/>
+	        <option name="maxConstructionsPerTypePerTerr" value="1"/>
+            <option name="canProduceUnits" value="true"/>
+            <option name="canProduceXUnits" value="30"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Master-Scourge" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="6"/>
             <option name="defense" value="6"/>
             <option name="movement" value="1"/>
             <option name="hitPoints" value="4"/>
-            <option name="isLandTransport" value="true"/>
-            <option name="transportCapacity" value="3"/>
             <option name="consumesUnits" value="1:Expert-Scourge"/>
+            <option name="isConstruction" value="true"/>
+            <option name="constructionType" value="Hero"/>
+            <option name="constructionsPerTerrPerTypePerTurn" value="1"/>
+	        <option name="maxConstructionsPerTypePerTerr" value="1"/>
+            <option name="canProduceUnits" value="true"/>
+            <option name="canProduceXUnits" value="30"/>
         </attachment>
+    <!-- end unit attachments - characters -->
 
-        <!-- unit attachments - retainers -->
-        <attachment name="unitAttachment" attachTo="Squire-(w)" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+    <!-- unit attachments - retainers -->
+        <attachment name="unitAttachment" attachTo="Squire-w" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="3"/>
             <option name="defense" value="3"/>
+            <option name="movement" value="1"/>
             <option name="hitPoints" value="2"/>
-            <option name="isLandTransportable" value="true"/>
-            <option name="transportCost" value="1"/>
         </attachment>
-        <attachment name="unitAttachment" attachTo="Knight-(w)" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+        <attachment name="unitAttachment" attachTo="Knight-w" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="4"/>
             <option name="defense" value="4"/>
+            <option name="movement" value="1"/>
             <option name="hitPoints" value="3"/>
-            <option name="isLandTransportable" value="true"/>
-            <option name="transportCost" value="1"/>
-            <option name="consumesUnits" value="1:Squire-(w)"/>
+            <option name="consumesUnits" value="1:Squire-w"/>
         </attachment>
-        <attachment name="unitAttachment" attachTo="Champion-(w)" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+        <attachment name="unitAttachment" attachTo="Champion-w" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="5"/>
             <option name="defense" value="5"/>
+            <option name="movement" value="1"/>
             <option name="hitPoints" value="4"/>
-            <option name="isLandTransportable" value="true"/>
-            <option name="transportCost" value="1"/>
-            <option name="consumesUnits" value="1:Knight-(w)"/>
+            <option name="consumesUnits" value="1:Knight-w"/>
         </attachment>
-        <attachment name="unitAttachment" attachTo="Squire-(p)" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+        <attachment name="unitAttachment" attachTo="Squire-p" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="3"/>
             <option name="defense" value="3"/>
+            <option name="movement" value="1"/>
             <option name="hitPoints" value="2"/>
-            <option name="isLandTransportable" value="true"/>
-            <option name="transportCost" value="1"/>
         </attachment>
-        <attachment name="unitAttachment" attachTo="Knight-(p)" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+        <attachment name="unitAttachment" attachTo="Knight-p" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="4"/>
             <option name="defense" value="4"/>
+            <option name="movement" value="1"/>
             <option name="hitPoints" value="3"/>
-            <option name="isLandTransportable" value="true"/>
-            <option name="transportCost" value="1"/>
-            <option name="consumesUnits" value="1:Squire-(p)"/>
+            <option name="consumesUnits" value="1:Squire-p"/>
         </attachment>
-        <attachment name="unitAttachment" attachTo="Champion-(p)" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+        <attachment name="unitAttachment" attachTo="Champion-p" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="5"/>
             <option name="defense" value="5"/>
+            <option name="movement" value="1"/>
             <option name="hitPoints" value="4"/>
-            <option name="isLandTransportable" value="true"/>
-            <option name="transportCost" value="1"/>
-            <option name="consumesUnits" value="1:Knight-(p)"/>
+            <option name="consumesUnits" value="1:Knight-p"/>
         </attachment>
-        <attachment name="unitAttachment" attachTo="Squire-(u)" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+        <attachment name="unitAttachment" attachTo="Squire-u" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="3"/>
             <option name="defense" value="3"/>
+            <option name="movement" value="1"/>
             <option name="hitPoints" value="2"/>
-            <option name="isLandTransportable" value="true"/>
-            <option name="transportCost" value="1"/>
         </attachment>
-        <attachment name="unitAttachment" attachTo="Knight-(u)" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+        <attachment name="unitAttachment" attachTo="Knight-u" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="4"/>
             <option name="defense" value="4"/>
+            <option name="movement" value="1"/>
             <option name="hitPoints" value="3"/>
-            <option name="isLandTransportable" value="true"/>
-            <option name="transportCost" value="1"/>
-            <option name="consumesUnits" value="1:Squire-(u)"/>
+            <option name="consumesUnits" value="1:Squire-u"/>
         </attachment>
-        <attachment name="unitAttachment" attachTo="Champion-(u)" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+        <attachment name="unitAttachment" attachTo="Champion-u" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="5"/>
             <option name="defense" value="5"/>
+            <option name="movement" value="1"/>
             <option name="hitPoints" value="4"/>
-            <option name="isLandTransportable" value="true"/>
-            <option name="transportCost" value="1"/>
-            <option name="consumesUnits" value="1:Knight-(u)"/>
+            <option name="consumesUnits" value="1:Knight-u"/>
         </attachment>
-        <attachment name="unitAttachment" attachTo="Squire-(g)" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+        <attachment name="unitAttachment" attachTo="Squire-g" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="3"/>
             <option name="defense" value="3"/>
+            <option name="movement" value="1"/>
             <option name="hitPoints" value="2"/>
-            <option name="isLandTransportable" value="true"/>
-            <option name="transportCost" value="1"/>
         </attachment>
-        <attachment name="unitAttachment" attachTo="Knight-(g)" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+        <attachment name="unitAttachment" attachTo="Knight-g" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="4"/>
             <option name="defense" value="4"/>
+            <option name="movement" value="1"/>
             <option name="hitPoints" value="3"/>
-            <option name="isLandTransportable" value="true"/>
-            <option name="transportCost" value="1"/>
-            <option name="consumesUnits" value="1:Squire-(g)"/>
+            <option name="consumesUnits" value="1:Squire-g"/>
         </attachment>
-        <attachment name="unitAttachment" attachTo="Champion-(g)" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+        <attachment name="unitAttachment" attachTo="Champion-g" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="5"/>
             <option name="defense" value="5"/>
+            <option name="movement" value="1"/>
             <option name="hitPoints" value="4"/>
-            <option name="isLandTransportable" value="true"/>
-            <option name="transportCost" value="1"/>
-            <option name="consumesUnits" value="1:Knight-(g)"/>
+            <option name="consumesUnits" value="1:Knight-g"/>
         </attachment>
-        <attachment name="unitAttachment" attachTo="Squire-(y)" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+        <attachment name="unitAttachment" attachTo="Squire-y" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="3"/>
             <option name="defense" value="3"/>
+            <option name="movement" value="1"/>
             <option name="hitPoints" value="2"/>
-            <option name="isLandTransportable" value="true"/>
-            <option name="transportCost" value="1"/>
         </attachment>
-        <attachment name="unitAttachment" attachTo="Knight-(y)" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+        <attachment name="unitAttachment" attachTo="Knight-y" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="4"/>
             <option name="defense" value="4"/>
+            <option name="movement" value="1"/>
             <option name="hitPoints" value="3"/>
-            <option name="isLandTransportable" value="true"/>
-            <option name="transportCost" value="1"/>
-            <option name="consumesUnits" value="1:Squire-(y)"/>
+            <option name="consumesUnits" value="1:Squire-y"/>
         </attachment>
-        <attachment name="unitAttachment" attachTo="Champion-(y)" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+        <attachment name="unitAttachment" attachTo="Champion-y" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="5"/>
             <option name="defense" value="5"/>
+            <option name="movement" value="1"/>
             <option name="hitPoints" value="4"/>
-            <option name="isLandTransportable" value="true"/>
-            <option name="transportCost" value="1"/>
-            <option name="consumesUnits" value="1:Knight-(y)"/>
+            <option name="consumesUnits" value="1:Knight-y"/>
         </attachment>
-        <attachment name="unitAttachment" attachTo="Squire-(o)" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+        <attachment name="unitAttachment" attachTo="Squire-o" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="3"/>
             <option name="defense" value="3"/>
+            <option name="movement" value="1"/>
             <option name="hitPoints" value="2"/>
-            <option name="isLandTransportable" value="true"/>
-            <option name="transportCost" value="1"/>
         </attachment>
-        <attachment name="unitAttachment" attachTo="Knight-(o)" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+        <attachment name="unitAttachment" attachTo="Knight-o" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="4"/>
             <option name="defense" value="4"/>
+            <option name="movement" value="1"/>
             <option name="hitPoints" value="3"/>
-            <option name="isLandTransportable" value="true"/>
-            <option name="transportCost" value="1"/>
-            <option name="consumesUnits" value="1:Squire-(o)"/>
+            <option name="consumesUnits" value="1:Squire-o"/>
         </attachment>
-        <attachment name="unitAttachment" attachTo="Champion-(o)" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+        <attachment name="unitAttachment" attachTo="Champion-o" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="5"/>
             <option name="defense" value="5"/>
+            <option name="movement" value="1"/>
             <option name="hitPoints" value="4"/>
-            <option name="isLandTransportable" value="true"/>
-            <option name="transportCost" value="1"/>
-            <option name="consumesUnits" value="1:Knight-(o)"/>
+            <option name="consumesUnits" value="1:Knight-o"/>
         </attachment>
-        <attachment name="unitAttachment" attachTo="Squire-(r)" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+        <attachment name="unitAttachment" attachTo="Squire-r" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="3"/>
             <option name="defense" value="3"/>
+            <option name="movement" value="1"/>
             <option name="hitPoints" value="2"/>
-            <option name="isLandTransportable" value="true"/>
-            <option name="transportCost" value="1"/>
         </attachment>
-        <attachment name="unitAttachment" attachTo="Knight-(r)" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+        <attachment name="unitAttachment" attachTo="Knight-r" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="4"/>
             <option name="defense" value="4"/>
+            <option name="movement" value="1"/>
             <option name="hitPoints" value="3"/>
-            <option name="isLandTransportable" value="true"/>
-            <option name="transportCost" value="1"/>
-            <option name="consumesUnits" value="1:Squire-(r)"/>
+            <option name="consumesUnits" value="1:Squire-r"/>
         </attachment>
-        <attachment name="unitAttachment" attachTo="Champion-(r)" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+        <attachment name="unitAttachment" attachTo="Champion-r" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="5"/>
             <option name="defense" value="5"/>
+            <option name="movement" value="1"/>
             <option name="hitPoints" value="4"/>
-            <option name="isLandTransportable" value="true"/>
-            <option name="transportCost" value="1"/>
-            <option name="consumesUnits" value="1:Knight-(r)"/>
+            <option name="consumesUnits" value="1:Knight-r"/>
         </attachment>
-        <attachment name="unitAttachment" attachTo="Squire-(b)" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+        <attachment name="unitAttachment" attachTo="Squire-b" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="3"/>
             <option name="defense" value="3"/>
+            <option name="movement" value="1"/>
             <option name="hitPoints" value="2"/>
-            <option name="isLandTransportable" value="true"/>
-            <option name="transportCost" value="1"/>
         </attachment>
-        <attachment name="unitAttachment" attachTo="Knight-(b)" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+        <attachment name="unitAttachment" attachTo="Knight-b" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="4"/>
             <option name="defense" value="4"/>
+            <option name="movement" value="1"/>
             <option name="hitPoints" value="3"/>
-            <option name="isLandTransportable" value="true"/>
-            <option name="transportCost" value="1"/>
-            <option name="consumesUnits" value="1:Squire-(b)"/>
+            <option name="consumesUnits" value="1:Squire-b"/>
         </attachment>
-        <attachment name="unitAttachment" attachTo="Champion-(b)" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+        <attachment name="unitAttachment" attachTo="Champion-b" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="5"/>
             <option name="defense" value="5"/>
+            <option name="movement" value="1"/>
             <option name="hitPoints" value="4"/>
-            <option name="isLandTransportable" value="true"/>
-            <option name="transportCost" value="1"/>
-            <option name="consumesUnits" value="1:Knight-(b)"/>
+            <option name="consumesUnits" value="1:Knight-b"/>
         </attachment>
+    <!-- end unit attachments - retainers -->
 
-        <!-- unit attachments - items -->
+    <!-- unit attachments - items -->
         <attachment name="unitAttachment" attachTo="Potion-of-Healing" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="isInfrastructure" value="true"/>
             <option name="maxBuiltPerPlayer" value="3"/>
             <option name="movement" value="1"/>
-
         </attachment>
+        <attachment name="unitAttachment" attachTo="Potion-of-Confusion" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="isSuicide" value="true"/>
+            <option name="maxBuiltPerPlayer" value="3"/>
+            <option name="movement" value="1"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Potion-of-Accuracy" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="isSuicide" value="true"/>
+            <option name="maxBuiltPerPlayer" value="3"/>
+            <option name="movement" value="1"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Potion-of-Wisdom" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="isInfrastructure" value="true"/>
+            <option name="maxBuiltPerPlayer" value="1"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Potion-of-Fortune" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="isInfrastructure" value="true"/>
+            <option name="maxBuiltPerPlayer" value="1"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Spell-of-Death" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="isSuicide" value="true"/>
+            <option name="maxBuiltPerPlayer" value="3"/>
+            <option name="movement" value="1"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Spell-of-Fireball" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="isSuicide" value="true"/>
+            <option name="maxBuiltPerPlayer" value="3"/>
+            <option name="movement" value="1"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Spell-of-Lightning-Bolt" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="isSuicide" value="true"/>
+            <option name="maxBuiltPerPlayer" value="2"/>
+            <option name="movement" value="1"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Spell-of-Ice-Storm" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="isSuicide" value="true"/>
+            <option name="maxBuiltPerPlayer" value="2"/>
+            <option name="movement" value="1"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Spell-of-Earthquake" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="isSuicide" value="true"/>
+            <option name="maxBuiltPerPlayer" value="1"/>
+            <option name="movement" value="1"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Shield-Runes" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="0"/>
+            <option name="defense" value="1"/>
+            <option name="maxBuiltPerPlayer" value="7"/>
+            <option name="movement" value="1"/>
+        </attachment>
+    <!-- end unit attachments - items -->
 
-
-
-        <!-- unit attachments - monsters -->
+    <!-- unit attachments - monsters -->
         <attachment name="unitAttachment" attachTo="Chompy" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="2"/>
             <option name="defense" value="2"/>
@@ -1375,7 +1540,1657 @@
             <option name="createsResourcesList" value="1:XP"/>
             <option name="createsResourcesList" value="0:Gold"/>
         </attachment>
+        <attachment name="unitAttachment" attachTo="Giant-Scorpion" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="2"/>
+            <option name="defense" value="2"/>
+            <option name="defenseRolls" value="3"/>
+            <option name="whenHitPointsDamagedChangesInto" value="1:false:Dead-Giant-Scorpion"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Dead-Giant-Scorpion" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="isInfrastructure" value="true"/>
+            <option name="createsResourcesList" value="3:XP"/>
+            <option name="createsResourcesList" value="0:Gold"/>            
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Ooze" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="2"/>
+            <option name="defense" value="2"/>
+            <option name="whenHitPointsDamagedChangesInto" value="1:false:Dead-Ooze"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Dead-Ooze" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="isInfrastructure" value="true"/>
+            <option name="createsResourcesList" value="2:XP"/>
+            <option name="createsResourcesList" value="1:Gold"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Skeleton" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="2"/>
+            <option name="defense" value="2"/>
+            <option name="whenHitPointsDamagedChangesInto" value="1:false:Dead-Skeleton"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Dead-Skeleton" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="isInfrastructure" value="true"/>
+            <option name="createsResourcesList" value="2:XP"/>
+            <option name="createsResourcesList" value="1:Gold"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Zombie" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="2"/>
+            <option name="defense" value="2"/>
+            <option name="whenHitPointsDamagedChangesInto" value="1:false:Dead-Zombie"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Dead-Zombie" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="isInfrastructure" value="true"/>
+            <option name="createsResourcesList" value="3:XP"/>
+            <option name="createsResourcesList" value="1:Gold"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Ghoul" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="2"/>
+            <option name="defense" value="2"/>
+            <option name="hitPoints" value="2"/>
+            <option name="whenHitPointsDamagedChangesInto" value="2:false:Dead-Ghoul"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Dead-Ghoul" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="isInfrastructure" value="true"/>
+            <option name="createsResourcesList" value="4:XP"/>
+            <option name="createsResourcesList" value="1:Gold"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Giant-Spider" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="2"/>
+            <option name="defense" value="2"/>
+            <option name="hitPoints" value="2"/>
+            <option name="whenHitPointsDamagedChangesInto" value="2:false:Dead-Giant-Spider"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Dead-Giant-Spider" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="isInfrastructure" value="true"/>
+            <option name="createsResourcesList" value="4:XP"/>
+            <option name="createsResourcesList" value="0:Gold"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Succubus" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="2"/>
+            <option name="defense" value="2"/>
+            <option name="hitPoints" value="2"/>
+            <option name="whenHitPointsDamagedChangesInto" value="2:false:Dead-Succubus"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Dead-Succubus" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="isInfrastructure" value="true"/>
+            <option name="createsResourcesList" value="5:XP"/>
+            <option name="createsResourcesList" value="2:Gold"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Wight" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="2"/>
+            <option name="defense" value="2"/>
+            <option name="hitPoints" value="2"/>
+            <option name="whenHitPointsDamagedChangesInto" value="2:false:Dead-Wight"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Dead-Wight" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="isInfrastructure" value="true"/>
+            <option name="createsResourcesList" value="4:XP"/>
+            <option name="createsResourcesList" value="2:Gold"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Air-Elemental" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="3"/>
+            <option name="defense" value="3"/>
+            <option name="hitPoints" value="3"/>
+            <option name="whenHitPointsDamagedChangesInto" value="3:false:Dead-Air-Elemental"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Dead-Air-Elemental" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="isInfrastructure" value="true"/>
+            <option name="createsResourcesList" value="6:XP"/>
+            <option name="createsResourcesList" value="0:Gold"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Ghast" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="3"/>
+            <option name="defense" value="3"/>
+            <option name="hitPoints" value="3"/>
+            <option name="whenHitPointsDamagedChangesInto" value="3:false:Dead-Ghast"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Dead-Ghast" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="isInfrastructure" value="true"/>
+            <option name="createsResourcesList" value="5:XP"/>
+            <option name="createsResourcesList" value="1:Gold"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Giant-Crab" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="3"/>
+            <option name="defense" value="3"/>
+            <option name="hitPoints" value="3"/>
+            <option name="whenHitPointsDamagedChangesInto" value="3:false:Dead-Giant-Crab"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Dead-Giant-Crab" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="isInfrastructure" value="true"/>
+            <option name="createsResourcesList" value="5:XP"/>
+            <option name="createsResourcesList" value="0:Gold"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Hag" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="3"/>
+            <option name="defense" value="3"/>
+            <option name="hitPoints" value="3"/>
+            <option name="whenHitPointsDamagedChangesInto" value="3:false:Dead-Hag"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Dead-Hag" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="isInfrastructure" value="true"/>
+            <option name="createsResourcesList" value="6:XP"/>
+            <option name="createsResourcesList" value="2:Gold"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Spectre" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="3"/>
+            <option name="defense" value="3"/>
+            <option name="hitPoints" value="4"/>
+            <option name="whenHitPointsDamagedChangesInto" value="4:false:Dead-Spectre"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Dead-Spectre" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="isInfrastructure" value="true"/>
+            <option name="createsResourcesList" value="7:XP"/>
+            <option name="createsResourcesList" value="2:Gold"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Water-Elemental" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="3"/>
+            <option name="defense" value="3"/>
+            <option name="hitPoints" value="4"/>
+            <option name="whenHitPointsDamagedChangesInto" value="4:false:Dead-Water-Elemental"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Dead-Water-Elemental" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="isInfrastructure" value="true"/>
+            <option name="createsResourcesList" value="8:XP"/>
+            <option name="createsResourcesList" value="0:Gold"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Werewolf" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="4"/>
+            <option name="defense" value="4"/>
+            <option name="hitPoints" value="4"/>
+            <option name="whenHitPointsDamagedChangesInto" value="4:false:Dead-Werewolf"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Dead-Werewolf" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="isInfrastructure" value="true"/>
+            <option name="createsResourcesList" value="7:XP"/>
+            <option name="createsResourcesList" value="3:Gold"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Wraith" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="4"/>
+            <option name="defense" value="4"/>
+            <option name="hitPoints" value="4"/>
+            <option name="whenHitPointsDamagedChangesInto" value="4:false:Dead-Wraith"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Dead-Wraith" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="isInfrastructure" value="true"/>
+            <option name="createsResourcesList" value="7:XP"/>
+            <option name="createsResourcesList" value="3:Gold"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Banshee" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="4"/>
+            <option name="defense" value="4"/>
+            <option name="defenseRolls" value="2"/>
+            <option name="hitPoints" value="5"/>
+            <option name="whenHitPointsDamagedChangesInto" value="5:false:Dead-Banshee"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Dead-Banshee" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="isInfrastructure" value="true"/>
+            <option name="createsResourcesList" value="9:XP"/>
+            <option name="createsResourcesList" value="3:Gold"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Fire-Elemental" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="4"/>
+            <option name="defense" value="4"/>
+            <option name="hitPoints" value="5"/>
+            <option name="whenHitPointsDamagedChangesInto" value="5:false:Dead-Fire-Elemental"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Dead-Fire-Elemental" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="isInfrastructure" value="true"/>
+            <option name="createsResourcesList" value="8:XP"/>
+            <option name="createsResourcesList" value="0:Gold"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Ghost" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="4"/>
+            <option name="defense" value="4"/>
+            <option name="hitPoints" value="5"/>
+            <option name="whenHitPointsDamagedChangesInto" value="5:false:Dead-Ghost"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Dead-Ghost" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="isInfrastructure" value="true"/>
+            <option name="createsResourcesList" value="9:XP"/>
+            <option name="createsResourcesList" value="4:Gold"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Treant" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="4"/>
+            <option name="defense" value="4"/>
+            <option name="hitPoints" value="5"/>
+            <option name="whenHitPointsDamagedChangesInto" value="5:false:Dead-Treant"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Dead-Treant" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="isInfrastructure" value="true"/>
+            <option name="createsResourcesList" value="8:XP"/>
+            <option name="createsResourcesList" value="4:Gold"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Crystal-Golem" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="5"/>
+            <option name="defense" value="5"/>
+            <option name="hitPoints" value="6"/>
+            <option name="whenHitPointsDamagedChangesInto" value="6:false:Dead-Crystal-Golem"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Dead-Crystal-Golem" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="isInfrastructure" value="true"/>
+            <option name="createsResourcesList" value="9:XP"/>
+            <option name="createsResourcesList" value="4:Gold"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Earth-Elemental" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="5"/>
+            <option name="defense" value="5"/>
+            <option name="hitPoints" value="6"/>
+            <option name="whenHitPointsDamagedChangesInto" value="6:false:Dead-Earth-Elemental"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Dead-Earth-Elemental" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="isInfrastructure" value="true"/>
+            <option name="createsResourcesList" value="10:XP"/>
+            <option name="createsResourcesList" value="0:Gold"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Mummy" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="5"/>
+            <option name="defense" value="5"/>
+            <option name="hitPoints" value="6"/>
+            <option name="whenHitPointsDamagedChangesInto" value="6:false:Dead-Mummy"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Dead-Mummy" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="isInfrastructure" value="true"/>
+            <option name="createsResourcesList" value="9:XP"/>
+            <option name="createsResourcesList" value="5:Gold"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Revenant" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="5"/>
+            <option name="defense" value="5"/>
+            <option name="hitPoints" value="6"/>
+            <option name="whenHitPointsDamagedChangesInto" value="6:false:Dead-Revenant"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Dead-Revenant" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="isInfrastructure" value="true"/>
+            <option name="createsResourcesList" value="10:XP"/>
+            <option name="createsResourcesList" value="5:Gold"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Gazer" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="5"/>
+            <option name="defense" value="5"/>
+            <option name="defenseRolls" value="8"/>
+            <option name="chooseBestRoll" value="true"/>
+            <option name="hitPoints" value="7"/>
+            <option name="whenHitPointsDamagedChangesInto" value="7:false:Dead-Gazer"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Dead-Gazer" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="isInfrastructure" value="true"/>
+            <option name="createsResourcesList" value="12:XP"/>
+            <option name="createsResourcesList" value="5:Gold"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Magma-Golem" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="5"/>
+            <option name="defense" value="5"/>
+            <option name="hitPoints" value="7"/>
+            <option name="whenHitPointsDamagedChangesInto" value="7:false:Dead-Magma-Golem"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Dead-Magma-Golem" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="isInfrastructure" value="true"/>
+            <option name="createsResourcesList" value="11:XP"/>
+            <option name="createsResourcesList" value="6:Gold"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Lich" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="6"/>
+            <option name="defense" value="6"/>
+            <option name="hitPoints" value="7"/>
+            <option name="whenHitPointsDamagedChangesInto" value="7:false:Dead-Lich"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Dead-Lich" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="isInfrastructure" value="true"/>
+            <option name="createsResourcesList" value="11:XP"/>
+            <option name="createsResourcesList" value="6:Gold"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Rakshasa" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="6"/>
+            <option name="defense" value="6"/>
+            <option name="hitPoints" value="7"/>
+            <option name="whenHitPointsDamagedChangesInto" value="7:false:Dead-Rakshasa"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Dead-Rakshasa" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="isInfrastructure" value="true"/>
+            <option name="createsResourcesList" value="11:XP"/>
+            <option name="createsResourcesList" value="6:Gold"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Clockwork-Golem" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="6"/>
+            <option name="defense" value="6"/>
+            <option name="hitPoints" value="8"/>
+            <option name="whenHitPointsDamagedChangesInto" value="8:false:Dead-Clockwork-Golem"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Dead-Clockwork-Golem" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="isInfrastructure" value="true"/>
+            <option name="createsResourcesList" value="12:XP"/>
+            <option name="createsResourcesList" value="7:Gold"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Grave-Golem" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="6"/>
+            <option name="defense" value="6"/>
+            <option name="hitPoints" value="8"/>
+            <option name="whenHitPointsDamagedChangesInto" value="8:false:Dead-Grave-Golem"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Dead-Grave-Golem" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="isInfrastructure" value="true"/>
+            <option name="createsResourcesList" value="12:XP"/>
+            <option name="createsResourcesList" value="7:Gold"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Dragon" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="7"/>
+            <option name="defense" value="7"/>
+            <option name="defenseRolls" value="3"/>
+            <option name="hitPoints" value="12"/>
+            <option name="whenHitPointsDamagedChangesInto" value="12:false:Dead-Dragon"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Dead-Dragon" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="isInfrastructure" value="true"/>
+            <option name="createsResourcesList" value="100:XP"/>
+            <option name="createsResourcesList" value="100:Gold"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Unknown" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="isInfrastructure" value="true"/>
+        </attachment>
+    <!-- end unit attachments - monsters -->
 
+    <!-- territory attachments -->
+        <attachment name="territoryAttachment" attachTo="The Precipice" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="victoryCity" value="1"/>
+            <option name="capital" value="Hero"/>
+            <option name="originalOwner" value="Hero"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Endgame" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="victoryCity" value="1"/>
+            <option name="capital" value="Maze"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Outer Northwestern Ridge" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Outer NW Path 6" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Outer NW Path 7" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Outer NW Path 8" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Outer NW Path 9" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Outer NW Path 10" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Outer North Path" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Outer NE Path 10" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Outer NE Path 9" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Outer NE Path 8" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Outer NE Path 7" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Outer NE Path 6" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Outer Northeastern Ridge" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Outer NW Path 5" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner Northwestern Ridge 1" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner NW Path 4" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner NW Path 3" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner NW Path 2" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner NW Path 1" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner North Path 1" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner NE Path 1" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner NE Path 2" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner NE Path 3" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner NE Path 4" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner Northeastern Ridge 1" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Outer NE Path 5" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Outer NW Path 4" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner NW Path 5" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner Northwestern Ridge 2" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner NW Path 12" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner NW Path 13" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner NW Path 14" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner North Path 2" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner NE Path 14" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner NE Path 13" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner NE Path 12" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner Northeastern Ridge 2" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner NE Path 5" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Outer NE Path 4" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Outer NW Path 3" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner NW Path 6" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner NW Path 11" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner Northwestern Ridge 3" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner NW Path 16" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner NW Path 15" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner North Path 3" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner NE Path 15" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner NE Path 16" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner Northeastern Ridge 3" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner NE Path 11" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner NE Path 6" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Outer NE Path 3" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Outer NW Path 2" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner NW Path 7" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner NW Path 10" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner NW Path 17" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner Northwestern Ridge 4" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner NW Path 20" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner North Path 4" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner NE Path 20" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner Northeastern Ridge 4" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner NE Path 17" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner NE Path 10" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner NE Path 7" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Outer NE Path 2" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Outer NW Path 1" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner NW Path 8" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner NW Path 9" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner NW Path 18" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner NW Path 19" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner Northwestern Ridge 5" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner NW Path 21" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner North Ridge" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner Northeastern Ridge 5" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner NE Path 19" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner NE Path 18" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner NE Path 9" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner NE Path 8" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Outer NE Path 1" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Outer West Path North" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner West Path North 1" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner West Path North 2" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner West Path North 3" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner West Path North 4" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner West Path North 5" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner East Path North 5" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner East Path North 4" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner East Path North 3" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner East Path North 2" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner East Path North 1" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Outer East Path North" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Outer West Path South" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner West Path South 1" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner West Path South 2" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner West Path South 3" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner West Path South 4" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner West Path South 5" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Final Boss" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner East Path South 5" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner East Path South 4" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner East Path South 3" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner East Path South 2" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner East Path South 1" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Outer East Path South" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Outer SW Path 9" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner SW Path 1" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner SW Path 13" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner SW Path 14" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner SW Path 20" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner Southwestern Ridge 5" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Scenic Vista" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner Southeastern Ridge 5" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner SE Path 19" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner SE Path 14" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner SE Path 13" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner SE Path 1" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Outer SE Path 9" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Outer SW Path 8" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner SW Path 2" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner SW Path 12" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner SW Path 15" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner Southwestern Ridge 4" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner SW Path 19" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner SW Path 18" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner South Path 2" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner SE Path 18" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner Southeastern Ridge 4" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner SE Path 15" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner SE Path 12" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner SE Path 2" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Outer SE Path 8" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Outer SW Path 7" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner SW Path 3" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner SW Path 11" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner Southwestern Ridge 3" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner SW Path 16" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner SW Path 17" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="South Ridge 2" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner SE Path 17" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner SE Path 16" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner Southeastern Ridge 3" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner SE Path 11" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner SE Path 3" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Outer SE Path 7" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Outer SW Path 6" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner SW Path 4" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner Southwestern Ridge 2" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner SW Path 10" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner SW Path 9" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner SW Path 8" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner South Path 1" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner SE Path 8" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner SE Path 9" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner SE Path 10" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner Southeastern Ridge 2" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner SE Path 4" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Outer SE Path 6" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Outer SW Path 5" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner Southwestern Ridge 1" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner SW Path 5" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner SW Path 6" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner SW Path 7" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="South Ridge 1" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner SE Path 7" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner SE Path 6" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner SE Path 5" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Inner Southeastern Ridge 1" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Outer SE Path 5" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Outer Southwestern Ridge" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Outer SW Path 4" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Outer SW Path 3" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Outer SW Path 2" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Outer SW Path 1" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Entrance" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Outer SE Path 1" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Outer SE Path 2" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Outer SE Path 3" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Outer SE Path 4" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+        <attachment name="territoryAttachment" attachTo="Outer Southeastern Ridge" javaClass="games.strategy.triplea.attachments.TerritoryAttachment" type="territory">
+            <option name="production" value="0"/>
+            <option name="originalOwner" value="Maze"/>
+        </attachment>
+    <!-- end territory attachments -->
+
+    <!-- support attachments -->
+
+    <!-- end support attachments -->
+
+    <!-- conditions -->
+        <attachment name="conditionStartGame" attachTo="Maze" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="rounds" value="1"/>
+        </attachment>
+
+        <attachment name="conditionHeroIsCrusader" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="The Precipice" count="1"/>
+            <option name="unitPresence" value="Crusader" count="1"/>
+        </attachment>
+        <attachment name="conditionHeroIsBard" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="The Precipice" count="1"/>
+            <option name="unitPresence" value="Bard" count="1"/>
+        </attachment>
+        <attachment name="conditionHeroIsHunter" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="The Precipice" count="1"/>
+            <option name="unitPresence" value="Hunter" count="1"/>
+        </attachment>
+        <attachment name="conditionHeroIsRanger" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="The Precipice" count="1"/>
+            <option name="unitPresence" value="Ranger" count="1"/>
+        </attachment>
+        <attachment name="conditionHeroIsPriestess" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="The Precipice" count="1"/>
+            <option name="unitPresence" value="Priestess" count="1"/>
+        </attachment>
+        <attachment name="conditionHeroIsRaider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="The Precipice" count="1"/>
+            <option name="unitPresence" value="Raider" count="1"/>
+        </attachment>
+        <attachment name="conditionHeroIsGladiator" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="The Precipice" count="1"/>
+            <option name="unitPresence" value="Gladiator" count="1"/>
+        </attachment>
+        <attachment name="conditionHeroIsScourge" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="The Precipice" count="1"/>
+            <option name="unitPresence" value="Scourge" count="1"/>
+        </attachment>
+
+        <attachment name="conditionRemoveDeadChompy" attachTo="Maze" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="map" count="1"/>
+            <option name="unitPresence" value="Dead-Chompy" count="1"/>
+            <option name="players" value="Hero"/>
+        </attachment>
+        <attachment name="conditionRemoveDeadGiantScorpion" attachTo="Maze" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="map" count="1"/>
+            <option name="unitPresence" value="Dead-Giant-Scorpion" count="1"/>
+            <option name="players" value="Hero"/>
+        </attachment>
+        <attachment name="conditionRemoveDeadOoze" attachTo="Maze" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="map" count="1"/>
+            <option name="unitPresence" value="Dead-Ooze" count="1"/>
+            <option name="players" value="Hero"/>
+        </attachment>
+        <attachment name="conditionRemoveDeadSkeleton" attachTo="Maze" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="map" count="1"/>
+            <option name="unitPresence" value="Dead-Skeleton" count="1"/>
+            <option name="players" value="Hero"/>
+        </attachment>
+        <attachment name="conditionRemoveDeadZombie" attachTo="Maze" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="map" count="1"/>
+            <option name="unitPresence" value="Dead-Zombie" count="1"/>
+            <option name="players" value="Hero"/>
+        </attachment>
+        <attachment name="conditionRemoveDeadGhoul" attachTo="Maze" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="map" count="1"/>
+            <option name="unitPresence" value="Dead-Ghoul" count="1"/>
+            <option name="players" value="Hero"/>
+        </attachment>
+        <attachment name="conditionRemoveDeadGiantSpider" attachTo="Maze" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="map" count="1"/>
+            <option name="unitPresence" value="Dead-Giant-Spider" count="1"/>
+            <option name="players" value="Hero"/>
+        </attachment>
+        <attachment name="conditionRemoveDeadSuccubus" attachTo="Maze" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="map" count="1"/>
+            <option name="unitPresence" value="Dead-Succubus" count="1"/>
+            <option name="players" value="Hero"/>
+        </attachment>
+        <attachment name="conditionRemoveDeadWight" attachTo="Maze" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="map" count="1"/>
+            <option name="unitPresence" value="Dead-Wight" count="1"/>
+            <option name="players" value="Hero"/>
+        </attachment>
+        <attachment name="conditionRemoveDeadAirElemental" attachTo="Maze" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="map" count="1"/>
+            <option name="unitPresence" value="Dead-Air-Elemental" count="1"/>
+            <option name="players" value="Hero"/>
+        </attachment>
+        <attachment name="conditionRemoveDeadGhast" attachTo="Maze" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="map" count="1"/>
+            <option name="unitPresence" value="Dead-Ghast" count="1"/>
+            <option name="players" value="Hero"/>
+        </attachment>
+        <attachment name="conditionRemoveDeadGiantCrab" attachTo="Maze" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="map" count="1"/>
+            <option name="unitPresence" value="Dead-Giant-Crab" count="1"/>
+            <option name="players" value="Hero"/>
+        </attachment>
+        <attachment name="conditionRemoveDeadHag" attachTo="Maze" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="map" count="1"/>
+            <option name="unitPresence" value="Dead-Hag" count="1"/>
+            <option name="players" value="Hero"/>
+        </attachment>
+        <attachment name="conditionRemoveDeadSpectre" attachTo="Maze" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="map" count="1"/>
+            <option name="unitPresence" value="Dead-Spectre" count="1"/>
+            <option name="players" value="Hero"/>
+        </attachment>
+        <attachment name="conditionRemoveDeadWaterElemental" attachTo="Maze" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="map" count="1"/>
+            <option name="unitPresence" value="Dead-Water-Elemental" count="1"/>
+            <option name="players" value="Hero"/>
+        </attachment>
+        <attachment name="conditionRemoveDeadWerewolf" attachTo="Maze" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="map" count="1"/>
+            <option name="unitPresence" value="Dead-Werewolf" count="1"/>
+            <option name="players" value="Hero"/>
+        </attachment>
+        <attachment name="conditionRemoveDeadWraith" attachTo="Maze" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="map" count="1"/>
+            <option name="unitPresence" value="Dead-Wraith" count="1"/>
+            <option name="players" value="Hero"/>
+        </attachment>
+        <attachment name="conditionRemoveDeadBanshee" attachTo="Maze" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="map" count="1"/>
+            <option name="unitPresence" value="Dead-Banshee" count="1"/>
+            <option name="players" value="Hero"/>
+        </attachment>
+        <attachment name="conditionRemoveDeadFireElemental" attachTo="Maze" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="map" count="1"/>
+            <option name="unitPresence" value="Dead-Fire-Elemental" count="1"/>
+            <option name="players" value="Hero"/>
+        </attachment>
+        <attachment name="conditionRemoveDeadGhost" attachTo="Maze" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="map" count="1"/>
+            <option name="unitPresence" value="Dead-Ghost" count="1"/>
+            <option name="players" value="Hero"/>
+        </attachment>
+        <attachment name="conditionRemoveDeadTreant" attachTo="Maze" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="map" count="1"/>
+            <option name="unitPresence" value="Dead-Treant" count="1"/>
+            <option name="players" value="Hero"/>
+        </attachment>
+        <attachment name="conditionRemoveDeadCrystalGolem" attachTo="Maze" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="map" count="1"/>
+            <option name="unitPresence" value="Dead-Crystal-Golem" count="1"/>
+            <option name="players" value="Hero"/>
+        </attachment>
+        <attachment name="conditionRemoveDeadEarthElemental" attachTo="Maze" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="map" count="1"/>
+            <option name="unitPresence" value="Dead-Earth-Elemental" count="1"/>
+            <option name="players" value="Hero"/>
+        </attachment>
+        <attachment name="conditionRemoveDeadMummy" attachTo="Maze" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="map" count="1"/>
+            <option name="unitPresence" value="Dead-Mummy" count="1"/>
+            <option name="players" value="Hero"/>
+        </attachment>
+        <attachment name="conditionRemoveDeadRevenant" attachTo="Maze" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="map" count="1"/>
+            <option name="unitPresence" value="Dead-Revenant" count="1"/>
+            <option name="players" value="Hero"/>
+        </attachment>
+        <attachment name="conditionRemoveDeadGazer" attachTo="Maze" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="map" count="1"/>
+            <option name="unitPresence" value="Dead-Gazer" count="1"/>
+            <option name="players" value="Hero"/>
+        </attachment>
+        <attachment name="conditionRemoveDeadMagmaGolem" attachTo="Maze" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="map" count="1"/>
+            <option name="unitPresence" value="Dead-Magma-Golem" count="1"/>
+            <option name="players" value="Hero"/>
+        </attachment>
+        <attachment name="conditionRemoveDeadLich" attachTo="Maze" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="map" count="1"/>
+            <option name="unitPresence" value="Dead-Lich" count="1"/>
+            <option name="players" value="Hero"/>
+        </attachment>
+        <attachment name="conditionRemoveDeadRakshasa" attachTo="Maze" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="map" count="1"/>
+            <option name="unitPresence" value="Dead-Rakshasa" count="1"/>
+            <option name="players" value="Hero"/>
+        </attachment>
+        <attachment name="conditionRemoveDeadClockworkGolem" attachTo="Maze" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="map" count="1"/>
+            <option name="unitPresence" value="Dead-Clockwork-Golem" count="1"/>
+            <option name="players" value="Hero"/>
+        </attachment>
+        <attachment name="conditionRemoveDeadGraveGolem" attachTo="Maze" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="map" count="1"/>
+            <option name="unitPresence" value="Dead-Grave-Golem" count="1"/>
+            <option name="players" value="Hero"/>
+        </attachment>
+        <attachment name="conditionRemoveDeadDragon" attachTo="Maze" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="map" count="1"/>
+            <option name="unitPresence" value="Dead-Dragon" count="1"/>
+            <option name="players" value="Hero"/>
+        </attachment>
+    <!-- end conditions -->
+
+<!-- triggers -->
+    <!-- shop adjustments based on selected character + starting gold -->
+        <attachment name="triggerAttachment_ModifyShopTier1_Crusader" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionStartGame:conditionHeroIsCrusader"/>
+            <option name="productionRule" value="shop-tier-1:buySquire-w"/>
+            <option name="resource" value="Gold"/>
+            <option name="resourceCount" value="10"/>
+            <option name="when" value="after:HeroOriginPlace"/>
+        </attachment>
+        <attachment name="triggerAttachment_ModifyShopTier2_Crusader" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionStartGame:conditionHeroIsCrusader"/>
+            <option name="productionRule" value="shop-tier-2:buySquire-w"/>
+            <option name="productionRule" value="shop-tier-2:buyKnight-w"/>
+            <option name="when" value="after:HeroOriginPlace"/>
+        </attachment>
+        <attachment name="triggerAttachment_ModifyShopTier3_Crusader" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionStartGame:conditionHeroIsCrusader"/>
+            <option name="productionRule" value="shop-tier-3:buySquire-w"/>
+            <option name="productionRule" value="shop-tier-3:buyKnight-w"/>
+            <option name="productionRule" value="shop-tier-3:buyChampion-w"/>
+            <option name="when" value="after:HeroOriginPlace"/>
+        </attachment>
+        <attachment name="triggerAttachment_ModifyShopTier1_Bard" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionStartGame:conditionHeroIsBard"/>
+            <option name="productionRule" value="shop-tier-1:buySquire-p"/>
+            <option name="resource" value="Gold"/>
+            <option name="resourceCount" value="12"/>
+            <option name="when" value="after:HeroOriginPlace"/>
+        </attachment>
+        <attachment name="triggerAttachment_ModifyShopTier2_Bard" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionStartGame:conditionHeroIsBard"/>
+            <option name="productionRule" value="shop-tier-2:buySquire-p"/>
+            <option name="productionRule" value="shop-tier-2:buyKnight-p"/>
+            <option name="when" value="after:HeroOriginPlace"/>
+        </attachment>
+        <attachment name="triggerAttachment_ModifyShopTier3_Crusader" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionStartGame:conditionHeroIsBard"/>
+            <option name="productionRule" value="shop-tier-3:buySquire-p"/>
+            <option name="productionRule" value="shop-tier-3:buyKnight-p"/>
+            <option name="productionRule" value="shop-tier-3:buyChampion-p"/>
+            <option name="when" value="after:HeroOriginPlace"/>
+        </attachment>
+        <attachment name="triggerAttachment_ModifyShopTier1_Hunter" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionStartGame:conditionHeroIsHunter"/>
+            <option name="productionRule" value="shop-tier-1:buySquire-u"/>
+            <option name="resource" value="Gold"/>
+            <option name="resourceCount" value="11"/>
+            <option name="when" value="after:HeroOriginPlace"/>
+        </attachment>
+        <attachment name="triggerAttachment_ModifyShopTier2_Hunter" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionStartGame:conditionHeroIsHunter"/>
+            <option name="productionRule" value="shop-tier-2:buySquire-u"/>
+            <option name="productionRule" value="shop-tier-2:buyKnight-u"/>
+            <option name="when" value="after:HeroOriginPlace"/>
+        </attachment>
+        <attachment name="triggerAttachment_ModifyShopTier3_Hunter" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionStartGame:conditionHeroIsHunter"/>
+            <option name="productionRule" value="shop-tier-3:buySquire-u"/>
+            <option name="productionRule" value="shop-tier-3:buyKnight-u"/>
+            <option name="productionRule" value="shop-tier-3:buyChampion-u"/>
+            <option name="when" value="after:HeroOriginPlace"/>
+        </attachment>
+        <attachment name="triggerAttachment_ModifyShopTier1_Ranger" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionStartGame:conditionHeroIsRanger"/>
+            <option name="productionRule" value="shop-tier-1:buySquire-g"/>
+            <option name="resource" value="Gold"/>
+            <option name="resourceCount" value="9"/>
+            <option name="when" value="after:HeroOriginPlace"/>
+        </attachment>
+        <attachment name="triggerAttachment_ModifyShopTier2_Ranger" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionStartGame:conditionHeroIsRanger"/>
+            <option name="productionRule" value="shop-tier-2:buySquire-g"/>
+            <option name="productionRule" value="shop-tier-2:buyKnight-g"/>
+            <option name="when" value="after:HeroOriginPlace"/>
+        </attachment>
+        <attachment name="triggerAttachment_ModifyShopTier3_Ranger" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionStartGame:conditionHeroIsRanger"/>
+            <option name="productionRule" value="shop-tier-3:buySquire-g"/>
+            <option name="productionRule" value="shop-tier-3:buyKnight-g"/>
+            <option name="productionRule" value="shop-tier-3:buyChampion-g"/>
+            <option name="when" value="after:HeroOriginPlace"/>
+        </attachment>
+        <attachment name="triggerAttachment_ModifyShopTier1_Priestess" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionStartGame:conditionHeroIsPriestess"/>
+            <option name="productionRule" value="shop-tier-1:buySquire-y"/>
+            <option name="resource" value="Gold"/>
+            <option name="resourceCount" value="14"/>
+            <option name="when" value="after:HeroOriginPlace"/>
+        </attachment>
+        <attachment name="triggerAttachment_ModifyShopTier2_Priestess" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionStartGame:conditionHeroIsPriestess"/>
+            <option name="productionRule" value="shop-tier-2:buySquire-y"/>
+            <option name="productionRule" value="shop-tier-2:buyKnight-y"/>
+            <option name="when" value="after:HeroOriginPlace"/>
+        </attachment>
+        <attachment name="triggerAttachment_ModifyShopTier3_Priestess" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionStartGame:conditionHeroIsPriestess"/>
+            <option name="productionRule" value="shop-tier-3:buySquire-y"/>
+            <option name="productionRule" value="shop-tier-3:buyKnight-y"/>
+            <option name="productionRule" value="shop-tier-3:buyChampion-y"/>
+            <option name="when" value="after:HeroOriginPlace"/>
+        </attachment>
+        <attachment name="triggerAttachment_ModifyShopTier1_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionStartGame:conditionHeroIsRaider"/>
+            <option name="productionRule" value="shop-tier-1:buySquire-o"/>
+            <option name="resource" value="Gold"/>
+            <option name="resourceCount" value="11"/>
+            <option name="when" value="after:HeroOriginPlace"/>
+        </attachment>
+        <attachment name="triggerAttachment_ModifyShopTier2_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionStartGame:conditionHeroIsRaider"/>
+            <option name="productionRule" value="shop-tier-2:buySquire-o"/>
+            <option name="productionRule" value="shop-tier-2:buyKnight-o"/>
+            <option name="when" value="after:HeroOriginPlace"/>
+        </attachment>
+        <attachment name="triggerAttachment_ModifyShopTier3_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionStartGame:conditionHeroIsRaider"/>
+            <option name="productionRule" value="shop-tier-3:buySquire-o"/>
+            <option name="productionRule" value="shop-tier-3:buyKnight-o"/>
+            <option name="productionRule" value="shop-tier-3:buyChampion-o"/>
+            <option name="when" value="after:HeroOriginPlace"/>
+        </attachment>
+        <attachment name="triggerAttachment_ModifyShopTier1_Gladiator" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionStartGame:conditionHeroIsGladiator"/>
+            <option name="productionRule" value="shop-tier-1:buySquire-r"/>
+            <option name="resource" value="Gold"/>
+            <option name="resourceCount" value="8"/>
+            <option name="when" value="after:HeroOriginPlace"/>
+        </attachment>
+        <attachment name="triggerAttachment_ModifyShopTier2_Gladiator" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionStartGame:conditionHeroIsGladiator"/>
+            <option name="productionRule" value="shop-tier-2:buySquire-r"/>
+            <option name="productionRule" value="shop-tier-2:buyKnight-r"/>
+            <option name="when" value="after:HeroOriginPlace"/>
+        </attachment>
+        <attachment name="triggerAttachment_ModifyShopTier3_Gladiator" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionStartGame:conditionHeroIsGladiator"/>
+            <option name="productionRule" value="shop-tier-3:buySquire-r"/>
+            <option name="productionRule" value="shop-tier-3:buyKnight-r"/>
+            <option name="productionRule" value="shop-tier-3:buyChampion-r"/>
+            <option name="when" value="after:HeroOriginPlace"/>
+        </attachment>
+        <attachment name="triggerAttachment_ModifyShopTier1_Scourge" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionStartGame:conditionHeroIsScourge"/>
+            <option name="productionRule" value="shop-tier-1:buySquire-b"/>
+            <option name="resource" value="Gold"/>
+            <option name="resourceCount" value="13"/>
+            <option name="when" value="after:HeroOriginPlace"/>
+        </attachment>
+        <attachment name="triggerAttachment_ModifyShopTier2_Scourge" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionStartGame:conditionHeroIsScourge"/>
+            <option name="productionRule" value="shop-tier-2:buySquire-b"/>
+            <option name="productionRule" value="shop-tier-2:buyKnight-b"/>
+            <option name="when" value="after:HeroOriginPlace"/>
+        </attachment>
+        <attachment name="triggerAttachment_ModifyShopTier3_Scourge" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionStartGame:conditionHeroIsScourge"/>
+            <option name="productionRule" value="shop-tier-3:buySquire-b"/>
+            <option name="productionRule" value="shop-tier-3:buyKnight-b"/>
+            <option name="productionRule" value="shop-tier-3:buyChampion-b"/>
+            <option name="when" value="after:HeroOriginPlace"/>
+        </attachment>
+    <!-- end -->
+
+    <!-- set frontier to shop-tier-1 after character selection -->
+        <attachment name="triggerAttachment_SetShopTier1_Start" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionStartGame"/>
+            <option name="frontier" value="shop-tier-1"/>
+            <option name="when" value="before:HeroFirstPurchase"/>
+        </attachment>
+    <!-- end -->
+
+    <!-- remove dead monsters so they don't continually give resources -->
+        <attachment name="triggerAttachment_RemoveDeadChompy" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRemoveDeadChompy"/>
+            <option name="removeUnits" value="all:Dead-Chompy" count="99"/>
+            <option name="players" value="Hero"/>
+            <option name="when" value="after:HeroEndTurn"/>
+        </attachment>
+        <attachment name="triggerAttachment_RemoveDeadGiantScorpion" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRemoveDeadGiantScorpion"/>
+            <option name="removeUnits" value="all:Dead-Giant-Scorpion" count="99"/>
+            <option name="players" value="Hero"/>
+            <option name="when" value="after:HeroEndTurn"/>
+        </attachment>
+        <attachment name="triggerAttachment_RemoveDeadOoze" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRemoveDeadOoze"/>
+            <option name="removeUnits" value="all:Dead-Ooze" count="99"/>
+            <option name="players" value="Hero"/>
+            <option name="when" value="after:HeroEndTurn"/>
+        </attachment>
+        <attachment name="triggerAttachment_RemoveDeadSkeleton" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRemoveDeadSkeleton"/>
+            <option name="removeUnits" value="all:Dead-Skeleton" count="99"/>
+            <option name="players" value="Hero"/>
+            <option name="when" value="after:HeroEndTurn"/>
+        </attachment>
+        <attachment name="triggerAttachment_RemoveDeadZombie" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRemoveDeadZombie"/>
+            <option name="removeUnits" value="all:Dead-Zombie" count="99"/>
+            <option name="players" value="Hero"/>
+            <option name="when" value="after:HeroEndTurn"/>
+        </attachment>
+        <attachment name="triggerAttachment_RemoveDeadGhoul" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRemoveDeadGhoul"/>
+            <option name="removeUnits" value="all:Dead-Ghoul" count="99"/>
+            <option name="players" value="Hero"/>
+            <option name="when" value="after:HeroEndTurn"/>
+        </attachment>
+        <attachment name="triggerAttachment_RemoveDeadGiantSpider" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRemoveDeadGiantSpider"/>
+            <option name="removeUnits" value="all:Dead-Giant-Spider" count="99"/>
+            <option name="players" value="Hero"/>
+            <option name="when" value="after:HeroEndTurn"/>
+        </attachment>
+        <attachment name="triggerAttachment_RemoveDeadSuccubus" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRemoveDeadSuccubus"/>
+            <option name="removeUnits" value="all:Dead-Succubus" count="99"/>
+            <option name="players" value="Hero"/>
+            <option name="when" value="after:HeroEndTurn"/>
+        </attachment>
+        <attachment name="triggerAttachment_RemoveDeadWight" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRemoveDeadWight"/>
+            <option name="removeUnits" value="all:Dead-Wight" count="99"/>
+            <option name="players" value="Hero"/>
+            <option name="when" value="after:HeroEndTurn"/>
+        </attachment>
+        <attachment name="triggerAttachment_RemoveDeadAirElemental" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRemoveDeadAirElemental"/>
+            <option name="removeUnits" value="all:Dead-Air-Elemental" count="99"/>
+            <option name="players" value="Hero"/>
+            <option name="when" value="after:HeroEndTurn"/>
+        </attachment>
+        <attachment name="triggerAttachment_RemoveDeadGhast" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRemoveDeadGhast"/>
+            <option name="removeUnits" value="all:Dead-Ghast" count="99"/>
+            <option name="players" value="Hero"/>
+            <option name="when" value="after:HeroEndTurn"/>
+        </attachment>
+        <attachment name="triggerAttachment_RemoveDeadGiantCrab" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRemoveDeadGiantCrab"/>
+            <option name="removeUnits" value="all:Dead-Giant-Crab" count="99"/>
+            <option name="players" value="Hero"/>
+            <option name="when" value="after:HeroEndTurn"/>
+        </attachment>
+        <attachment name="triggerAttachment_RemoveDeadHag" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRemoveDeadHag"/>
+            <option name="removeUnits" value="all:Dead-Hag" count="99"/>
+            <option name="players" value="Hero"/>
+            <option name="when" value="after:HeroEndTurn"/>
+        </attachment>
+        <attachment name="triggerAttachment_RemoveDeadSpectre" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRemoveDeadSpectre"/>
+            <option name="removeUnits" value="all:Dead-Spectre" count="99"/>
+            <option name="players" value="Hero"/>
+            <option name="when" value="after:HeroEndTurn"/>
+        </attachment>
+        <attachment name="triggerAttachment_RemoveDeadWaterElemental" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRemoveDeadWaterElemental"/>
+            <option name="removeUnits" value="all:Dead-Water-Elemental" count="99"/>
+            <option name="players" value="Hero"/>
+            <option name="when" value="after:HeroEndTurn"/>
+        </attachment>
+        <attachment name="triggerAttachment_RemoveDeadWerewolf" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRemoveDeadWerewolf"/>
+            <option name="removeUnits" value="all:Dead-Werewolf" count="99"/>
+            <option name="players" value="Hero"/>
+            <option name="when" value="after:HeroEndTurn"/>
+        </attachment>
+        <attachment name="triggerAttachment_RemoveDeadWraith" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRemoveDeadWraith"/>
+            <option name="removeUnits" value="all:Dead-Wraith" count="99"/>
+            <option name="players" value="Hero"/>
+            <option name="when" value="after:HeroEndTurn"/>
+        </attachment>
+        <attachment name="triggerAttachment_RemoveDeadBanshee" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRemoveDeadBanshee"/>
+            <option name="removeUnits" value="all:Dead-Banshee" count="99"/>
+            <option name="players" value="Hero"/>
+            <option name="when" value="after:HeroEndTurn"/>
+        </attachment>
+        <attachment name="triggerAttachment_RemoveDeadFireElemental" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRemoveDeadFireElemental"/>
+            <option name="removeUnits" value="all:Dead-Fire-Elemental" count="99"/>
+            <option name="players" value="Hero"/>
+            <option name="when" value="after:HeroEndTurn"/>
+        </attachment>
+        <attachment name="triggerAttachment_RemoveDeadGhost" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRemoveDeadGhost"/>
+            <option name="removeUnits" value="all:Dead-Ghost" count="99"/>
+            <option name="players" value="Hero"/>
+            <option name="when" value="after:HeroEndTurn"/>
+        </attachment>
+        <attachment name="triggerAttachment_RemoveDeadTreant" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRemoveDeadTreant"/>
+            <option name="removeUnits" value="all:Dead-Treant" count="99"/>
+            <option name="players" value="Hero"/>
+            <option name="when" value="after:HeroEndTurn"/>
+        </attachment>
+        <attachment name="triggerAttachment_RemoveDeadCrystalGolem" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRemoveDeadCrystalGolem"/>
+            <option name="removeUnits" value="all:Dead-Crystal-Golem" count="99"/>
+            <option name="players" value="Hero"/>
+            <option name="when" value="after:HeroEndTurn"/>
+        </attachment>
+        <attachment name="triggerAttachment_RemoveDeadEarthElemental" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRemoveDeadEarthElemental"/>
+            <option name="removeUnits" value="all:Dead-Earth-Elemental" count="99"/>
+            <option name="players" value="Hero"/>
+            <option name="when" value="after:HeroEndTurn"/>
+        </attachment>
+        <attachment name="triggerAttachment_RemoveDeadMummy" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRemoveDeadMummy"/>
+            <option name="removeUnits" value="all:Dead-Mummy" count="99"/>
+            <option name="players" value="Hero"/>
+            <option name="when" value="after:HeroEndTurn"/>
+        </attachment>
+        <attachment name="triggerAttachment_RemoveDeadRevenant" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRemoveDeadRevenant"/>
+            <option name="removeUnits" value="all:Dead-Revenant" count="99"/>
+            <option name="players" value="Hero"/>
+            <option name="when" value="after:HeroEndTurn"/>
+        </attachment>
+        <attachment name="triggerAttachment_RemoveDeadGazer" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRemoveDeadGazer"/>
+            <option name="removeUnits" value="all:Dead-Gazer" count="99"/>
+            <option name="players" value="Hero"/>
+            <option name="when" value="after:HeroEndTurn"/>
+        </attachment>
+        <attachment name="triggerAttachment_RemoveDeadMagmaGolem" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRemoveDeadMagmaGolem"/>
+            <option name="removeUnits" value="all:Dead-Magma-Golem" count="99"/>
+            <option name="players" value="Hero"/>
+            <option name="when" value="after:HeroEndTurn"/>
+        </attachment>
+        <attachment name="triggerAttachment_RemoveDeadLich" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRemoveDeadLich"/>
+            <option name="removeUnits" value="all:Dead-Lich" count="99"/>
+            <option name="players" value="Hero"/>
+            <option name="when" value="after:HeroEndTurn"/>
+        </attachment>
+        <attachment name="triggerAttachment_RemoveDeadRakshasa" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRemoveDeadRakshasa"/>
+            <option name="removeUnits" value="all:Dead-Rakshasa" count="99"/>
+            <option name="players" value="Hero"/>
+            <option name="when" value="after:HeroEndTurn"/>
+        </attachment>
+        <attachment name="triggerAttachment_RemoveDeadClockworkGolem" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRemoveDeadClockworkGolem"/>
+            <option name="removeUnits" value="all:Dead-Clockwork-Golem" count="99"/>
+            <option name="players" value="Hero"/>
+            <option name="when" value="after:HeroEndTurn"/>
+        </attachment>
+        <attachment name="triggerAttachment_RemoveDeadGraveGolem" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRemoveDeadGraveGolem"/>
+            <option name="removeUnits" value="all:Dead-Grave-Golem" count="99"/>
+            <option name="players" value="Hero"/>
+            <option name="when" value="after:HeroEndTurn"/>
+        </attachment>
+        <attachment name="triggerAttachment_RemoveDeadDragon" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRemoveDeadDragon"/>
+            <option name="removeUnits" value="all:Dead-Dragon" count="99"/>
+            <option name="players" value="Hero"/>
+            <option name="when" value="after:HeroEndTurn"/>
+        </attachment>
+
+    <!-- end -->
+
+<!-- end triggers -->
     </attachmentList>
 
     <initialize>
@@ -1762,6 +3577,7 @@
         <property name="Hero bid" value="0" editable="false"></property>
         <property name="Maze bid" value="0" editable="false"></property>
         <property name="Low Luck" value="false" editable="false"><boolean/></property>
+        <property name="Damage From Bombing Done To Units Instead Of Territories" value="true" editable="false"><boolean/></property>
         <property name="Place in Any Territory" value="true" editable="false"><boolean/></property>        
         <property name="Projection of Power" value="false" editable="false"><boolean/></property>
         <property name="Selectable Zero Movement Units" value="true" editable="false"><boolean/></property>
