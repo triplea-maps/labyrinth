@@ -523,6 +523,8 @@
         <unit name="Dead-Wraith"/>
         <unit name="Dead-Zombie"/>        
         
+        <unit name="Gold-Stack"/>
+        <unit name="XP-Stack"/>
         <unit name="Unknown"/>
     </unitList>
 
@@ -537,10 +539,12 @@
         <delegate name="bid" javaClass="games.strategy.triplea.delegate.BidPurchaseDelegate" display="Hero Selection"/>
         <delegate name="placeBid" javaClass="games.strategy.triplea.delegate.BidPlaceDelegate" display="Hero Placement"/>
         <delegate name="move" javaClass="games.strategy.triplea.delegate.MoveDelegate" display="Movement"/>
+        <delegate name="randomization" javaClass="games.strategy.triplea.delegate.PoliticsDelegate" display="Randomizing"/>
         <delegate name="battle" javaClass="games.strategy.triplea.delegate.BattleDelegate" display="Encounter"/>
         <delegate name="userActions" javaClass="games.strategy.triplea.delegate.UserActionDelegate" display="Event"/>
         <delegate name="purchase" javaClass="games.strategy.triplea.delegate.PurchaseDelegate" display="Purchase Items"/>
         <delegate name="place" javaClass="games.strategy.triplea.delegate.PlaceDelegate" display="Place Items"/>        
+        <delegate name="endTurn" javaClass="games.strategy.triplea.delegate.EndTurnDelegate" display="Turn Complete"/>
         <delegate name="endTurnNoPU" javaClass="games.strategy.triplea.delegate.NoPUEndTurnDelegate" display="Turn Complete"/>
         <delegate name="endRound" javaClass="games.strategy.triplea.delegate.EndRoundDelegate" display="Round Complete"/>
 
@@ -556,16 +560,18 @@
             <step name="HeroFirstPlace" delegate="place" player="Hero" maxRunCount="1"/>
 
             <!-- standard steps -->
+            <step name="HeroRandomization" delegate="randomization" player="Hero"/>
             <step name="HeroCombatMove" delegate="move" player="Hero"/>
-            <step name="HeroEncounter" delegate="battle" player="Hero"/>
-            <step name="HeroEvent" delegate="userActions" player="Hero"/>
+            <step name="HeroBattle" delegate="battle" player="Hero"/>
+            <step name="HeroNonCombatMove" delegate="move" player="Hero"/>
+            <step name="HeroUserActions" delegate="userActions" player="Hero"/>
             <step name="HeroPurchase" delegate="purchase" player="Hero"/>
             <step name="HeroPlace" delegate="place" player="Hero"/>
             <step name="HeroEndTurn" delegate="endTurnNoPU" player="Hero"/>
 
             <step name="MazeEndTurn" delegate="endTurnNoPU" player="Maze" display="Turn Complete"/>
             <step name="endRoundStep" delegate="endRound" display="Round Complete"/>
-        </sequence>        
+        </sequence>
     </gamePlay>
 
     <production>
@@ -879,39 +885,10 @@
             <frontierRules name="buyScourge"/>
         </productionFrontier>
 
-        <!-- after character selection we switch to the appropriate below frontier for normal progression, until the player hits a shop... -->
-        <!-- also, these frontiers will get modified via triggers as the character and/or retainers level up, but we start with all level 2 options -->
-        <productionFrontier name="level-up-crusader">
+        <!-- switch to the level-up frontier under normal circumstances (modified as necessary in the first turn) -->
+        <productionFrontier name="level-up">
             <frontierRules name="buyCrusader-Level-2"/>
             <frontierRules name="buySquire-w-LevelUp"/>
-        </productionFrontier>
-        <productionFrontier name="level-up-bard">
-            <frontierRules name="buyBard-Level-2"/>
-            <frontierRules name="buySquire-p-LevelUp"/>
-        </productionFrontier>
-        <productionFrontier name="level-up-hunter">
-            <frontierRules name="buyHunter-Level-2"/>
-            <frontierRules name="buySquire-u-LevelUp"/>
-        </productionFrontier>
-        <productionFrontier name="level-up-ranger">
-            <frontierRules name="buyRanger-Level-2"/>
-            <frontierRules name="buySquire-g-LevelUp"/>
-        </productionFrontier>
-        <productionFrontier name="level-up-priestess">
-            <frontierRules name="buyPriestess-Level-2"/>
-            <frontierRules name="buySquire-y-LevelUp"/>
-        </productionFrontier>
-        <productionFrontier name="level-up-raider">
-            <frontierRules name="buyRaider-Level-2"/>
-            <frontierRules name="buySquire-o-LevelUp"/>
-        </productionFrontier>
-        <productionFrontier name="level-up-gladiator">
-            <frontierRules name="buyGladiator-Level-2"/>
-            <frontierRules name="buySquire-r-LevelUp"/>
-        </productionFrontier>
-        <productionFrontier name="level-up-scourge">
-            <frontierRules name="buyScourge-Level-2"/>
-            <frontierRules name="buySquire-b-LevelUp"/>
         </productionFrontier>
 
         <productionFrontier name="shop-tier-1">
@@ -1491,32 +1468,50 @@
         <attachment name="unitAttachment" attachTo="Potion-of-Wisdom" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="isInfrastructure" value="true"/>
             <option name="maxBuiltPerPlayer" value="1"/>
+            <option name="createsResourcesList" value="10:XP"/>
+            <option name="createsResourcesList" value="0:Gold"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Potion-of-Fortune" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="isInfrastructure" value="true"/>
             <option name="maxBuiltPerPlayer" value="1"/>
+            <option name="createsResourcesList" value="0:XP"/>
+            <option name="createsResourcesList" value="10:Gold"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Spell-of-Death" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="8"/>
+            <option name="defense" value="8"/>
             <option name="isSuicide" value="true"/>
             <option name="maxBuiltPerPlayer" value="3"/>
             <option name="movement" value="1"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Spell-of-Fireball" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="3"/>
+            <option name="defense" value="3"/>
+            <option name="attackRolls" value="3"/>
             <option name="isSuicide" value="true"/>
             <option name="maxBuiltPerPlayer" value="3"/>
             <option name="movement" value="1"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Spell-of-Lightning-Bolt" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="5"/>
+            <option name="defense" value="5"/>
+            <option name="attackRolls" value="2"/>
             <option name="isSuicide" value="true"/>
             <option name="maxBuiltPerPlayer" value="2"/>
             <option name="movement" value="1"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Spell-of-Ice-Storm" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="4"/>
+            <option name="defense" value="4"/>
+            <option name="attackRolls" value="3"/>
             <option name="isSuicide" value="true"/>
             <option name="maxBuiltPerPlayer" value="2"/>
             <option name="movement" value="1"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Spell-of-Earthquake" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="attack" value="5"/>
+            <option name="defense" value="5"/>
+            <option name="attackRolls" value="4"/>
             <option name="isSuicide" value="true"/>
             <option name="maxBuiltPerPlayer" value="1"/>
             <option name="movement" value="1"/>
@@ -1526,6 +1521,18 @@
             <option name="defense" value="1"/>
             <option name="maxBuiltPerPlayer" value="7"/>
             <option name="movement" value="1"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Gold-Stack" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="isInfrastructure" value="true"/>
+            <option name="maxBuiltPerPlayer" value="1"/>
+            <option name="createsResourcesList" value="0:XP"/>
+            <option name="createsResourcesList" value="1:Gold"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="XP-Stack" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="isInfrastructure" value="true"/>
+            <option name="maxBuiltPerPlayer" value="1"/>
+            <option name="createsResourcesList" value="5:XP"/>
+            <option name="createsResourcesList" value="0:Gold"/>
         </attachment>
     <!-- end unit attachments - items -->
 
@@ -2622,42 +2629,89 @@
 
     <!-- end support attachments -->
 
-    <!-- conditions -->
+<!-- conditions -->
+    <!-- time based consitions -->
         <attachment name="conditionStartGame" attachTo="Maze" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
             <option name="rounds" value="1"/>
         </attachment>
 
+        <attachment name="conditionLevelUpTier" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">            
+            <option name="directExclusionTerritories" value="Outer Northeastern Ridge:Outer Southwestern Ridge:Inner Northwestern Ridge 2:Inner Southeastern Ridge 2:Inner Northeastern Ridge 4:Inner Southwestern Ridge 4" count="0"/>
+            <option name="unitPresence" value="ANY" count="1"/>
+        </attachment>       
+        <attachment name="conditionTier1Land" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="Outer Northeastern Ridge:Outer Southwestern Ridge" count="1"/>
+            <option name="rounds" value="2-49"/>
+        </attachment>
+        <attachment name="conditionTier2Land" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="Inner Northwestern Ridge 2:Inner Southeastern Ridge 2" count="1"/>
+            <option name="rounds" value="50-78"/>
+        </attachment>
+        <attachment name="conditionTier3Land" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="Inner Northeastern Ridge 4:Inner Southwestern Ridge 4" count="1"/>
+            <option name="rounds" value="79-98"/>
+        </attachment>
+        
+        <attachment name="conditionLoseGame" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="rounds" value="99"/>
+        </attachment>
+    <!-- end -->
+
+    <!-- character type conditions -->
         <attachment name="conditionHeroIsCrusader" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
-            <option name="directPresenceTerritories" value="The Precipice" count="1"/>
+            <option name="directPresenceTerritories" value="map" count="1"/>
             <option name="unitPresence" value="Crusader" count="1"/>
         </attachment>
         <attachment name="conditionHeroIsBard" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
-            <option name="directPresenceTerritories" value="The Precipice" count="1"/>
+            <option name="directPresenceTerritories" value="map" count="1"/>
             <option name="unitPresence" value="Bard" count="1"/>
         </attachment>
         <attachment name="conditionHeroIsHunter" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
-            <option name="directPresenceTerritories" value="The Precipice" count="1"/>
+            <option name="directPresenceTerritories" value="map" count="1"/>
             <option name="unitPresence" value="Hunter" count="1"/>
         </attachment>
         <attachment name="conditionHeroIsRanger" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
-            <option name="directPresenceTerritories" value="The Precipice" count="1"/>
+            <option name="directPresenceTerritories" value="map" count="1"/>
             <option name="unitPresence" value="Ranger" count="1"/>
         </attachment>
         <attachment name="conditionHeroIsPriestess" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
-            <option name="directPresenceTerritories" value="The Precipice" count="1"/>
+            <option name="directPresenceTerritories" value="map" count="1"/>
             <option name="unitPresence" value="Priestess" count="1"/>
         </attachment>
         <attachment name="conditionHeroIsRaider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
-            <option name="directPresenceTerritories" value="The Precipice" count="1"/>
+            <option name="directPresenceTerritories" value="map" count="1"/>
             <option name="unitPresence" value="Raider" count="1"/>
         </attachment>
         <attachment name="conditionHeroIsGladiator" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
-            <option name="directPresenceTerritories" value="The Precipice" count="1"/>
+            <option name="directPresenceTerritories" value="map" count="1"/>
             <option name="unitPresence" value="Gladiator" count="1"/>
         </attachment>
         <attachment name="conditionHeroIsScourge" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
-            <option name="directPresenceTerritories" value="The Precipice" count="1"/>
+            <option name="directPresenceTerritories" value="map" count="1"/>
             <option name="unitPresence" value="Scourge" count="1"/>
+        </attachment>
+    <!-- end -->
+
+    <!-- monster removal conditions (and certain items) -->
+        <attachment name="conditionRemoveWisdomPotion" attachTo="Maze" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="map" count="1"/>
+            <option name="unitPresence" value="Potion-of-Wisdom" count="1"/>
+            <option name="players" value="Hero"/>
+        </attachment>
+        <attachment name="conditionRemoveFortunePotion" attachTo="Maze" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="map" count="1"/>
+            <option name="unitPresence" value="Potion-of-Fortune" count="1"/>
+            <option name="players" value="Hero"/>
+        </attachment>
+        <attachment name="conditionRemoveGoldStack" attachTo="Maze" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="map" count="1"/>
+            <option name="unitPresence" value="Gold-Stack" count="1"/>
+            <option name="players" value="Hero"/>
+        </attachment>
+        <attachment name="conditionRemoveXPStack" attachTo="Maze" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="map" count="1"/>
+            <option name="unitPresence" value="XP-Stack" count="1"/>
+            <option name="players" value="Hero"/>
         </attachment>
 
         <attachment name="conditionRemoveDeadChompy" attachTo="Maze" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
@@ -2820,13 +2874,583 @@
             <option name="unitPresence" value="Dead-Dragon" count="1"/>
             <option name="players" value="Hero"/>
         </attachment>
-    <!-- end conditions -->
+    <!-- end -->
+
+    <!-- unknown reveal conditions -->
+        <attachment name="conditionRevealFrom_Precipice" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:The Precipice"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_OuterNorthwesternRidge" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Outer Northwestern Ridge"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_OuterNWPath6" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Outer NW Path 6"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_OuterNWPath7" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Outer NW Path 7"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_OuterNWPath8" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Outer NW Path 8"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_OuterNWPath9" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Outer NW Path 9"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_OuterNWPath10" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Outer NW Path 10"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_OuterNorthPath" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Outer North Path"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_OuterNEPath10" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Outer NE Path 10"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_OuterNEPath9" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Outer NE Path 9"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_OuterNEPath8" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Outer NE Path 8"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_OuterNEPath7" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Outer NE Path 7"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_OuterNEPath6" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Outer NE Path 6"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_OuterNortheasternRidge" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Outer Northeastern Ridge"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_OuterNWPath5" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Outer NW Path 5"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNorthwesternRidge1" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner Northwestern Ridge 1"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNWPath4" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner NW Path 4"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNWPath3" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner NW Path 3"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNWPath2" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner NW Path 2"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNWPath1" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner NW Path 1"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNorthPath1" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner North Path 1"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNEPath1" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner NE Path 1"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNEPath2" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner NE Path 2"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNEPath3" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner NE Path 3"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNEPath4" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner NE Path 4"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNortheasternRidge1" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner Northeastern Ridge 1"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_OuterNEPath5" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Outer NE Path 5"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_OuterNWPath4" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Outer NW Path 4"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNWPath5" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner NW Path 5"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNorthwesternRidge2" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner Northwestern Ridge 2"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNWPath12" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner NW Path 12"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNWPath13" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner NW Path 13"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNWPath14" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner NW Path 14"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNorthPath2" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner North Path 2"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNEPath14" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner NE Path 14"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNEPath13" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner NE Path 13"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNEPath12" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner NE Path 12"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNortheasternRidge2" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner Northeastern Ridge 2"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNEPath5" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner NE Path 5"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_OuterNEPath4" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Outer NE Path 4"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_OuterNWPath3" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Outer NW Path 3"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNWPath6" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner NW Path 6"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNWPath11" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner NW Path 11"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNorthwesternRidge3" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner Northwestern Ridge 3"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNWPath16" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner NW Path 16"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNWPath15" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner NW Path 15"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNorthPath3" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner North Path 3"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNEPath15" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner NE Path 15"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNEPath16" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner NE Path 16"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNortheasternRidge3" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner Northeastern Ridge 3"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNEPath11" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner NE Path 11"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNEPath6" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner NE Path 6"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_OuterNEPath3" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Outer NE Path 3"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_OuterNWPath2" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Outer NW Path 2"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNWPath7" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner NW Path 7"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNWPath10" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner NW Path 10"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNWPath17" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner NW Path 17"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNorthwesternRidge4" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner Northwestern Ridge 4"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNWPath20" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner NW Path 20"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNorthPath4" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner North Path 4"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNEPath20" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner NE Path 20"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNortheasternRidge4" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner Northeastern Ridge 4"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNEPath17" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner NE Path 17"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNEPath10" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner NE Path 10"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNEPath7" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner NE Path 7"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_OuterNEPath2" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Outer NE Path 2"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_OuterNWPath1" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Outer NW Path 1"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNWPath8" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner NW Path 8"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNWPath9" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner NW Path 9"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNWPath18" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner NW Path 18"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNWPath19" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner NW Path 19"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNorthwesternRidge5" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner Northwestern Ridge 5"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNWPath21" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner NW Path 21"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNorthRidge" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner North Ridge"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNortheasternRidge5" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner Northeastern Ridge 5"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNEPath19" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner NE Path 19"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNEPath18" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner NE Path 18"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNEPath9" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner NE Path 9"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerNEPath8" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner NE Path 8"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_OuterNEPath1" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Outer NE Path 1"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_OuterWestPathNorth" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Outer West Path North"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerWestPathNorth1" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner West Path North 1"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerWestPathNorth2" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner West Path North 2"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerWestPathNorth3" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner West Path North 3"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerWestPathNorth4" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner West Path North 4"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerWestPathNorth5" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner West Path North 5"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerEastPathNorth5" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner East Path North 5"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerEastPathNorth4" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner East Path North 4"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerEastPathNorth3" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner East Path North 3"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerEastPathNorth2" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner East Path North 2"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerEastPathNorth1" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner East Path North 1"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_OuterEastPathNorth" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Outer East Path North"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_OuterWestPathSouth" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Outer West Path South"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerWestPathSouth1" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner West Path South 1"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerWestPathSouth2" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner West Path South 2"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerWestPathSouth3" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner West Path South 3"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerWestPathSouth4" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner West Path South 4"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerWestPathSouth5" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner West Path South 5"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_FinalBoss" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Final Boss"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerEastPathSouth5" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner East Path South 5"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerEastPathSouth4" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner East Path South 4"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerEastPathSouth3" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner East Path South 3"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerEastPathSouth2" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner East Path South 2"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerEastPathSouth1" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner East Path South 1"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_OuterEastPathSouth" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Outer East Path South"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_OuterSWPath9" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Outer SW Path 9"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerSWPath1" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner SW Path 1"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerSWPath13" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner SW Path 13"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerSWPath14" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner SW Path 14"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerSWPath20" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner SW Path 20"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerSouthwesternRidge5" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner Southwestern Ridge 5"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_ScenicVista" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Scenic Vista"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerSoutheasternRidge5" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner Southeastern Ridge 5"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerSEPath19" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner SE Path 19"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerSEPath14" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner SE Path 14"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerSEPath13" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner SE Path 13"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerSEPath1" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner SE Path 1"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_OuterSEPath9" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Outer SE Path 9"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_OuterSWPath8" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Outer SW Path 8"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerSWPath2" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner SW Path 2"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerSWPath12" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner SW Path 12"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerSWPath15" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner SW Path 15"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerSouthwesternRidge4" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner Southwestern Ridge 4"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerSWPath19" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner SW Path 19"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerSWPath18" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner SW Path 18"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerSouthPath2" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner South Path 2"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerSEPath18" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner SE Path 18"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerSoutheasternRidge4" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner Southeastern Ridge 4"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerSEPath15" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner SE Path 15"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerSEPath12" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner SE Path 12"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerSEPath2" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner SE Path 2"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_OuterSEPath8" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Outer SE Path 8"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_OuterSWPath7" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Outer SW Path 7"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerSWPath3" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner SW Path 3"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerSWPath11" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner SW Path 11"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerSouthwesternRidge3" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner Southwestern Ridge 3"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerSWPath16" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner SW Path 16"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerSWPath17" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner SW Path 17"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_SouthRidge2" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:South Ridge 2"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerSEPath17" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner SE Path 17"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerSEPath16" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner SE Path 16"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerSoutheasternRidge3" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner Southeastern Ridge 3"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerSEPath11" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner SE Path 11"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerSEPath3" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner SE Path 3"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_OuterSEPath7" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Outer SE Path 7"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_OuterSWPath6" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Outer SW Path 6"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerSWPath4" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner SW Path 4"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerSouthwesternRidge2" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner Southwestern Ridge 2"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerSWPath10" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner SW Path 10"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerSWPath9" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner SW Path 9"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerSWPath8" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner SW Path 8"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerSouthPath1" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner South Path 1"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerSEPath8" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner SE Path 8"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerSEPath9" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner SE Path 9"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerSEPath10" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner SE Path 10"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerSoutheasternRidge2" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner Southeastern Ridge 2"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerSEPath4" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner SE Path 4"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_OuterSEPath6" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Outer SE Path 6"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_OuterSWPath5" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Outer SW Path 5"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerSouthwesternRidge1" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner Southwestern Ridge 1"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerSWPath5" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner SW Path 5"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerSWPath6" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner SW Path 6"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerSWPath7" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner SW Path 7"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_SouthRidge1" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:South Ridge 1"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerSEPath7" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner SE Path 7"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerSEPath6" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner SE Path 6"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerSEPath5" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner SE Path 5"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_InnerSoutheasternRidge1" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Inner Southeastern Ridge 1"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_OuterSEPath5" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Outer SE Path 5"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_OuterSouthwesternRidge" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Outer Southwestern Ridge"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_OuterSWPath4" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Outer SW Path 4"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_OuterSWPath3" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Outer SW Path 3"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_OuterSWPath2" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Outer SW Path 2"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_OuterSWPath1" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Outer SW Path 1"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_Entrance" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Entrance"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_OuterSEPath1" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Outer SE Path 1"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_OuterSEPath2" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Outer SE Path 2"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_OuterSEPath3" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Outer SE Path 3"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_OuterSEPath4" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Outer SE Path 4"/>
+        </attachment>
+        <attachment name="conditionRevealFrom_OuterSoutheasternRidge" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+            <option name="directPresenceTerritories" value="1:Outer Southeastern Ridge"/>
+        </attachment>
+    <!-- end -->
+
+    <!-- random encounter conditions -->
+        <attachment name="conditionAttachmentRE_WisdomPotion" attachTo="Maze" javaClass="RulesAttachment" type="player">
+            <option name="switch" value="true"/>
+        </attachment>
+        <attachment name="conditionAttachmentRE_FortunePotion" attachTo="Maze" javaClass="RulesAttachment" type="player">
+            <option name="switch" value="true"/>
+        </attachment>
+        <attachment name="conditionAttachmentRE_Gold" attachTo="Maze" javaClass="RulesAttachment" type="player">
+            <option name="switch" value="true"/>
+        </attachment>
+        <attachment name="conditionAttachmentRE_XP" attachTo="Maze" javaClass="RulesAttachment" type="player">
+            <option name="switch" value="true"/>
+        </attachment>
+        <attachment name="conditionAttachmentRE_Monster1" attachTo="Maze" javaClass="RulesAttachment" type="player">
+            <option name="switch" value="true"/>
+        </attachment>
+        <attachment name="conditionAttachmentRE_Monster2" attachTo="Maze" javaClass="RulesAttachment" type="player">
+            <option name="switch" value="true"/>
+        </attachment>
+        <attachment name="conditionAttachmentRE_Monster3" attachTo="Maze" javaClass="RulesAttachment" type="player">
+            <option name="switch" value="true"/>
+        </attachment>
+    <!-- end -->
+<!-- end conditions -->
 
 <!-- triggers -->
     <!-- shop adjustments based on selected character + starting gold -->
         <attachment name="triggerAttachment_ModifyShopTier1_Crusader" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
             <option name="conditions" value="conditionStartGame:conditionHeroIsCrusader"/>
             <option name="productionRule" value="shop-tier-1:buySquire-w"/>
+            <option name="productionRule" value="shop-tier-1:buyCrusader-Level-2"/>
+            <option name="productionRule" value="shop-tier-1:buySquire-w-LevelUp"/>
             <option name="resource" value="Gold"/>
             <option name="resourceCount" value="10"/>
             <option name="when" value="after:HeroOriginPlace"/>
@@ -2835,6 +3459,8 @@
             <option name="conditions" value="conditionStartGame:conditionHeroIsCrusader"/>
             <option name="productionRule" value="shop-tier-2:buySquire-w"/>
             <option name="productionRule" value="shop-tier-2:buyKnight-w"/>
+            <option name="productionRule" value="shop-tier-2:buyCrusader-Level-2"/>
+            <option name="productionRule" value="shop-tier-2:buySquire-w-LevelUp"/>
             <option name="when" value="after:HeroOriginPlace"/>
         </attachment>
         <attachment name="triggerAttachment_ModifyShopTier3_Crusader" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
@@ -2842,11 +3468,19 @@
             <option name="productionRule" value="shop-tier-3:buySquire-w"/>
             <option name="productionRule" value="shop-tier-3:buyKnight-w"/>
             <option name="productionRule" value="shop-tier-3:buyChampion-w"/>
+            <option name="productionRule" value="shop-tier-3:buyCrusader-Level-2"/>
+            <option name="productionRule" value="shop-tier-3:buySquire-w-LevelUp"/>
             <option name="when" value="after:HeroOriginPlace"/>
         </attachment>
         <attachment name="triggerAttachment_ModifyShopTier1_Bard" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
             <option name="conditions" value="conditionStartGame:conditionHeroIsBard"/>
             <option name="productionRule" value="shop-tier-1:buySquire-p"/>
+            <option name="productionRule" value="shop-tier-1:buyBard-Level-2"/>
+            <option name="productionRule" value="shop-tier-1:buySquire-p-LevelUp"/>
+            <option name="productionRule" value="level-up:-buyCrusader-Level-2"/>
+            <option name="productionRule" value="level-up:-buySquire-w-LevelUp"/>
+            <option name="productionRule" value="level-up:buyBard-Level-2"/>
+            <option name="productionRule" value="level-up:buySquire-p-LevelUp"/>
             <option name="resource" value="Gold"/>
             <option name="resourceCount" value="12"/>
             <option name="when" value="after:HeroOriginPlace"/>
@@ -2855,6 +3489,8 @@
             <option name="conditions" value="conditionStartGame:conditionHeroIsBard"/>
             <option name="productionRule" value="shop-tier-2:buySquire-p"/>
             <option name="productionRule" value="shop-tier-2:buyKnight-p"/>
+            <option name="productionRule" value="shop-tier-2:buyBard-Level-2"/>
+            <option name="productionRule" value="shop-tier-2:buySquire-p-LevelUp"/>
             <option name="when" value="after:HeroOriginPlace"/>
         </attachment>
         <attachment name="triggerAttachment_ModifyShopTier3_Crusader" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
@@ -2862,11 +3498,19 @@
             <option name="productionRule" value="shop-tier-3:buySquire-p"/>
             <option name="productionRule" value="shop-tier-3:buyKnight-p"/>
             <option name="productionRule" value="shop-tier-3:buyChampion-p"/>
+            <option name="productionRule" value="shop-tier-3:buyBard-Level-2"/>
+            <option name="productionRule" value="shop-tier-3:buySquire-p-LevelUp"/>
             <option name="when" value="after:HeroOriginPlace"/>
         </attachment>
         <attachment name="triggerAttachment_ModifyShopTier1_Hunter" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
             <option name="conditions" value="conditionStartGame:conditionHeroIsHunter"/>
             <option name="productionRule" value="shop-tier-1:buySquire-u"/>
+            <option name="productionRule" value="shop-tier-1:buyHunter-Level-2"/>
+            <option name="productionRule" value="shop-tier-1:buySquire-u-LevelUp"/>
+            <option name="productionRule" value="level-up:-buyCrusader-Level-2"/>
+            <option name="productionRule" value="level-up:-buySquire-w-LevelUp"/>
+            <option name="productionRule" value="level-up:buyHunter-Level-2"/>
+            <option name="productionRule" value="level-up:buySquire-u-LevelUp"/>
             <option name="resource" value="Gold"/>
             <option name="resourceCount" value="11"/>
             <option name="when" value="after:HeroOriginPlace"/>
@@ -2875,6 +3519,8 @@
             <option name="conditions" value="conditionStartGame:conditionHeroIsHunter"/>
             <option name="productionRule" value="shop-tier-2:buySquire-u"/>
             <option name="productionRule" value="shop-tier-2:buyKnight-u"/>
+            <option name="productionRule" value="shop-tier-2:buyHunter-Level-2"/>
+            <option name="productionRule" value="shop-tier-2:buySquire-u-LevelUp"/>
             <option name="when" value="after:HeroOriginPlace"/>
         </attachment>
         <attachment name="triggerAttachment_ModifyShopTier3_Hunter" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
@@ -2882,11 +3528,19 @@
             <option name="productionRule" value="shop-tier-3:buySquire-u"/>
             <option name="productionRule" value="shop-tier-3:buyKnight-u"/>
             <option name="productionRule" value="shop-tier-3:buyChampion-u"/>
+            <option name="productionRule" value="shop-tier-3:buyHunter-Level-2"/>
+            <option name="productionRule" value="shop-tier-3:buySquire-u-LevelUp"/>
             <option name="when" value="after:HeroOriginPlace"/>
         </attachment>
         <attachment name="triggerAttachment_ModifyShopTier1_Ranger" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
             <option name="conditions" value="conditionStartGame:conditionHeroIsRanger"/>
             <option name="productionRule" value="shop-tier-1:buySquire-g"/>
+            <option name="productionRule" value="shop-tier-1:buyRanger-Level-2"/>
+            <option name="productionRule" value="shop-tier-1:buySquire-g-LevelUp"/>
+            <option name="productionRule" value="level-up:-buyCrusader-Level-2"/>
+            <option name="productionRule" value="level-up:-buySquire-w-LevelUp"/>
+            <option name="productionRule" value="level-up:buyRanger-Level-2"/>
+            <option name="productionRule" value="level-up:buySquire-g-LevelUp"/>
             <option name="resource" value="Gold"/>
             <option name="resourceCount" value="9"/>
             <option name="when" value="after:HeroOriginPlace"/>
@@ -2895,6 +3549,8 @@
             <option name="conditions" value="conditionStartGame:conditionHeroIsRanger"/>
             <option name="productionRule" value="shop-tier-2:buySquire-g"/>
             <option name="productionRule" value="shop-tier-2:buyKnight-g"/>
+            <option name="productionRule" value="shop-tier-2:buyRanger-Level-2"/>
+            <option name="productionRule" value="shop-tier-2:buySquire-g-LevelUp"/>
             <option name="when" value="after:HeroOriginPlace"/>
         </attachment>
         <attachment name="triggerAttachment_ModifyShopTier3_Ranger" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
@@ -2902,11 +3558,19 @@
             <option name="productionRule" value="shop-tier-3:buySquire-g"/>
             <option name="productionRule" value="shop-tier-3:buyKnight-g"/>
             <option name="productionRule" value="shop-tier-3:buyChampion-g"/>
+            <option name="productionRule" value="shop-tier-3:buyRanger-Level-2"/>
+            <option name="productionRule" value="shop-tier-3:buySquire-g-LevelUp"/>
             <option name="when" value="after:HeroOriginPlace"/>
         </attachment>
         <attachment name="triggerAttachment_ModifyShopTier1_Priestess" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
             <option name="conditions" value="conditionStartGame:conditionHeroIsPriestess"/>
             <option name="productionRule" value="shop-tier-1:buySquire-y"/>
+            <option name="productionRule" value="shop-tier-1:buyPriestess-Level-2"/>
+            <option name="productionRule" value="shop-tier-1:buySquire-y-LevelUp"/>
+            <option name="productionRule" value="level-up:-buyCrusader-Level-2"/>
+            <option name="productionRule" value="level-up:-buySquire-w-LevelUp"/>
+            <option name="productionRule" value="level-up:buyPriestess-Level-2"/>
+            <option name="productionRule" value="level-up:buySquire-y-LevelUp"/>
             <option name="resource" value="Gold"/>
             <option name="resourceCount" value="14"/>
             <option name="when" value="after:HeroOriginPlace"/>
@@ -2915,6 +3579,8 @@
             <option name="conditions" value="conditionStartGame:conditionHeroIsPriestess"/>
             <option name="productionRule" value="shop-tier-2:buySquire-y"/>
             <option name="productionRule" value="shop-tier-2:buyKnight-y"/>
+            <option name="productionRule" value="shop-tier-2:buyPriestess-Level-2"/>
+            <option name="productionRule" value="shop-tier-2:buySquire-y-LevelUp"/>
             <option name="when" value="after:HeroOriginPlace"/>
         </attachment>
         <attachment name="triggerAttachment_ModifyShopTier3_Priestess" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
@@ -2922,11 +3588,19 @@
             <option name="productionRule" value="shop-tier-3:buySquire-y"/>
             <option name="productionRule" value="shop-tier-3:buyKnight-y"/>
             <option name="productionRule" value="shop-tier-3:buyChampion-y"/>
+            <option name="productionRule" value="shop-tier-3:buyPriestess-Level-2"/>
+            <option name="productionRule" value="shop-tier-3:buySquire-y-LevelUp"/>
             <option name="when" value="after:HeroOriginPlace"/>
         </attachment>
         <attachment name="triggerAttachment_ModifyShopTier1_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
             <option name="conditions" value="conditionStartGame:conditionHeroIsRaider"/>
             <option name="productionRule" value="shop-tier-1:buySquire-o"/>
+            <option name="productionRule" value="shop-tier-1:buyRaider-Level-2"/>
+            <option name="productionRule" value="shop-tier-1:buySquire-o-LevelUp"/>
+            <option name="productionRule" value="level-up:-buyCrusader-Level-2"/>
+            <option name="productionRule" value="level-up:-buySquire-w-LevelUp"/>
+            <option name="productionRule" value="level-up:buyRanger-Level-2"/>
+            <option name="productionRule" value="level-up:buySquire-o-LevelUp"/>
             <option name="resource" value="Gold"/>
             <option name="resourceCount" value="11"/>
             <option name="when" value="after:HeroOriginPlace"/>
@@ -2935,6 +3609,8 @@
             <option name="conditions" value="conditionStartGame:conditionHeroIsRaider"/>
             <option name="productionRule" value="shop-tier-2:buySquire-o"/>
             <option name="productionRule" value="shop-tier-2:buyKnight-o"/>
+            <option name="productionRule" value="shop-tier-2:buyRaider-Level-2"/>
+            <option name="productionRule" value="shop-tier-2:buySquire-o-LevelUp"/>
             <option name="when" value="after:HeroOriginPlace"/>
         </attachment>
         <attachment name="triggerAttachment_ModifyShopTier3_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
@@ -2942,11 +3618,19 @@
             <option name="productionRule" value="shop-tier-3:buySquire-o"/>
             <option name="productionRule" value="shop-tier-3:buyKnight-o"/>
             <option name="productionRule" value="shop-tier-3:buyChampion-o"/>
+            <option name="productionRule" value="shop-tier-3:buyRaider-Level-2"/>
+            <option name="productionRule" value="shop-tier-3:buySquire-o-LevelUp"/>
             <option name="when" value="after:HeroOriginPlace"/>
         </attachment>
         <attachment name="triggerAttachment_ModifyShopTier1_Gladiator" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
             <option name="conditions" value="conditionStartGame:conditionHeroIsGladiator"/>
             <option name="productionRule" value="shop-tier-1:buySquire-r"/>
+            <option name="productionRule" value="shop-tier-1:buyGladiator-Level-2"/>
+            <option name="productionRule" value="shop-tier-1:buySquire-r-LevelUp"/>
+            <option name="productionRule" value="level-up:-buyCrusader-Level-2"/>
+            <option name="productionRule" value="level-up:-buySquire-w-LevelUp"/>
+            <option name="productionRule" value="level-up:buyGladiator-Level-2"/>
+            <option name="productionRule" value="level-up:buySquire-r-LevelUp"/>
             <option name="resource" value="Gold"/>
             <option name="resourceCount" value="8"/>
             <option name="when" value="after:HeroOriginPlace"/>
@@ -2955,6 +3639,8 @@
             <option name="conditions" value="conditionStartGame:conditionHeroIsGladiator"/>
             <option name="productionRule" value="shop-tier-2:buySquire-r"/>
             <option name="productionRule" value="shop-tier-2:buyKnight-r"/>
+            <option name="productionRule" value="shop-tier-2:buyGladiator-Level-2"/>
+            <option name="productionRule" value="shop-tier-2:buySquire-r-LevelUp"/>
             <option name="when" value="after:HeroOriginPlace"/>
         </attachment>
         <attachment name="triggerAttachment_ModifyShopTier3_Gladiator" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
@@ -2962,11 +3648,19 @@
             <option name="productionRule" value="shop-tier-3:buySquire-r"/>
             <option name="productionRule" value="shop-tier-3:buyKnight-r"/>
             <option name="productionRule" value="shop-tier-3:buyChampion-r"/>
+            <option name="productionRule" value="shop-tier-3:buyGladiator-Level-2"/>
+            <option name="productionRule" value="shop-tier-3:buySquire-r-LevelUp"/>
             <option name="when" value="after:HeroOriginPlace"/>
         </attachment>
         <attachment name="triggerAttachment_ModifyShopTier1_Scourge" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
             <option name="conditions" value="conditionStartGame:conditionHeroIsScourge"/>
             <option name="productionRule" value="shop-tier-1:buySquire-b"/>
+            <option name="productionRule" value="shop-tier-1:buyScourge-Level-2"/>
+            <option name="productionRule" value="shop-tier-1:buySquire-b-LevelUp"/>
+            <option name="productionRule" value="level-up:-buyCrusader-Level-2"/>
+            <option name="productionRule" value="level-up:-buySquire-w-LevelUp"/>
+            <option name="productionRule" value="level-up:buyScourge-Level-2"/>
+            <option name="productionRule" value="level-up:buySquire-b-LevelUp"/>
             <option name="resource" value="Gold"/>
             <option name="resourceCount" value="13"/>
             <option name="when" value="after:HeroOriginPlace"/>
@@ -2975,6 +3669,8 @@
             <option name="conditions" value="conditionStartGame:conditionHeroIsScourge"/>
             <option name="productionRule" value="shop-tier-2:buySquire-b"/>
             <option name="productionRule" value="shop-tier-2:buyKnight-b"/>
+            <option name="productionRule" value="shop-tier-2:buyScourge-Level-2"/>
+            <option name="productionRule" value="shop-tier-2:buySquire-b-LevelUp"/>
             <option name="when" value="after:HeroOriginPlace"/>
         </attachment>
         <attachment name="triggerAttachment_ModifyShopTier3_Scourge" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
@@ -2982,19 +3678,233 @@
             <option name="productionRule" value="shop-tier-3:buySquire-b"/>
             <option name="productionRule" value="shop-tier-3:buyKnight-b"/>
             <option name="productionRule" value="shop-tier-3:buyChampion-b"/>
+            <option name="productionRule" value="shop-tier-3:buyScourge-Level-2"/>
+            <option name="productionRule" value="shop-tier-3:buySquire-b-LevelUp"/>
             <option name="when" value="after:HeroOriginPlace"/>
         </attachment>
     <!-- end -->
 
-    <!-- set frontier to shop-tier-1 after character selection -->
+    <!-- frontier adjustments based on character selection and location -->
+        <!-- set frontier to various shop tiers at various times -->
         <attachment name="triggerAttachment_SetShopTier1_Start" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
             <option name="conditions" value="conditionStartGame"/>
             <option name="frontier" value="shop-tier-1"/>
             <option name="when" value="before:HeroFirstPurchase"/>
         </attachment>
+        <attachment name="triggerAttachment_SetShopTier1" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionTier1Land"/>
+            <option name="frontier" value="shop-tier-1"/>
+            <option name="when" value="before:HeroPurchase"/>
+        </attachment>
+        <attachment name="triggerAttachment_SetShopTier2" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionTier2Land"/>
+            <option name="frontier" value="shop-tier-2"/>
+            <option name="when" value="before:HeroPurchase"/>
+        </attachment>
+        <attachment name="triggerAttachment_SetShopTier3" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionTier3Land"/>
+            <option name="frontier" value="shop-tier-3"/>
+            <option name="when" value="before:HeroPurchase"/>
+        </attachment>
+
+        <!-- set frontier to levelling tiers at all other times -->
+        <attachment name="triggerAttachment_SetLevelTier" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionLevelUpTier"/>
+            <option name="frontier" value="level-up"/>
+            <option name="when" value="before:HeroPurchase"/>
+        </attachment>
+
     <!-- end -->
 
-    <!-- remove dead monsters so they don't continually give resources -->
+    <!-- random encounter triggers (manually fired from below reveal triggers) -->
+        <attachment name="triggerAttachment_RE_7" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="chance" value="5:10"/>
+            <option name="players" value="Maze"/>
+            <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachmentRE_Monster3"/>
+            <option name="playerProperty" value="switch" count="false"/>
+        </attachment>
+        <attachment name="triggerAttachment_RE_6" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="chance" value="6:10"/>
+            <option name="players" value="Maze"/>
+            <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachmentRE_Monster2"/>
+            <option name="playerProperty" value="switch" count="false"/>
+            <option name="activateTrigger" value="triggerAttachment_RE_7:1:false:false:false:true"/>
+        </attachment>
+        <attachment name="triggerAttachment_RE_5" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="chance" value="7:10"/>
+            <option name="players" value="Maze"/>
+            <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachmentRE_Monster1"/>
+            <option name="playerProperty" value="switch" count="false"/>
+            <option name="activateTrigger" value="triggerAttachment_RE_6:1:false:false:false:true"/>
+        </attachment>
+        <attachment name="triggerAttachment_RE_4" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="chance" value="8:10"/>
+            <option name="players" value="Maze"/>
+            <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachmentRE_XP"/>
+            <option name="playerProperty" value="switch" count="false"/>
+            <option name="activateTrigger" value="triggerAttachment_RE_5:1:false:false:false:true"/>
+        </attachment>
+        <attachment name="triggerAttachment_RE_3" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="chance" value="8:10"/>
+            <option name="players" value="Maze"/>
+            <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachmentRE_Gold"/>
+            <option name="playerProperty" value="switch" count="false"/>
+            <option name="activateTrigger" value="triggerAttachment_RE_4:1:false:false:false:true"/>
+        </attachment>
+        <attachment name="triggerAttachment_RE_2" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="chance" value="9:10"/>
+            <option name="players" value="Maze"/>
+            <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachmentRE_FortunePotion"/>
+            <option name="playerProperty" value="switch" count="false"/>
+            <option name="activateTrigger" value="triggerAttachment_RE_3:1:false:false:false:true"/>
+        </attachment>
+        <attachment name="triggerAttachment_RE_1" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="chance" value="9:10"/>
+            <option name="players" value="Maze"/>
+            <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachmentRE_WisdomPotion"/>
+            <option name="playerProperty" value="switch" count="false"/>
+            <option name="activateTrigger" value="triggerAttachment_RE_2:1:false:false:false:true"/>
+        </attachment>
+    <!-- end -->
+  
+    <!-- show the available unknowns to the player before combat movement -->
+        <attachment name="triggerAttachment_RevealFrom_Precipice" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_Precipice"/>
+            <option name="when" value="before:HeroRandomization"/>            
+            <option name="removeUnits" value="Entrance:Unknown" count="1"/>
+            <option name="activateTrigger" value="triggerAttachment_RE_1:1:false:false:false:true"/>
+        </attachment>
+
+        <attachment name="triggerAttachment_EntranceRevealed1" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionAttachmentRE_WisdomPotion:conditionAttachmentRE_FortunePotion"/>
+            <option name="conditionType" value="1"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Entrance:Potion-of-Wisdom"/>
+        </attachment>
+        <attachment name="triggerAttachment_EntranceRevealed2" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionAttachmentRE_FortunePotion:conditionAttachmentRE_Gold"/>
+            <option name="conditionType" value="1"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Entrance:Potion-of-Fortune"/>
+        </attachment>
+        <attachment name="triggerAttachment_EntranceRevealed3" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionAttachmentRE_Gold:conditionAttachmentRE_XP"/>
+            <option name="conditionType" value="1"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Entrance:Gold-Stack"/>
+        </attachment>
+        <attachment name="triggerAttachment_EntranceRevealed4" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionAttachmentRE_XP:conditionAttachmentRE_Monster1"/>
+            <option name="conditionType" value="1"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Entrance:XP-Stack"/>
+        </attachment>
+        <attachment name="triggerAttachment_EntranceRevealed5" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionAttachmentRE_Monster1:conditionAttachmentRE_Monster2"/>
+            <option name="conditionType" value="1"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Entrance:Chompy"/>
+        </attachment>
+        <attachment name="triggerAttachment_EntranceRevealed6" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionAttachmentRE_Monster2:conditionAttachmentRE_Monster3"/>
+            <option name="conditionType" value="1"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Entrance:Ooze"/>
+        </attachment>
+        <attachment name="triggerAttachment_EntranceRevealed7" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionAttachmentRE_Monster3"/>
+            <option name="conditionType" value="0"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Entrance:Skeleton"/>
+        </attachment>
+
+    <!-- end -->
+
+    <!-- reset random encounter switches for next round (as applicable) -->
+        <attachment name="triggerAttachment_Reset_RE_1" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionAttachmentRE_WisdomPotion"/>
+            <option name="conditionType" value="0"/>
+            <option name="when" value="after:HeroCombatMove"/>
+            <option name="players" value="Maze"/>
+            <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachmentRE_WisdomPotion"/>
+            <option name="playerProperty" value="switch" count="true"/>
+        </attachment>
+        <attachment name="triggerAttachment_Reset_RE_2" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionAttachmentRE_FortunePotion"/>
+            <option name="conditionType" value="0"/>
+            <option name="when" value="after:HeroCombatMove"/>
+            <option name="players" value="Maze"/>
+            <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachmentRE_FortunePotion"/>
+            <option name="playerProperty" value="switch" count="true"/>
+        </attachment>
+        <attachment name="triggerAttachment_Reset_RE_3" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionAttachmentRE_Gold"/>
+            <option name="conditionType" value="0"/>
+            <option name="when" value="after:HeroCombatMove"/>
+            <option name="players" value="Maze"/>
+            <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachmentRE_Gold"/>
+            <option name="playerProperty" value="switch" count="true"/>
+        </attachment>
+        <attachment name="triggerAttachment_Reset_RE_4" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionAttachmentRE_XP"/>
+            <option name="conditionType" value="0"/>
+            <option name="when" value="after:HeroCombatMove"/>
+            <option name="players" value="Maze"/>
+            <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachmentRE_XP"/>
+            <option name="playerProperty" value="switch" count="true"/>
+        </attachment>
+        <attachment name="triggerAttachment_Reset_RE_5" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionAttachmentRE_Monster1"/>
+            <option name="conditionType" value="0"/>
+            <option name="when" value="after:HeroCombatMove"/>
+            <option name="players" value="Maze"/>
+            <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachmentRE_Monster1"/>
+            <option name="playerProperty" value="switch" count="true"/>
+        </attachment>
+        <attachment name="triggerAttachment_Reset_RE_6" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionAttachmentRE_Monster2"/>
+            <option name="conditionType" value="0"/>
+            <option name="when" value="after:HeroCombatMove"/>
+            <option name="players" value="Maze"/>
+            <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachmentRE_Monster2"/>
+            <option name="playerProperty" value="switch" count="true"/>
+        </attachment>
+        <attachment name="triggerAttachment_Reset_RE_7" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionAttachmentRE_Monster3"/>
+            <option name="conditionType" value="0"/>
+            <option name="when" value="after:HeroCombatMove"/>
+            <option name="players" value="Maze"/>
+            <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachmentRE_Monster3"/>
+            <option name="playerProperty" value="switch" count="true"/>
+        </attachment>
+    <!-- end -->
+
+    <!-- remove dead monsters (and certain items) so they don't continually give resources -->
+        <attachment name="triggerAttachment_RemoveWisdomPotion" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRemoveWisdomPotion"/>
+            <option name="removeUnits" value="all:Potion-of-Wisdom" count="99"/>
+            <option name="players" value="Hero"/>
+            <option name="when" value="after:HeroEndTurn"/>
+        </attachment>
+        <attachment name="triggerAttachment_RemoveFortunePotion" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRemoveFortunePotion"/>
+            <option name="removeUnits" value="all:Potion-of-Fortune" count="99"/>
+            <option name="players" value="Hero"/>
+            <option name="when" value="after:HeroEndTurn"/>
+        </attachment>
+        <attachment name="triggerAttachment_RemoveGoldStack" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRemoveGoldStack"/>
+            <option name="removeUnits" value="all:Gold-Stack" count="99"/>
+            <option name="players" value="Hero"/>
+            <option name="when" value="after:HeroEndTurn"/>
+        </attachment>
+        <attachment name="triggerAttachment_RemoveXPStack" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRemoveXPStack"/>
+            <option name="removeUnits" value="all:XP-Stack" count="99"/>
+            <option name="players" value="Hero"/>
+            <option name="when" value="after:HeroEndTurn"/>
+        </attachment>
+
         <attachment name="triggerAttachment_RemoveDeadChompy" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
             <option name="conditions" value="conditionRemoveDeadChompy"/>
             <option name="removeUnits" value="all:Dead-Chompy" count="99"/>
@@ -3578,7 +4488,7 @@
         <property name="Maze bid" value="0" editable="false"></property>
         <property name="Low Luck" value="false" editable="false"><boolean/></property>
         <property name="Damage From Bombing Done To Units Instead Of Territories" value="true" editable="false"><boolean/></property>
-        <property name="Place in Any Territory" value="true" editable="false"><boolean/></property>        
+        <property name="Place in Any Territory" value="true" editable="false"><boolean/></property>
         <property name="Projection of Power" value="false" editable="false"><boolean/></property>
         <property name="Selectable Zero Movement Units" value="true" editable="false"><boolean/></property>
         <property name="Suicide and Munition Casualties Restricted" value="true" editable="false"><boolean/></property>
