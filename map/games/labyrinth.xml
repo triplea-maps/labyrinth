@@ -1117,7 +1117,7 @@
             <option name="defense" value="4"/>
             <option name="movement" value="1"/>
             <option name="hitPoints" value="3"/>
-            <option name="repairsUnits" value="1:Priestess:Squire-y:Knight-y:Champion-y"/>
+            <option name="repairsUnits" value="1:Priestess:Squire-y"/>
             <option name="isConstruction" value="true"/>
             <option name="constructionType" value="Hero"/>
             <option name="constructionsPerTerrPerTypePerTurn" value="1"/>
@@ -1130,7 +1130,7 @@
             <option name="defense" value="4"/>
             <option name="movement" value="1"/>
             <option name="hitPoints" value="4"/>
-            <option name="repairsUnits" value="1:Priestess:Squire-y:Knight-y:Champion-y"/>
+            <option name="repairsUnits" value="1:Priestess:Squire-y:Knight-y"/>
             <option name="consumesUnits" value="1:Priestess"/>
             <option name="isConstruction" value="true"/>
             <option name="constructionType" value="Hero"/>
@@ -2638,7 +2638,149 @@
     <!-- end territory attachments -->
 
     <!-- support attachments -->
-
+        <attachment name="supportAttachmentPotionofAccuracy" attachTo="Potion-of-Accuracy" javaClass="games.strategy.triplea.attachments.UnitSupportAttachment" type="unitType">
+            <option name="unitType" value="Squire-w:Knight-w:Champion-w:Squire-p:Knight-p:Champion-p:Squire-u:Knight-u:Champion-u:Squire-g:Knight-g:Champion-g:Squire-y:Knight-y:Champion-y:Squire-o:Knight-o:Champion-o:Squire-r:Knight-r:Champion-r:Squire-b:Knight-b:Champion-b"/>
+            <option name="faction" value="allied"/>
+            <option name="side" value="offence:defence"/>
+            <option name="dice" value="strength"/>
+            <option name="bonus" value="4"/>
+            <option name="number" value="1"/>
+            <option name="bonusType" value="Accuracy"/>
+            <option name="players" value="Hero:Maze"/>
+            <option name="impArtTech" value="false"/>
+        </attachment>
+        <attachment name="supportAttachmentPotionofConfusion" attachTo="Potion-of-Confusion" javaClass="games.strategy.triplea.attachments.UnitSupportAttachment" type="unitType">
+            <option name="unitType" value="Chompy:Giant-Scorpion:Skeleton:Zombie:Ghoul:Giant-Spider:Succubus:Wight:Air-Elemental:Giant-Crab:Ghast:Hag:Spectre:Water-Elemental:Werewolf:Wraith:Banshee:Fire-Elemental:Ghost:Treant:Crystal-Golem:Earth-Elemental:Mummy:Revenant:Gazer:Magma-Golem:Lich:Clockwork-Golem:Grave-Golem:Dragon"/>
+            <option name="faction" value="enemy"/>
+            <option name="side" value="offence:defence"/>
+            <option name="dice" value="strength"/>
+            <option name="bonus" value="-4"/>
+            <option name="number" value="1"/>
+            <option name="bonusType" value="Confusion"/>
+            <option name="players" value="Hero:Maze"/>
+            <option name="impArtTech" value="false"/>
+        </attachment>
+        <attachment name="supportAttachmentBardSong1" attachTo="Bard" javaClass="games.strategy.triplea.attachments.UnitSupportAttachment" type="unitType">
+            <option name="unitType" value="Squire-p:Knight-p:Champion-p"/>
+            <option name="faction" value="allied"/>
+            <option name="side" value="offence:defence"/>
+            <option name="dice" value="strength"/>
+            <option name="bonus" value="1"/>
+            <option name="number" value="1"/>
+            <option name="bonusType" value="Inspiration"/>
+            <option name="players" value="Hero:Maze"/>
+            <option name="impArtTech" value="false"/>
+        </attachment>
+        <attachment name="supportAttachmentBardSong2" attachTo="Expert-Bard" javaClass="games.strategy.triplea.attachments.UnitSupportAttachment" type="unitType">
+            <option name="unitType" value="Squire-p:Knight-p:Champion-p"/>
+            <option name="faction" value="allied"/>
+            <option name="side" value="offence:defence"/>
+            <option name="dice" value="strength"/>
+            <option name="bonus" value="1"/>
+            <option name="number" value="2"/>
+            <option name="bonusType" value="Inspiration"/>
+            <option name="players" value="Hero:Maze"/>
+            <option name="impArtTech" value="false"/>
+        </attachment>
+        <attachment name="supportAttachmentBardSong3" attachTo="Master-Bard" javaClass="games.strategy.triplea.attachments.UnitSupportAttachment" type="unitType">
+            <option name="unitType" value="Squire-p:Knight-p:Champion-p"/>
+            <option name="faction" value="allied"/>
+            <option name="side" value="offence:defence"/>
+            <option name="dice" value="strength"/>
+            <option name="bonus" value="1"/>
+            <option name="number" value="3"/>
+            <option name="bonusType" value="Inspiration"/>
+            <option name="players" value="Hero:Maze"/>
+            <option name="impArtTech" value="false"/>
+        </attachment>
+        <attachment name="supportAttachmentPoisonAura1" attachTo="Scourge" javaClass="games.strategy.triplea.attachments.UnitSupportAttachment" type="unitType">
+            <option name="unitType" value="Chompy:Ooze:Giant-Scorpion:Skeleton:Zombie:Ghoul:Giant-Spider:Succubus:Wight:Air-Elemental:Giant-Crab:Ghast:Hag:Spectre:Water-Elemental:Werewolf:Wraith:Banshee:Fire-Elemental:Ghost:Treant:Crystal-Golem:Earth-Elemental:Mummy:Revenant:Gazer:Magma-Golem:Lich:Clockwork-Golem:Grave-Golem:Dragon"/>
+            <option name="faction" value="enemy"/>
+            <option name="side" value="offence:defence"/>
+            <option name="dice" value="strength"/>
+            <option name="bonus" value="-1"/>
+            <option name="number" value="1"/>
+            <option name="bonusType" value="Poison-Aura"/>
+            <option name="players" value="Hero:Maze"/>
+            <option name="impArtTech" value="false"/>
+        </attachment>
+        <attachment name="supportAttachmentPoisonAura2" attachTo="Expert-Scourge" javaClass="games.strategy.triplea.attachments.UnitSupportAttachment" type="unitType">
+            <option name="unitType" value="Chompy:Ooze:Giant-Scorpion:Skeleton:Zombie:Ghoul:Giant-Spider:Succubus:Wight:Air-Elemental:Giant-Crab:Ghast:Hag:Spectre:Water-Elemental:Werewolf:Wraith:Banshee:Fire-Elemental:Ghost:Treant:Crystal-Golem:Earth-Elemental:Mummy:Revenant:Gazer:Magma-Golem:Lich:Clockwork-Golem:Grave-Golem:Dragon"/>
+            <option name="faction" value="enemy"/>
+            <option name="side" value="offence:defence"/>
+            <option name="dice" value="strength"/>
+            <option name="bonus" value="-1"/>
+            <option name="number" value="2"/>
+            <option name="bonusType" value="Poison-Aura"/>
+            <option name="players" value="Hero:Maze"/>
+            <option name="impArtTech" value="false"/>
+        </attachment>
+        <attachment name="supportAttachmentPoisonAura3" attachTo="Master-Scourge" javaClass="games.strategy.triplea.attachments.UnitSupportAttachment" type="unitType">
+            <option name="unitType" value="Chompy:Ooze:Giant-Scorpion:Skeleton:Zombie:Ghoul:Giant-Spider:Succubus:Wight:Air-Elemental:Giant-Crab:Ghast:Hag:Spectre:Water-Elemental:Werewolf:Wraith:Banshee:Fire-Elemental:Ghost:Treant:Crystal-Golem:Earth-Elemental:Mummy:Revenant:Gazer:Magma-Golem:Lich:Rakshasa:Clockwork-Golem:Grave-Golem:Dragon"/>
+            <option name="faction" value="enemy"/>
+            <option name="side" value="offence:defence"/>
+            <option name="dice" value="strength"/>
+            <option name="bonus" value="-1"/>
+            <option name="number" value="3"/>
+            <option name="bonusType" value="Poison-Aura"/>
+            <option name="players" value="Hero:Maze"/>
+            <option name="impArtTech" value="false"/>
+        </attachment>
+        <attachment name="supportAttachmentDesire" attachTo="Succubus" javaClass="games.strategy.triplea.attachments.UnitSupportAttachment" type="unitType">
+            <option name="unitType" value="Squire-w:Knight-w:Champion-w:Squire-p:Knight-p:Champion-p:Squire-u:Knight-u:Champion-u:Squire-g:Knight-g:Champion-g:Squire-y:Knight-y:Champion-y:Squire-o:Knight-o:Champion-o:Squire-r:Knight-r:Champion-r:Squire-b:Knight-b:Champion-b"/>
+            <option name="faction" value="enemy"/>
+            <option name="side" value="offence:defence"/>
+            <option name="dice" value="strength"/>
+            <option name="bonus" value="-1"/>
+            <option name="number" value="1"/>
+            <option name="bonusType" value="Desire"/>
+            <option name="players" value="Hero:Maze"/>
+            <option name="impArtTech" value="false"/>
+        </attachment>
+        <attachment name="supportAttachmentFear" attachTo="Ghost" javaClass="games.strategy.triplea.attachments.UnitSupportAttachment" type="unitType">
+            <option name="unitType" value="Squire-w:Knight-w:Champion-w:Squire-p:Knight-p:Champion-p:Squire-u:Knight-u:Champion-u:Squire-g:Knight-g:Champion-g:Squire-y:Knight-y:Champion-y:Squire-o:Knight-o:Champion-o:Squire-r:Knight-r:Champion-r:Squire-b:Knight-b:Champion-b"/>
+            <option name="faction" value="enemy"/>
+            <option name="side" value="offence:defence"/>
+            <option name="dice" value="strength"/>
+            <option name="bonus" value="-2"/>
+            <option name="number" value="1"/>
+            <option name="bonusType" value="Fear"/>
+            <option name="players" value="Hero:Maze"/>
+            <option name="impArtTech" value="false"/>
+        </attachment>
+        <attachment name="supportAttachmentTerror" attachTo="Revenant" javaClass="games.strategy.triplea.attachments.UnitSupportAttachment" type="unitType">
+            <option name="unitType" value="Squire-w:Knight-w:Champion-w:Squire-p:Knight-p:Champion-p:Squire-u:Knight-u:Champion-u:Squire-g:Knight-g:Champion-g:Squire-y:Knight-y:Champion-y:Squire-o:Knight-o:Champion-o:Squire-r:Knight-r:Champion-r:Squire-b:Knight-b:Champion-b"/>
+            <option name="faction" value="enemy"/>
+            <option name="side" value="offence:defence"/>
+            <option name="dice" value="strength"/>
+            <option name="bonus" value="-3"/>
+            <option name="number" value="1"/>
+            <option name="bonusType" value="Terror"/>
+            <option name="players" value="Hero:Maze"/>
+            <option name="impArtTech" value="false"/>
+        </attachment>
+        <attachment name="supportAttachmentRevulsion" attachTo="Hag" javaClass="games.strategy.triplea.attachments.UnitSupportAttachment" type="unitType">
+            <option name="unitType" value="Squire-w:Knight-w:Champion-w:Squire-p:Knight-p:Champion-p:Squire-u:Knight-u:Champion-u:Squire-g:Knight-g:Champion-g:Squire-y:Knight-y:Champion-y:Squire-o:Knight-o:Champion-o:Squire-r:Knight-r:Champion-r:Squire-b:Knight-b:Champion-b:Crusader:Expert-Crusader:Bard:Expert-Bard:Hunter:Expert-Hunter:Ranger:Expert-Ranger:Priestess:Expert-Priestess:Raider:Expert-Raider:Gladiator:Expert-Gladiator:Scourge:Expert-Scourge"/>
+            <option name="faction" value="enemy"/>
+            <option name="side" value="offence:defence"/>
+            <option name="dice" value="strength"/>
+            <option name="bonus" value="-1"/>
+            <option name="number" value="1"/>
+            <option name="bonusType" value="Revulsion"/>
+            <option name="players" value="Hero:Maze"/>
+            <option name="impArtTech" value="false"/>
+        </attachment>
+        <attachment name="supportAttachmentHorror" attachTo="Lich" javaClass="games.strategy.triplea.attachments.UnitSupportAttachment" type="unitType">
+            <option name="unitType" value="Squire-w:Knight-w:Champion-w:Squire-p:Knight-p:Champion-p:Squire-u:Knight-u:Champion-u:Squire-g:Knight-g:Champion-g:Squire-y:Knight-y:Champion-y:Squire-o:Knight-o:Champion-o:Squire-r:Knight-r:Champion-r:Squire-b:Knight-b:Champion-b:Master-Crusader:Expert-Crusader:Master-Bard:Expert-Bard:Master-Hunter:Expert-Hunter:Master-Ranger:Expert-Ranger:Master-Priestess:Expert-Priestess:Master-Raider:Expert-Raider:Master-Gladiator:Expert-Gladiator:Master-Scourge:Expert-Scourge"/>
+            <option name="faction" value="enemy"/>
+            <option name="side" value="offence:defence"/>
+            <option name="dice" value="strength"/>
+            <option name="bonus" value="-2"/>
+            <option name="number" value="1"/>
+            <option name="bonusType" value="Horror"/>
+            <option name="players" value="Hero:Maze"/>
+            <option name="impArtTech" value="false"/>
+        </attachment>
     <!-- end support attachments -->
 
 <!-- conditions -->
@@ -7732,6 +7874,16 @@
 <!-- end conditions -->
 
 <!-- triggers -->
+
+    <!-- prologue -->
+    <attachment name="triggerAttachment_Prologue" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+        <option name="conditions" value="conditionStartGame"/>
+        <option name="notification" value="Prologue"/>
+        <option name="players" value="Hero"/>
+        <option name="when" value="before:HeroOriginPurchase"/>
+        <option name="uses" value="1"/>
+    </attachment>
+
     <!-- shop adjustments based on selected character + starting gold -->
         <attachment name="triggerAttachment_ModifyShopTier1_Crusader" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
             <option name="conditions" value="conditionStartGame:conditionHeroIsCrusader"/>
@@ -7817,6 +7969,7 @@
             <option name="productionRule" value="shop-tier-3:buyChampion-u"/>
             <option name="productionRule" value="shop-tier-3:buyHunter-Level-2"/>
             <option name="productionRule" value="shop-tier-3:buySquire-u-LevelUp"/>
+            <option name="productionRule" value="shop-tier-3:-buyEarthquakeSpell"/>
             <option name="when" value="after:HeroOriginPlace"/>
         </attachment>
         <attachment name="triggerAttachment_ModifyShopTier1_Ranger" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
@@ -7847,6 +8000,7 @@
             <option name="productionRule" value="shop-tier-3:buyChampion-g"/>
             <option name="productionRule" value="shop-tier-3:buyRanger-Level-2"/>
             <option name="productionRule" value="shop-tier-3:buySquire-g-LevelUp"/>
+            <option name="productionRule" value="shop-tier-3:-buyEarthquakeSpell"/>
             <option name="when" value="after:HeroOriginPlace"/>
         </attachment>
         <attachment name="triggerAttachment_ModifyShopTier1_Priestess" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
@@ -7907,6 +8061,7 @@
             <option name="productionRule" value="shop-tier-3:buyChampion-o"/>
             <option name="productionRule" value="shop-tier-3:buyRaider-Level-2"/>
             <option name="productionRule" value="shop-tier-3:buySquire-o-LevelUp"/>
+            <option name="productionRule" value="shop-tier-3:-buyEarthquakeSpell"/>
             <option name="when" value="after:HeroOriginPlace"/>
         </attachment>
         <attachment name="triggerAttachment_ModifyShopTier1_Gladiator" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
@@ -7928,6 +8083,8 @@
             <option name="productionRule" value="shop-tier-2:buyKnight-r"/>
             <option name="productionRule" value="shop-tier-2:buyGladiator-Level-2"/>
             <option name="productionRule" value="shop-tier-2:buySquire-r-LevelUp"/>
+            <option name="productionRule" value="shop-tier-2:-buyLightningBoltSpell"/>
+            <option name="productionRule" value="shop-tier-2:-buyIceStormSpell"/>
             <option name="when" value="after:HeroOriginPlace"/>
         </attachment>
         <attachment name="triggerAttachment_ModifyShopTier3_Gladiator" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
@@ -7937,6 +8094,7 @@
             <option name="productionRule" value="shop-tier-3:buyChampion-r"/>
             <option name="productionRule" value="shop-tier-3:buyGladiator-Level-2"/>
             <option name="productionRule" value="shop-tier-3:buySquire-r-LevelUp"/>
+            <option name="productionRule" value="shop-tier-3:-buyEarthquakeSpell"/>
             <option name="when" value="after:HeroOriginPlace"/>
         </attachment>
         <attachment name="triggerAttachment_ModifyShopTier1_Scourge" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
@@ -17904,6 +18062,137 @@
             <option name="placement" value="Entrance:Dead-Skeleton"/>
         </attachment>
 
+        <attachment name="triggerAttachment_RevealFrom_Entrance1" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_Entrance"/>
+            <option name="when" value="before:HeroRandomization"/>
+            <option name="removeUnits" value="Outer SW Path 1:Unknown" count="1"/>
+            <option name="activateTrigger" value="triggerAttachment_RE_OuterSWPath1_1:1:false:false:false:true"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSWPath1Revealed1" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_Entrance:conditionAttachmentRE_OuterSWPath1_1:conditionAttachmentRE_OuterSWPath1_2"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SW Path 1:Potion-of-Wisdom"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSWPath1Revealed2" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_Entrance:conditionAttachmentRE_OuterSWPath1_2:conditionAttachmentRE_OuterSWPath1_3"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SW Path 1:Gold-Stack-10"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSWPath1Revealed3" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_Entrance:conditionAttachmentRE_OuterSWPath1_3:conditionAttachmentRE_OuterSWPath1_4"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SW Path 1:Gold-Stack-3"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSWPath1Revealed4" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_Entrance:conditionAttachmentRE_OuterSWPath1_4:conditionAttachmentRE_OuterSWPath1_5"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SW Path 1:XP-Stack"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSWPath1Revealed5" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_Entrance:conditionAttachmentRE_OuterSWPath1_5:conditionAttachmentRE_OuterSWPath1_6"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SW Path 1:Chompy"/>
+            <option name="placement" value="Outer SW Path 1:Dead-Chompy"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSWPath1Revealed6" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_Entrance:conditionAttachmentRE_OuterSWPath1_6:conditionAttachmentRE_OuterSWPath1_7"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SW Path 1:Ooze"/>
+            <option name="placement" value="Outer SW Path 1:Dead-Ooze"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSWPath1Revealed7" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_Entrance:conditionAttachmentRE_OuterSWPath1_7:conditionAttachmentRE_OuterSWPath1_8"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SW Path 1:Skeleton"/>
+            <option name="placement" value="Outer SW Path 1:Dead-Skeleton"/>
+        </attachment>
+
+        <attachment name="triggerAttachment_RevealFrom_Entrance2" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_Entrance"/>
+            <option name="when" value="before:HeroRandomization"/>
+            <option name="removeUnits" value="Outer SE Path 1:Unknown" count="1"/>
+            <option name="activateTrigger" value="triggerAttachment_RE_OuterSEPath1_1:1:false:false:false:true"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSEPath1Revealed1" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_Entrance:conditionAttachmentRE_OuterSEPath1_1:conditionAttachmentRE_OuterSEPath1_2"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SE Path 1:Potion-of-Wisdom"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSEPath1Revealed2" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_Entrance:conditionAttachmentRE_OuterSEPath1_2:conditionAttachmentRE_OuterSEPath1_3"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SE Path 1:Gold-Stack-10"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSEPath1Revealed3" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_Entrance:conditionAttachmentRE_OuterSEPath1_3:conditionAttachmentRE_OuterSEPath1_4"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SE Path 1:Gold-Stack-3"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSEPath1Revealed4" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_Entrance:conditionAttachmentRE_OuterSEPath1_4:conditionAttachmentRE_OuterSEPath1_5"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SE Path 1:XP-Stack"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSEPath1Revealed5" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_Entrance:conditionAttachmentRE_OuterSEPath1_5:conditionAttachmentRE_OuterSEPath1_6"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SE Path 1:Chompy"/>
+            <option name="placement" value="Outer SE Path 1:Dead-Chompy"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSEPath1Revealed6" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_Entrance:conditionAttachmentRE_OuterSEPath1_6:conditionAttachmentRE_OuterSEPath1_7"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SE Path 1:Ooze"/>
+            <option name="placement" value="Outer SE Path 1:Dead-Ooze"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSEPath1Revealed7" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_Entrance:conditionAttachmentRE_OuterSEPath1_7:conditionAttachmentRE_OuterSEPath1_8"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SE Path 1:Skeleton"/>
+            <option name="placement" value="Outer SE Path 1:Dead-Skeleton"/>
+        </attachment>
+
+    <!-- end -->
+
+    <!-- close off backwards progress and wipe out any stranded units -->
+        <attachment name="triggerAttachment_ClosePrecipice" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_Entrance"/>
+            <option name="when" value="after:HeroNonCombatMove"/>
+            <option name="removeUnits" value="The Precipice:all" count="99"/>
+            <option name="territoryAttachmentName" value="TerritoryAttachment" count="territoryAttachment"/>
+            <option name="territories" value="The Precipice"/>
+            <option name="territoryProperty" value="isImpassable" count="true"/>
+        </attachment>
+        <attachment name="triggerAttachment_CloseEntrance1" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSWPath1"/>
+            <option name="when" value="after:HeroNonCombatMove"/>
+            <option name="removeUnits" value="Entrance:all" count="99"/>
+            <option name="territoryAttachmentName" value="TerritoryAttachment" count="territoryAttachment"/>
+            <option name="territories" value="Entrance"/>
+            <option name="territoryProperty" value="isImpassable" count="true"/>
+        </attachment>
+        <attachment name="triggerAttachment_CloseEntrance2" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSEPath1"/>
+            <option name="when" value="after:HeroNonCombatMove"/>
+            <option name="removeUnits" value="Entrance:all" count="99"/>
+            <option name="territoryAttachmentName" value="TerritoryAttachment" count="territoryAttachment"/>
+            <option name="territories" value="Entrance"/>
+            <option name="territoryProperty" value="isImpassable" count="true"/>
+        </attachment>
     <!-- end -->
 
     <!-- reset randomizer switches -->

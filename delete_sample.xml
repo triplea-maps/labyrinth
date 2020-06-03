@@ -1,15 +1,6 @@
-<!-- Start Beta Info popup -->
-<attachment name="triggerAttachmentBeta_Info" attachTo="Nature" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
-    <option name="conditions" value="conditionStartGame"/>
-    <option name="notification" value="BetaInfo"/>
-    <option name="players" value="Humans:Dwarves:Gnomes:Night-Elves:Orcs:Tauren:Undead:Trolls"/>
-    <option name="when" value="before:gameInitDelegate"/>
-    <option name="uses" value="1"/>
-</attachment>
-
 <!-- Pact of Steel User Action Attachment sample -->
 <attachment name="conditionAttachment_Americans_Aid_UK" attachTo="Americans" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
-    <option name="SEitch" value="true"/>
+    <option name="switch" value="true"/>
 </attachment>
 <attachment name="triggerAttachment_Americans_Aid_UK" attachTo="Americans" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
     <option name="resource" value="PUs"/>
@@ -57,59 +48,66 @@ Arthur_Level_2.ACCEPT_QUESTION=NONE
 </attachment>
 
 
+<!-- template reveal trigger -->
+        <attachment name="triggerAttachment_RevealFrom_Entrance2" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_Entrance"/>
+            <option name="when" value="before:HeroRandomization"/>
+            <option name="removeUnits" value="Outer SE Path 1:Unknown" count="1"/>
+            <option name="activateTrigger" value="triggerAttachment_RE_OuterSEPath 1_1:1:false:false:false:true"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSEPath_1Revealed1" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_Entrance:conditionAttachmentRE_OuterSEPath 1_1:conditionAttachmentRE_OuterSEPath 1_2"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SE Path 1:Potion-of-Wisdom"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSEPath_1Revealed2" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_Entrance:conditionAttachmentRE_OuterSEPath 1_2:conditionAttachmentRE_OuterSEPath 1_3"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SE Path 1:Gold-Stack-10"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSEPath_1Revealed3" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_Entrance:conditionAttachmentRE_OuterSEPath 1_3:conditionAttachmentRE_OuterSEPath 1_4"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SE Path 1:Gold-Stack-3"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSEPath_1Revealed4" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_Entrance:conditionAttachmentRE_OuterSEPath 1_4:conditionAttachmentRE_OuterSEPath 1_5"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SE Path 1:XP-Stack"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSEPath_1Revealed5" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_Entrance:conditionAttachmentRE_OuterSEPath 1_5:conditionAttachmentRE_OuterSEPath 1_6"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SE Path 1:Chompy"/>
+            <option name="placement" value="Outer SE Path 1:Dead-Chompy"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSEPath_1Revealed6" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_Entrance:conditionAttachmentRE_OuterSEPath 1_6:conditionAttachmentRE_OuterSEPath 1_7"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SE Path 1:Ooze"/>
+            <option name="placement" value="Outer SE Path 1:Dead-Ooze"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSEPath_1Revealed7" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_Entrance:conditionAttachmentRE_OuterSEPath 1_7:conditionAttachmentRE_OuterSEPath 1_8"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SE Path 1:Skeleton"/>
+            <option name="placement" value="Outer SE Path 1:Dead-Skeleton"/>
+        </attachment>
 
-        <attachment name="triggerAttachment_RE_Entrance_8" attachTo="Maze" javaClass="TriggerAttachment" type="player">
-            <option name="chance" value="4:10"/>
-            <option name="players" value="Maze"/>
-            <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachmentRE_Entrance_8"/>
-            <option name="playerProperty" value="switch" count="true"/>
-        </attachment>
-        <attachment name="triggerAttachment_RE_Entrance_7" attachTo="Maze" javaClass="TriggerAttachment" type="player">
-            <option name="chance" value="5:10"/>
-            <option name="players" value="Maze"/>
-            <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachmentRE_Entrance_7"/>
-            <option name="playerProperty" value="switch" count="true"/>
-            <option name="activateTrigger" value="triggerAttachment_RE_Entrance_8:1:false:false:false:true"/>
-        </attachment>
-        <attachment name="triggerAttachment_RE_Entrance_6" attachTo="Maze" javaClass="TriggerAttachment" type="player">
-            <option name="chance" value="6:10"/>
-            <option name="players" value="Maze"/>
-            <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachmentRE_Entrance_6"/>
-            <option name="playerProperty" value="switch" count="true"/>
-            <option name="activateTrigger" value="triggerAttachment_RE_Entrance_7:1:false:false:false:true"/>
-        </attachment>
-        <attachment name="triggerAttachment_RE_Entrance_5" attachTo="Maze" javaClass="TriggerAttachment" type="player">
-            <option name="chance" value="7:10"/>
-            <option name="players" value="Maze"/>
-            <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachmentRE_Entrance_5"/>
-            <option name="playerProperty" value="switch" count="true"/>
-            <option name="activateTrigger" value="triggerAttachment_RE_Entrance_6:1:false:false:false:true"/>
-        </attachment>
-        <attachment name="triggerAttachment_RE_Entrance_4" attachTo="Maze" javaClass="TriggerAttachment" type="player">
-            <option name="chance" value="8:10"/>
-            <option name="players" value="Maze"/>
-            <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachmentRE_Entrance_4"/>
-            <option name="playerProperty" value="switch" count="true"/>
-            <option name="activateTrigger" value="triggerAttachment_RE_Entrance_5:1:false:false:false:true"/>
-        </attachment>
-        <attachment name="triggerAttachment_RE_Entrance_3" attachTo="Maze" javaClass="TriggerAttachment" type="player">
-            <option name="chance" value="8:10"/>
-            <option name="players" value="Maze"/>
-            <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachmentRE_Entrance_3"/>
-            <option name="playerProperty" value="switch" count="true"/>
-            <option name="activateTrigger" value="triggerAttachment_RE_Entrance_4:1:false:false:false:true"/>
-        </attachment>
-        <attachment name="triggerAttachment_RE_Entrance_2" attachTo="Maze" javaClass="TriggerAttachment" type="player">
-            <option name="chance" value="9:10"/>
-            <option name="players" value="Maze"/>
-            <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachmentRE_Entrance_2"/>
-            <option name="playerProperty" value="switch" count="true"/>
-            <option name="activateTrigger" value="triggerAttachment_RE_Entrance_3:1:false:false:false:true"/>
-        </attachment>
-        <attachment name="triggerAttachment_RE_Entrance_1" attachTo="Maze" javaClass="TriggerAttachment" type="player">
-            <option name="chance" value="9:10"/>
-            <option name="players" value="Maze"/>
-            <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachmentRE_Entrance_1"/>
-            <option name="playerProperty" value="switch" count="true"/>
-            <option name="activateTrigger" value="triggerAttachment_RE_Entrance_2:1:false:false:false:true"/>
+
+<!-- template close trigger -->
+        <attachment name="triggerAttachment_CloseEntrance1" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSWPath 1"/>
+            <option name="when" value="after:HeroNonCombatMove"/>
+            <option name="removeUnits" value="Entrance:all" count="99"/>
+            <option name="territoryAttachmentName" value="TerritoryAttachment" count="territoryAttachment"/>
+            <option name="territories" value="Entrance"/>
+            <option name="territoryProperty" value="isImpassable" count="true"/>
         </attachment>
