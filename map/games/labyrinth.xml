@@ -448,13 +448,15 @@
         <unit name="Potion-of-Confusion"/>
         <unit name="Potion-of-Accuracy"/>
         <unit name="Potion-of-Wisdom"/>
-        <unit name="Potion-of-Fortune"/>
         <unit name="Spell-of-Death"/>
         <unit name="Spell-of-Fireball"/>
         <unit name="Spell-of-Lightning-Bolt"/>
         <unit name="Spell-of-Ice-Storm"/>
         <unit name="Spell-of-Earthquake"/>
         <unit name="Shield-Runes"/>
+        <unit name="Gold-Stack-10"/>
+        <unit name="Gold-Stack-3"/>
+        <unit name="XP-Stack"/>
 
         <!-- Maze Units -->
         <unit name="Air-Elemental"/>
@@ -523,8 +525,6 @@
         <unit name="Dead-Wraith"/>
         <unit name="Dead-Zombie"/>        
         
-        <unit name="Gold-Stack"/>
-        <unit name="XP-Stack"/>
         <unit name="Unknown"/>
     </unitList>
 
@@ -932,17 +932,6 @@
         <playerProduction player="Hero" frontier="character-selection"/>
     </production>
 
-    <technology>
-        <technologies>
-            <techname name="mechanizedInfantry"/>
-        </technologies>
-        <playerTech player="Hero">
-            <category name="Technology Advances">
-                <tech name="mechanizedInfantry"/>
-            </category>
-        </playerTech>
-    </technology>
-
     <attachmentList>
     <!-- relationship attachments -->
         <attachment name="relationshipTypeAttachment" attachTo="Allied" javaClass="games.strategy.triplea.attachments.RelationshipTypeAttachment" type="relationship">
@@ -955,12 +944,6 @@
             <option name="archeType" value="neutral"/>
         </attachment>
     <!-- end relationship attachments -->
-
-    <!-- tech attachments -->
-        <attachment name="techAttachment" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TechAttachment" type="player">
-            <option name="mechanizedInfantry" value="true"/>
-        </attachment>
-    <!-- end tech attachments -->
 
     <!-- rule attachments -->
         <attachment name="rulesAttachment" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
@@ -1292,6 +1275,7 @@
             <option name="defense" value="3"/>
             <option name="movement" value="1"/>
             <option name="hitPoints" value="2"/>
+            <option name="maxBuiltPerPlayer" value="3"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Knight-w" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="4"/>
@@ -1299,6 +1283,7 @@
             <option name="movement" value="1"/>
             <option name="hitPoints" value="3"/>
             <option name="consumesUnits" value="1:Squire-w"/>
+            <option name="maxBuiltPerPlayer" value="3"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Champion-w" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="5"/>
@@ -1306,12 +1291,14 @@
             <option name="movement" value="1"/>
             <option name="hitPoints" value="4"/>
             <option name="consumesUnits" value="1:Knight-w"/>
+            <option name="maxBuiltPerPlayer" value="3"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Squire-p" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="3"/>
             <option name="defense" value="3"/>
             <option name="movement" value="1"/>
             <option name="hitPoints" value="2"/>
+            <option name="maxBuiltPerPlayer" value="3"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Knight-p" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="4"/>
@@ -1319,6 +1306,7 @@
             <option name="movement" value="1"/>
             <option name="hitPoints" value="3"/>
             <option name="consumesUnits" value="1:Squire-p"/>
+            <option name="maxBuiltPerPlayer" value="3"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Champion-p" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="5"/>
@@ -1326,12 +1314,14 @@
             <option name="movement" value="1"/>
             <option name="hitPoints" value="4"/>
             <option name="consumesUnits" value="1:Knight-p"/>
+            <option name="maxBuiltPerPlayer" value="3"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Squire-u" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="3"/>
             <option name="defense" value="3"/>
             <option name="movement" value="1"/>
             <option name="hitPoints" value="2"/>
+            <option name="maxBuiltPerPlayer" value="3"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Knight-u" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="4"/>
@@ -1339,6 +1329,7 @@
             <option name="movement" value="1"/>
             <option name="hitPoints" value="3"/>
             <option name="consumesUnits" value="1:Squire-u"/>
+            <option name="maxBuiltPerPlayer" value="3"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Champion-u" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="5"/>
@@ -1346,12 +1337,14 @@
             <option name="movement" value="1"/>
             <option name="hitPoints" value="4"/>
             <option name="consumesUnits" value="1:Knight-u"/>
+            <option name="maxBuiltPerPlayer" value="3"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Squire-g" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="3"/>
             <option name="defense" value="3"/>
             <option name="movement" value="1"/>
             <option name="hitPoints" value="2"/>
+            <option name="maxBuiltPerPlayer" value="3"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Knight-g" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="4"/>
@@ -1359,6 +1352,7 @@
             <option name="movement" value="1"/>
             <option name="hitPoints" value="3"/>
             <option name="consumesUnits" value="1:Squire-g"/>
+            <option name="maxBuiltPerPlayer" value="3"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Champion-g" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="5"/>
@@ -1366,12 +1360,14 @@
             <option name="movement" value="1"/>
             <option name="hitPoints" value="4"/>
             <option name="consumesUnits" value="1:Knight-g"/>
+            <option name="maxBuiltPerPlayer" value="3"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Squire-y" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="3"/>
             <option name="defense" value="3"/>
             <option name="movement" value="1"/>
             <option name="hitPoints" value="2"/>
+            <option name="maxBuiltPerPlayer" value="3"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Knight-y" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="4"/>
@@ -1379,6 +1375,7 @@
             <option name="movement" value="1"/>
             <option name="hitPoints" value="3"/>
             <option name="consumesUnits" value="1:Squire-y"/>
+            <option name="maxBuiltPerPlayer" value="3"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Champion-y" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="5"/>
@@ -1386,12 +1383,14 @@
             <option name="movement" value="1"/>
             <option name="hitPoints" value="4"/>
             <option name="consumesUnits" value="1:Knight-y"/>
+            <option name="maxBuiltPerPlayer" value="3"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Squire-o" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="3"/>
             <option name="defense" value="3"/>
             <option name="movement" value="1"/>
             <option name="hitPoints" value="2"/>
+            <option name="maxBuiltPerPlayer" value="3"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Knight-o" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="4"/>
@@ -1399,6 +1398,7 @@
             <option name="movement" value="1"/>
             <option name="hitPoints" value="3"/>
             <option name="consumesUnits" value="1:Squire-o"/>
+            <option name="maxBuiltPerPlayer" value="3"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Champion-o" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="5"/>
@@ -1406,12 +1406,14 @@
             <option name="movement" value="1"/>
             <option name="hitPoints" value="4"/>
             <option name="consumesUnits" value="1:Knight-o"/>
+            <option name="maxBuiltPerPlayer" value="3"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Squire-r" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="3"/>
             <option name="defense" value="3"/>
             <option name="movement" value="1"/>
             <option name="hitPoints" value="2"/>
+            <option name="maxBuiltPerPlayer" value="3"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Knight-r" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="4"/>
@@ -1419,6 +1421,7 @@
             <option name="movement" value="1"/>
             <option name="hitPoints" value="3"/>
             <option name="consumesUnits" value="1:Squire-r"/>
+            <option name="maxBuiltPerPlayer" value="3"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Champion-r" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="5"/>
@@ -1426,12 +1429,14 @@
             <option name="movement" value="1"/>
             <option name="hitPoints" value="4"/>
             <option name="consumesUnits" value="1:Knight-r"/>
+            <option name="maxBuiltPerPlayer" value="3"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Squire-b" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="3"/>
             <option name="defense" value="3"/>
             <option name="movement" value="1"/>
             <option name="hitPoints" value="2"/>
+            <option name="maxBuiltPerPlayer" value="3"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Knight-b" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="4"/>
@@ -1439,6 +1444,7 @@
             <option name="movement" value="1"/>
             <option name="hitPoints" value="3"/>
             <option name="consumesUnits" value="1:Squire-b"/>
+            <option name="maxBuiltPerPlayer" value="3"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Champion-b" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="5"/>
@@ -1446,6 +1452,7 @@
             <option name="movement" value="1"/>
             <option name="hitPoints" value="4"/>
             <option name="consumesUnits" value="1:Knight-b"/>
+            <option name="maxBuiltPerPlayer" value="3"/>
         </attachment>
     <!-- end unit attachments - retainers -->
 
@@ -1470,12 +1477,6 @@
             <option name="maxBuiltPerPlayer" value="1"/>
             <option name="createsResourcesList" value="10:XP"/>
             <option name="createsResourcesList" value="0:Gold"/>
-        </attachment>
-        <attachment name="unitAttachment" attachTo="Potion-of-Fortune" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
-            <option name="isInfrastructure" value="true"/>
-            <option name="maxBuiltPerPlayer" value="1"/>
-            <option name="createsResourcesList" value="0:XP"/>
-            <option name="createsResourcesList" value="10:Gold"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Spell-of-Death" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="8"/>
@@ -1522,11 +1523,17 @@
             <option name="maxBuiltPerPlayer" value="7"/>
             <option name="movement" value="1"/>
         </attachment>
-        <attachment name="unitAttachment" attachTo="Gold-Stack" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+        <attachment name="unitAttachment" attachTo="Gold-Stack-3" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="isInfrastructure" value="true"/>
             <option name="maxBuiltPerPlayer" value="1"/>
             <option name="createsResourcesList" value="0:XP"/>
-            <option name="createsResourcesList" value="1:Gold"/>
+            <option name="createsResourcesList" value="3:Gold"/>
+        </attachment>
+        <attachment name="unitAttachment" attachTo="Gold-Stack-10" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
+            <option name="isInfrastructure" value="true"/>
+            <option name="maxBuiltPerPlayer" value="1"/>
+            <option name="createsResourcesList" value="0:XP"/>
+            <option name="createsResourcesList" value="10:Gold"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="XP-Stack" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="isInfrastructure" value="true"/>
@@ -1540,6 +1547,7 @@
         <attachment name="unitAttachment" attachTo="Chompy" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="2"/>
             <option name="defense" value="2"/>
+            <option name="hitPoints" value="1"/>
             <option name="whenHitPointsDamagedChangesInto" value="1:false:Dead-Chompy"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Dead-Chompy" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
@@ -1551,6 +1559,7 @@
             <option name="attack" value="2"/>
             <option name="defense" value="2"/>
             <option name="defenseRolls" value="3"/>
+            <option name="hitPoints" value="1"/>
             <option name="whenHitPointsDamagedChangesInto" value="1:false:Dead-Giant-Scorpion"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Dead-Giant-Scorpion" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
@@ -1561,6 +1570,7 @@
         <attachment name="unitAttachment" attachTo="Ooze" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="2"/>
             <option name="defense" value="2"/>
+            <option name="hitPoints" value="1"/>
             <option name="whenHitPointsDamagedChangesInto" value="1:false:Dead-Ooze"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Dead-Ooze" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
@@ -1571,6 +1581,7 @@
         <attachment name="unitAttachment" attachTo="Skeleton" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="2"/>
             <option name="defense" value="2"/>
+            <option name="hitPoints" value="1"/>
             <option name="whenHitPointsDamagedChangesInto" value="1:false:Dead-Skeleton"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Dead-Skeleton" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
@@ -1581,6 +1592,7 @@
         <attachment name="unitAttachment" attachTo="Zombie" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
             <option name="attack" value="2"/>
             <option name="defense" value="2"/>
+            <option name="hitPoints" value="1"/>
             <option name="whenHitPointsDamagedChangesInto" value="1:false:Dead-Zombie"/>
         </attachment>
         <attachment name="unitAttachment" attachTo="Dead-Zombie" javaClass="games.strategy.triplea.attachments.UnitAttachment" type="unitType">
@@ -2698,14 +2710,14 @@
             <option name="unitPresence" value="Potion-of-Wisdom" count="1"/>
             <option name="players" value="Hero"/>
         </attachment>
-        <attachment name="conditionRemoveFortunePotion" attachTo="Maze" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+        <attachment name="conditionRemoveGoldStack3" attachTo="Maze" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
             <option name="directPresenceTerritories" value="map" count="1"/>
-            <option name="unitPresence" value="Potion-of-Fortune" count="1"/>
+            <option name="unitPresence" value="Gold-Stack-3" count="1"/>
             <option name="players" value="Hero"/>
         </attachment>
-        <attachment name="conditionRemoveGoldStack" attachTo="Maze" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
+        <attachment name="conditionRemoveGoldStack10" attachTo="Maze" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
             <option name="directPresenceTerritories" value="map" count="1"/>
-            <option name="unitPresence" value="Gold-Stack" count="1"/>
+            <option name="unitPresence" value="Gold-Stack-10" count="1"/>
             <option name="players" value="Hero"/>
         </attachment>
         <attachment name="conditionRemoveXPStack" attachTo="Maze" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
@@ -3421,25 +3433,28 @@
 
     <!-- random encounter conditions -->
         <attachment name="conditionAttachmentRE_WisdomPotion" attachTo="Maze" javaClass="RulesAttachment" type="player">
-            <option name="switch" value="true"/>
+            <option name="switch" value="false"/>
         </attachment>
-        <attachment name="conditionAttachmentRE_FortunePotion" attachTo="Maze" javaClass="RulesAttachment" type="player">
-            <option name="switch" value="true"/>
+        <attachment name="conditionAttachmentRE_Gold10" attachTo="Maze" javaClass="RulesAttachment" type="player">
+            <option name="switch" value="false"/>
         </attachment>
-        <attachment name="conditionAttachmentRE_Gold" attachTo="Maze" javaClass="RulesAttachment" type="player">
-            <option name="switch" value="true"/>
+        <attachment name="conditionAttachmentRE_Gold3" attachTo="Maze" javaClass="RulesAttachment" type="player">
+            <option name="switch" value="false"/>
         </attachment>
         <attachment name="conditionAttachmentRE_XP" attachTo="Maze" javaClass="RulesAttachment" type="player">
-            <option name="switch" value="true"/>
+            <option name="switch" value="false"/>
         </attachment>
         <attachment name="conditionAttachmentRE_Monster1" attachTo="Maze" javaClass="RulesAttachment" type="player">
-            <option name="switch" value="true"/>
+            <option name="switch" value="false"/>
         </attachment>
         <attachment name="conditionAttachmentRE_Monster2" attachTo="Maze" javaClass="RulesAttachment" type="player">
-            <option name="switch" value="true"/>
+            <option name="switch" value="false"/>
         </attachment>
         <attachment name="conditionAttachmentRE_Monster3" attachTo="Maze" javaClass="RulesAttachment" type="player">
-            <option name="switch" value="true"/>
+            <option name="switch" value="false"/>
+        </attachment>
+        <attachment name="conditionAttachmentRE_Nothing" attachTo="Maze" javaClass="RulesAttachment" type="player">
+            <option name="switch" value="false"/>
         </attachment>
     <!-- end -->
 <!-- end conditions -->
@@ -3717,52 +3732,59 @@
     <!-- end -->
 
     <!-- random encounter triggers (manually fired from below reveal triggers) -->
+        <attachment name="triggerAttachment_RE_8" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="chance" value="4:10"/>
+            <option name="players" value="Maze"/>
+            <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachmentRE_Nothing"/>
+            <option name="playerProperty" value="switch" count="true"/>
+        </attachment>
         <attachment name="triggerAttachment_RE_7" attachTo="Maze" javaClass="TriggerAttachment" type="player">
             <option name="chance" value="5:10"/>
             <option name="players" value="Maze"/>
             <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachmentRE_Monster3"/>
-            <option name="playerProperty" value="switch" count="false"/>
+            <option name="playerProperty" value="switch" count="true"/>
+            <option name="activateTrigger" value="triggerAttachment_RE_8:1:false:false:false:true"/>
         </attachment>
         <attachment name="triggerAttachment_RE_6" attachTo="Maze" javaClass="TriggerAttachment" type="player">
             <option name="chance" value="6:10"/>
             <option name="players" value="Maze"/>
             <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachmentRE_Monster2"/>
-            <option name="playerProperty" value="switch" count="false"/>
+            <option name="playerProperty" value="switch" count="true"/>
             <option name="activateTrigger" value="triggerAttachment_RE_7:1:false:false:false:true"/>
         </attachment>
         <attachment name="triggerAttachment_RE_5" attachTo="Maze" javaClass="TriggerAttachment" type="player">
             <option name="chance" value="7:10"/>
             <option name="players" value="Maze"/>
             <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachmentRE_Monster1"/>
-            <option name="playerProperty" value="switch" count="false"/>
+            <option name="playerProperty" value="switch" count="true"/>
             <option name="activateTrigger" value="triggerAttachment_RE_6:1:false:false:false:true"/>
         </attachment>
         <attachment name="triggerAttachment_RE_4" attachTo="Maze" javaClass="TriggerAttachment" type="player">
             <option name="chance" value="8:10"/>
             <option name="players" value="Maze"/>
             <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachmentRE_XP"/>
-            <option name="playerProperty" value="switch" count="false"/>
+            <option name="playerProperty" value="switch" count="true"/>
             <option name="activateTrigger" value="triggerAttachment_RE_5:1:false:false:false:true"/>
         </attachment>
         <attachment name="triggerAttachment_RE_3" attachTo="Maze" javaClass="TriggerAttachment" type="player">
             <option name="chance" value="8:10"/>
             <option name="players" value="Maze"/>
-            <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachmentRE_Gold"/>
-            <option name="playerProperty" value="switch" count="false"/>
+            <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachmentRE_Gold3"/>
+            <option name="playerProperty" value="switch" count="true"/>
             <option name="activateTrigger" value="triggerAttachment_RE_4:1:false:false:false:true"/>
         </attachment>
         <attachment name="triggerAttachment_RE_2" attachTo="Maze" javaClass="TriggerAttachment" type="player">
             <option name="chance" value="9:10"/>
             <option name="players" value="Maze"/>
-            <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachmentRE_FortunePotion"/>
-            <option name="playerProperty" value="switch" count="false"/>
+            <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachmentRE_Gold10"/>
+            <option name="playerProperty" value="switch" count="true"/>
             <option name="activateTrigger" value="triggerAttachment_RE_3:1:false:false:false:true"/>
         </attachment>
         <attachment name="triggerAttachment_RE_1" attachTo="Maze" javaClass="TriggerAttachment" type="player">
             <option name="chance" value="9:10"/>
             <option name="players" value="Maze"/>
             <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachmentRE_WisdomPotion"/>
-            <option name="playerProperty" value="switch" count="false"/>
+            <option name="playerProperty" value="switch" count="true"/>
             <option name="activateTrigger" value="triggerAttachment_RE_2:1:false:false:false:true"/>
         </attachment>
     <!-- end -->
@@ -3774,46 +3796,45 @@
             <option name="removeUnits" value="Entrance:Unknown" count="1"/>
             <option name="activateTrigger" value="triggerAttachment_RE_1:1:false:false:false:true"/>
         </attachment>
-
         <attachment name="triggerAttachment_EntranceRevealed1" attachTo="Maze" javaClass="TriggerAttachment" type="player">
-            <option name="conditions" value="conditionAttachmentRE_WisdomPotion:conditionAttachmentRE_FortunePotion"/>
-            <option name="conditionType" value="1"/>
+            <option name="conditions" value="conditionRevealFrom_Precipice:conditionAttachmentRE_WisdomPotion:conditionAttachmentRE_Gold10"/>
+            <option name="conditionType" value="2"/>
             <option name="when" value="after:HeroRandomization"/>
             <option name="placement" value="Entrance:Potion-of-Wisdom"/>
         </attachment>
         <attachment name="triggerAttachment_EntranceRevealed2" attachTo="Maze" javaClass="TriggerAttachment" type="player">
-            <option name="conditions" value="conditionAttachmentRE_FortunePotion:conditionAttachmentRE_Gold"/>
-            <option name="conditionType" value="1"/>
+            <option name="conditions" value="conditionRevealFrom_Precipice:conditionAttachmentRE_Gold10:conditionAttachmentRE_Gold3"/>
+            <option name="conditionType" value="2"/>
             <option name="when" value="after:HeroRandomization"/>
-            <option name="placement" value="Entrance:Potion-of-Fortune"/>
+            <option name="placement" value="Entrance:Gold-Stack-10"/>
         </attachment>
         <attachment name="triggerAttachment_EntranceRevealed3" attachTo="Maze" javaClass="TriggerAttachment" type="player">
-            <option name="conditions" value="conditionAttachmentRE_Gold:conditionAttachmentRE_XP"/>
-            <option name="conditionType" value="1"/>
+            <option name="conditions" value="conditionRevealFrom_Precipice:conditionAttachmentRE_Gold3:conditionAttachmentRE_XP"/>
+            <option name="conditionType" value="2"/>
             <option name="when" value="after:HeroRandomization"/>
-            <option name="placement" value="Entrance:Gold-Stack"/>
+            <option name="placement" value="Entrance:Gold-Stack-3"/>
         </attachment>
         <attachment name="triggerAttachment_EntranceRevealed4" attachTo="Maze" javaClass="TriggerAttachment" type="player">
-            <option name="conditions" value="conditionAttachmentRE_XP:conditionAttachmentRE_Monster1"/>
-            <option name="conditionType" value="1"/>
+            <option name="conditions" value="conditionRevealFrom_Precipice:conditionAttachmentRE_XP:conditionAttachmentRE_Monster1"/>
+            <option name="conditionType" value="2"/>
             <option name="when" value="after:HeroRandomization"/>
             <option name="placement" value="Entrance:XP-Stack"/>
         </attachment>
         <attachment name="triggerAttachment_EntranceRevealed5" attachTo="Maze" javaClass="TriggerAttachment" type="player">
-            <option name="conditions" value="conditionAttachmentRE_Monster1:conditionAttachmentRE_Monster2"/>
-            <option name="conditionType" value="1"/>
+            <option name="conditions" value="conditionRevealFrom_Precipice:conditionAttachmentRE_Monster1:conditionAttachmentRE_Monster2"/>
+            <option name="conditionType" value="2"/>
             <option name="when" value="after:HeroRandomization"/>
             <option name="placement" value="Entrance:Chompy"/>
         </attachment>
         <attachment name="triggerAttachment_EntranceRevealed6" attachTo="Maze" javaClass="TriggerAttachment" type="player">
-            <option name="conditions" value="conditionAttachmentRE_Monster2:conditionAttachmentRE_Monster3"/>
-            <option name="conditionType" value="1"/>
+            <option name="conditions" value="conditionRevealFrom_Precipice:conditionAttachmentRE_Monster2:conditionAttachmentRE_Monster3"/>
+            <option name="conditionType" value="2"/>
             <option name="when" value="after:HeroRandomization"/>
             <option name="placement" value="Entrance:Ooze"/>
         </attachment>
         <attachment name="triggerAttachment_EntranceRevealed7" attachTo="Maze" javaClass="TriggerAttachment" type="player">
-            <option name="conditions" value="conditionAttachmentRE_Monster3"/>
-            <option name="conditionType" value="0"/>
+            <option name="conditions" value="conditionRevealFrom_Precipice:conditionAttachmentRE_Monster3:conditionAttachmentRE_Nothing"/>
+            <option name="conditionType" value="2"/>
             <option name="when" value="after:HeroRandomization"/>
             <option name="placement" value="Entrance:Skeleton"/>
         </attachment>
@@ -3823,59 +3844,67 @@
     <!-- reset random encounter switches for next round (as applicable) -->
         <attachment name="triggerAttachment_Reset_RE_1" attachTo="Maze" javaClass="TriggerAttachment" type="player">
             <option name="conditions" value="conditionAttachmentRE_WisdomPotion"/>
-            <option name="conditionType" value="0"/>
+            <option name="conditionType" value="1"/>
             <option name="when" value="after:HeroCombatMove"/>
             <option name="players" value="Maze"/>
             <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachmentRE_WisdomPotion"/>
-            <option name="playerProperty" value="switch" count="true"/>
+            <option name="playerProperty" value="switch" count="false"/>
         </attachment>
         <attachment name="triggerAttachment_Reset_RE_2" attachTo="Maze" javaClass="TriggerAttachment" type="player">
-            <option name="conditions" value="conditionAttachmentRE_FortunePotion"/>
-            <option name="conditionType" value="0"/>
+            <option name="conditions" value="conditionAttachmentRE_Gold10"/>
+            <option name="conditionType" value="1"/>
             <option name="when" value="after:HeroCombatMove"/>
             <option name="players" value="Maze"/>
-            <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachmentRE_FortunePotion"/>
-            <option name="playerProperty" value="switch" count="true"/>
+            <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachmentRE_Gold10"/>
+            <option name="playerProperty" value="switch" count="false"/>
         </attachment>
         <attachment name="triggerAttachment_Reset_RE_3" attachTo="Maze" javaClass="TriggerAttachment" type="player">
-            <option name="conditions" value="conditionAttachmentRE_Gold"/>
-            <option name="conditionType" value="0"/>
+            <option name="conditions" value="conditionAttachmentRE_Gold3"/>
+            <option name="conditionType" value="1"/>
             <option name="when" value="after:HeroCombatMove"/>
             <option name="players" value="Maze"/>
-            <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachmentRE_Gold"/>
-            <option name="playerProperty" value="switch" count="true"/>
+            <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachmentRE_Gold3"/>
+            <option name="playerProperty" value="switch" count="false"/>
         </attachment>
         <attachment name="triggerAttachment_Reset_RE_4" attachTo="Maze" javaClass="TriggerAttachment" type="player">
             <option name="conditions" value="conditionAttachmentRE_XP"/>
-            <option name="conditionType" value="0"/>
+            <option name="conditionType" value="1"/>
             <option name="when" value="after:HeroCombatMove"/>
             <option name="players" value="Maze"/>
             <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachmentRE_XP"/>
-            <option name="playerProperty" value="switch" count="true"/>
+            <option name="playerProperty" value="switch" count="false"/>
         </attachment>
         <attachment name="triggerAttachment_Reset_RE_5" attachTo="Maze" javaClass="TriggerAttachment" type="player">
             <option name="conditions" value="conditionAttachmentRE_Monster1"/>
-            <option name="conditionType" value="0"/>
+            <option name="conditionType" value="1"/>
             <option name="when" value="after:HeroCombatMove"/>
             <option name="players" value="Maze"/>
             <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachmentRE_Monster1"/>
-            <option name="playerProperty" value="switch" count="true"/>
+            <option name="playerProperty" value="switch" count="false"/>
         </attachment>
         <attachment name="triggerAttachment_Reset_RE_6" attachTo="Maze" javaClass="TriggerAttachment" type="player">
             <option name="conditions" value="conditionAttachmentRE_Monster2"/>
-            <option name="conditionType" value="0"/>
+            <option name="conditionType" value="1"/>
             <option name="when" value="after:HeroCombatMove"/>
             <option name="players" value="Maze"/>
             <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachmentRE_Monster2"/>
-            <option name="playerProperty" value="switch" count="true"/>
+            <option name="playerProperty" value="switch" count="false"/>
         </attachment>
         <attachment name="triggerAttachment_Reset_RE_7" attachTo="Maze" javaClass="TriggerAttachment" type="player">
             <option name="conditions" value="conditionAttachmentRE_Monster3"/>
-            <option name="conditionType" value="0"/>
+            <option name="conditionType" value="1"/>
             <option name="when" value="after:HeroCombatMove"/>
             <option name="players" value="Maze"/>
             <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachmentRE_Monster3"/>
-            <option name="playerProperty" value="switch" count="true"/>
+            <option name="playerProperty" value="switch" count="false"/>
+        </attachment>
+        <attachment name="triggerAttachment_Reset_RE_8" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionAttachmentRE_Nothing"/>
+            <option name="conditionType" value="1"/>
+            <option name="when" value="after:HeroCombatMove"/>
+            <option name="players" value="Maze"/>
+            <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachmentRE_Nothing"/>
+            <option name="playerProperty" value="switch" count="false"/>
         </attachment>
     <!-- end -->
 
@@ -3886,15 +3915,15 @@
             <option name="players" value="Hero"/>
             <option name="when" value="after:HeroEndTurn"/>
         </attachment>
-        <attachment name="triggerAttachment_RemoveFortunePotion" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
-            <option name="conditions" value="conditionRemoveFortunePotion"/>
-            <option name="removeUnits" value="all:Potion-of-Fortune" count="99"/>
+        <attachment name="triggerAttachment_RemoveGoldStack10" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRemoveGoldStack10"/>
+            <option name="removeUnits" value="all:Gold-Stack-10" count="99"/>
             <option name="players" value="Hero"/>
             <option name="when" value="after:HeroEndTurn"/>
         </attachment>
-        <attachment name="triggerAttachment_RemoveGoldStack" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
-            <option name="conditions" value="conditionRemoveGoldStack"/>
-            <option name="removeUnits" value="all:Gold-Stack" count="99"/>
+        <attachment name="triggerAttachment_RemoveGoldStack3" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRemoveGoldStack3"/>
+            <option name="removeUnits" value="all:Gold-Stack-3" count="99"/>
             <option name="players" value="Hero"/>
             <option name="when" value="after:HeroEndTurn"/>
         </attachment>
