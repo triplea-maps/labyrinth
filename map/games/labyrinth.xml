@@ -387,7 +387,7 @@
 
     <playerList>
         <player name="Hero" optional="true"/>
-        <player name="Maze" optional="true" canBeDisabled="false" isHidden="true"/>
+        <player name="Maze" optional="true" canBeDisabled="false" isHidden="true" defaultType="DoesNothing"/>
     </playerList>
 
     <unitList>
@@ -2789,10 +2789,6 @@
             <option name="rounds" value="1"/>
         </attachment>
 
-        <attachment name="conditionLevelUpTier" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">            
-            <option name="directExclusionTerritories" value="Outer Northeastern Ridge:Outer Southwestern Ridge:Inner Northwestern Ridge 2:Inner Southeastern Ridge 2:Inner Northeastern Ridge 4:Inner Southwestern Ridge 4" count="0"/>
-            <option name="unitPresence" value="ANY" count="1"/>
-        </attachment>       
         <attachment name="conditionTier1Land" attachTo="Hero" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
             <option name="directPresenceTerritories" value="Outer Northeastern Ridge:Outer Southwestern Ridge" count="1"/>
             <option name="rounds" value="2-49"/>
@@ -8154,7 +8150,8 @@
 
         <!-- set frontier to levelling tiers at all other times -->
         <attachment name="triggerAttachment_SetLevelTier" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
-            <option name="conditions" value="conditionLevelUpTier"/>
+            <option name="conditions" value="conditionStartGame:conditionTier1Land:conditionTier2Land:conditionTier3Land"/>
+            <option name="conditionType" value="0"/>
             <option name="frontier" value="level-up"/>
             <option name="when" value="before:HeroPurchase"/>
         </attachment>
@@ -18166,6 +18163,542 @@
             <option name="placement" value="Outer SE Path 1:Dead-Skeleton"/>
         </attachment>
 
+        <attachment name="triggerAttachment_RevealFrom_OuterSWPath1" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSWPath1"/>
+            <option name="when" value="before:HeroRandomization"/>
+            <option name="removeUnits" value="Outer SW Path 2:Unknown" count="1"/>
+            <option name="activateTrigger" value="triggerAttachment_RE_OuterSWPath2_1:1:false:false:false:true"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSWPath2Revealed1" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSWPath1:conditionAttachmentRE_OuterSWPath2_1:conditionAttachmentRE_OuterSWPath2_2"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SW Path 2:Potion-of-Wisdom"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSWPath2Revealed2" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSWPath1:conditionAttachmentRE_OuterSWPath2_2:conditionAttachmentRE_OuterSWPath2_3"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SW Path 2:Gold-Stack-10"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSWPath2Revealed3" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSWPath1:conditionAttachmentRE_OuterSWPath2_3:conditionAttachmentRE_OuterSWPath2_4"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SW Path 2:Gold-Stack-3"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSWPath2Revealed4" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSWPath1:conditionAttachmentRE_OuterSWPath2_4:conditionAttachmentRE_OuterSWPath2_5"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SW Path 2:XP-Stack"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSWPath2Revealed5" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSWPath1:conditionAttachmentRE_OuterSWPath2_5:conditionAttachmentRE_OuterSWPath2_6"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SW Path 2:Chompy"/>
+            <option name="placement" value="Outer SW Path 2:Dead-Chompy"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSWPath2Revealed6" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSWPath1:conditionAttachmentRE_OuterSWPath2_6:conditionAttachmentRE_OuterSWPath2_7"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SW Path 2:Ooze"/>
+            <option name="placement" value="Outer SW Path 2:Dead-Ooze"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSWPath2Revealed7" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSWPath1:conditionAttachmentRE_OuterSWPath2_7:conditionAttachmentRE_OuterSWPath2_8"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SW Path 2:Skeleton"/>
+            <option name="placement" value="Outer SW Path 2:Dead-Skeleton"/>
+        </attachment>
+
+        <attachment name="triggerAttachment_RevealFrom_OuterSEPath1" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSEPath1"/>
+            <option name="when" value="before:HeroRandomization"/>
+            <option name="removeUnits" value="Outer SE Path 2:Unknown" count="1"/>
+            <option name="activateTrigger" value="triggerAttachment_RE_OuterSEPath2_1:1:false:false:false:true"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSEPath2Revealed1" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSEPath1:conditionAttachmentRE_OuterSEPath2_1:conditionAttachmentRE_OuterSEPath2_2"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SE Path 2:Potion-of-Wisdom"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSEPath2Revealed2" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSEPath1:conditionAttachmentRE_OuterSEPath2_2:conditionAttachmentRE_OuterSEPath2_3"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SE Path 2:Gold-Stack-10"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSEPath2Revealed3" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSEPath1:conditionAttachmentRE_OuterSEPath2_3:conditionAttachmentRE_OuterSEPath2_4"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SE Path 2:Gold-Stack-3"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSEPath2Revealed4" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSEPath1:conditionAttachmentRE_OuterSEPath2_4:conditionAttachmentRE_OuterSEPath2_5"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SE Path 2:XP-Stack"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSEPath2Revealed5" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSEPath1:conditionAttachmentRE_OuterSEPath2_5:conditionAttachmentRE_OuterSEPath2_6"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SE Path 2:Chompy"/>
+            <option name="placement" value="Outer SE Path 2:Dead-Chompy"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSEPath2Revealed6" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSEPath1:conditionAttachmentRE_OuterSEPath2_6:conditionAttachmentRE_OuterSEPath2_7"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SE Path 2:Ooze"/>
+            <option name="placement" value="Outer SE Path 2:Dead-Ooze"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSEPath2Revealed7" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSEPath1:conditionAttachmentRE_OuterSEPath2_7:conditionAttachmentRE_OuterSEPath2_8"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SE Path 2:Skeleton"/>
+            <option name="placement" value="Outer SE Path 2:Dead-Skeleton"/>
+        </attachment>
+
+        <attachment name="triggerAttachment_RevealFrom_OuterSWPath2" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSWPath2"/>
+            <option name="when" value="before:HeroRandomization"/>
+            <option name="removeUnits" value="Outer SW Path 3:Unknown" count="1"/>
+            <option name="activateTrigger" value="triggerAttachment_RE_OuterSWPath3_1:1:false:false:false:true"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSWPath3Revealed1" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSWPath2:conditionAttachmentRE_OuterSWPath3_1:conditionAttachmentRE_OuterSWPath3_2"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SW Path 3:Potion-of-Wisdom"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSWPath3Revealed2" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSWPath2:conditionAttachmentRE_OuterSWPath3_2:conditionAttachmentRE_OuterSWPath3_3"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SW Path 3:Gold-Stack-10"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSWPath3Revealed3" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSWPath2:conditionAttachmentRE_OuterSWPath3_3:conditionAttachmentRE_OuterSWPath3_4"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SW Path 3:Gold-Stack-3"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSWPath3Revealed4" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSWPath2:conditionAttachmentRE_OuterSWPath3_4:conditionAttachmentRE_OuterSWPath3_5"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SW Path 3:XP-Stack"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSWPath3Revealed5" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSWPath2:conditionAttachmentRE_OuterSWPath3_5:conditionAttachmentRE_OuterSWPath3_6"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SW Path 3:Chompy"/>
+            <option name="placement" value="Outer SW Path 3:Dead-Chompy"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSWPath3Revealed6" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSWPath2:conditionAttachmentRE_OuterSWPath3_6:conditionAttachmentRE_OuterSWPath3_7"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SW Path 3:Ooze"/>
+            <option name="placement" value="Outer SW Path 3:Dead-Ooze"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSWPath3Revealed7" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSWPath2:conditionAttachmentRE_OuterSWPath3_7:conditionAttachmentRE_OuterSWPath3_8"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SW Path 3:Skeleton"/>
+            <option name="placement" value="Outer SW Path 3:Dead-Skeleton"/>
+        </attachment>
+
+        <attachment name="triggerAttachment_RevealFrom_OuterSEPath2" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSEPath2"/>
+            <option name="when" value="before:HeroRandomization"/>
+            <option name="removeUnits" value="Outer SE Path 3:Unknown" count="1"/>
+            <option name="activateTrigger" value="triggerAttachment_RE_OuterSEPath3_1:1:false:false:false:true"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSEPath3Revealed1" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSEPath2:conditionAttachmentRE_OuterSEPath3_1:conditionAttachmentRE_OuterSEPath3_2"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SE Path 3:Potion-of-Wisdom"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSEPath3Revealed2" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSEPath2:conditionAttachmentRE_OuterSEPath3_2:conditionAttachmentRE_OuterSEPath3_3"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SE Path 3:Gold-Stack-10"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSEPath3Revealed3" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSEPath2:conditionAttachmentRE_OuterSEPath3_3:conditionAttachmentRE_OuterSEPath3_4"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SE Path 3:Gold-Stack-3"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSEPath3Revealed4" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSEPath2:conditionAttachmentRE_OuterSEPath3_4:conditionAttachmentRE_OuterSEPath3_5"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SE Path 3:XP-Stack"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSEPath3Revealed5" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSEPath2:conditionAttachmentRE_OuterSEPath3_5:conditionAttachmentRE_OuterSEPath3_6"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SE Path 3:Chompy"/>
+            <option name="placement" value="Outer SE Path 3:Dead-Chompy"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSEPath3Revealed6" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSEPath2:conditionAttachmentRE_OuterSEPath3_6:conditionAttachmentRE_OuterSEPath3_7"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SE Path 3:Ooze"/>
+            <option name="placement" value="Outer SE Path 3:Dead-Ooze"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSEPath3Revealed7" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSEPath2:conditionAttachmentRE_OuterSEPath3_7:conditionAttachmentRE_OuterSEPath3_8"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SE Path 3:Skeleton"/>
+            <option name="placement" value="Outer SE Path 3:Dead-Skeleton"/>
+        </attachment>
+
+        <attachment name="triggerAttachment_RevealFrom_OuterSWPath3" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSWPath3"/>
+            <option name="when" value="before:HeroRandomization"/>
+            <option name="removeUnits" value="Outer SW Path 4:Unknown" count="1"/>
+            <option name="activateTrigger" value="triggerAttachment_RE_OuterSWPath4_1:1:false:false:false:true"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSWPath4Revealed1" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSWPath3:conditionAttachmentRE_OuterSWPath4_1:conditionAttachmentRE_OuterSWPath4_2"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SW Path 4:Potion-of-Wisdom"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSWPath4Revealed2" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSWPath3:conditionAttachmentRE_OuterSWPath4_2:conditionAttachmentRE_OuterSWPath4_3"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SW Path 4:Gold-Stack-10"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSWPath4Revealed3" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSWPath3:conditionAttachmentRE_OuterSWPath4_3:conditionAttachmentRE_OuterSWPath4_4"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SW Path 4:Gold-Stack-3"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSWPath4Revealed4" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSWPath3:conditionAttachmentRE_OuterSWPath4_4:conditionAttachmentRE_OuterSWPath4_5"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SW Path 4:XP-Stack"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSWPath4Revealed5" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSWPath3:conditionAttachmentRE_OuterSWPath4_5:conditionAttachmentRE_OuterSWPath4_6"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SW Path 4:Chompy"/>
+            <option name="placement" value="Outer SW Path 4:Dead-Chompy"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSWPath4Revealed6" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSWPath3:conditionAttachmentRE_OuterSWPath4_6:conditionAttachmentRE_OuterSWPath4_7"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SW Path 4:Ooze"/>
+            <option name="placement" value="Outer SW Path 4:Dead-Ooze"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSWPath4Revealed7" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSWPath3:conditionAttachmentRE_OuterSWPath4_7:conditionAttachmentRE_OuterSWPath4_8"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SW Path 4:Skeleton"/>
+            <option name="placement" value="Outer SW Path 4:Dead-Skeleton"/>
+        </attachment>
+
+        <attachment name="triggerAttachment_RevealFrom_OuterSEPath3" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSEPath3"/>
+            <option name="when" value="before:HeroRandomization"/>
+            <option name="removeUnits" value="Outer SE Path 4:Unknown" count="1"/>
+            <option name="activateTrigger" value="triggerAttachment_RE_OuterSEPath4_1:1:false:false:false:true"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSEPath4Revealed1" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSEPath3:conditionAttachmentRE_OuterSEPath4_1:conditionAttachmentRE_OuterSEPath4_2"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SE Path 4:Potion-of-Wisdom"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSEPath4Revealed2" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSEPath3:conditionAttachmentRE_OuterSEPath4_2:conditionAttachmentRE_OuterSEPath4_3"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SE Path 4:Gold-Stack-10"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSEPath4Revealed3" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSEPath3:conditionAttachmentRE_OuterSEPath4_3:conditionAttachmentRE_OuterSEPath4_4"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SE Path 4:Gold-Stack-3"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSEPath4Revealed4" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSEPath3:conditionAttachmentRE_OuterSEPath4_4:conditionAttachmentRE_OuterSEPath4_5"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SE Path 4:XP-Stack"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSEPath4Revealed5" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSEPath3:conditionAttachmentRE_OuterSEPath4_5:conditionAttachmentRE_OuterSEPath4_6"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SE Path 4:Chompy"/>
+            <option name="placement" value="Outer SE Path 4:Dead-Chompy"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSEPath4Revealed6" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSEPath3:conditionAttachmentRE_OuterSEPath4_6:conditionAttachmentRE_OuterSEPath4_7"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SE Path 4:Ooze"/>
+            <option name="placement" value="Outer SE Path 4:Dead-Ooze"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSEPath4Revealed7" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSEPath3:conditionAttachmentRE_OuterSEPath4_7:conditionAttachmentRE_OuterSEPath4_8"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SE Path 4:Skeleton"/>
+            <option name="placement" value="Outer SE Path 4:Dead-Skeleton"/>
+        </attachment>
+
+        <attachment name="triggerAttachment_RevealFrom_OuterSWPath4" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSWPath4"/>
+            <option name="when" value="before:HeroRandomization"/>
+            <option name="removeUnits" value="Outer Southwestern Ridge:Unknown" count="1"/>            
+            <option name="activateTrigger" value="triggerAttachment_RE_OuterSouthwesternRidge_1:1:false:false:false:true"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSouthwesternRidgeRevealed1" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSWPath4:conditionAttachmentRE_OuterSouthwesternRidge_1:conditionAttachmentRE_OuterSouthwesternRidge_2"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer Southwestern Ridge:Potion-of-Wisdom"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSouthwesternRidgeRevealed2" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSWPath4:conditionAttachmentRE_OuterSouthwesternRidge_2:conditionAttachmentRE_OuterSouthwesternRidge_3"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer Southwestern Ridge:Gold-Stack-10"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSouthwesternRidgeRevealed3" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSWPath4:conditionAttachmentRE_OuterSouthwesternRidge_3:conditionAttachmentRE_OuterSouthwesternRidge_4"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer Southwestern Ridge:Gold-Stack-3"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSouthwesternRidgeRevealed4" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSWPath4:conditionAttachmentRE_OuterSouthwesternRidge_4:conditionAttachmentRE_OuterSouthwesternRidge_5"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer Southwestern Ridge:XP-Stack"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSouthwesternRidgeRevealed5" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSWPath4:conditionAttachmentRE_OuterSouthwesternRidge_5:conditionAttachmentRE_OuterSouthwesternRidge_6"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer Southwestern Ridge:Zombie"/>
+            <option name="placement" value="Outer Southwestern Ridge:Dead-Zombie"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSouthwesternRidgeRevealed6" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSWPath4:conditionAttachmentRE_OuterSouthwesternRidge_6:conditionAttachmentRE_OuterSouthwesternRidge_7"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer Southwestern Ridge:Giant-Scorpion"/>
+            <option name="placement" value="Outer Southwestern Ridge:Dead-Giant-Scorpion"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSouthwesternRidgeRevealed7" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSWPath4:conditionAttachmentRE_OuterSouthwesternRidge_7:conditionAttachmentRE_OuterSouthwesternRidge_8"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer Southwestern Ridge:Ghoul"/>
+            <option name="placement" value="Outer Southwestern Ridge:Dead-Ghoul"/>
+        </attachment>
+
+        <attachment name="triggerAttachment_RevealFrom_OuterSEPath4" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSEPath4"/>
+            <option name="when" value="before:HeroRandomization"/>
+            <option name="removeUnits" value="Outer Southeastern Ridge:Unknown" count="1"/>
+            <option name="activateTrigger" value="triggerAttachment_RE_OuterSoutheasternRidge_1:1:false:false:false:true"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSoutheasternRidgeRevealed1" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSEPath4:conditionAttachmentRE_OuterSoutheasternRidge_1:conditionAttachmentRE_OuterSoutheasternRidge_2"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer Southeastern Ridge:Potion-of-Wisdom"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSoutheasternRidgeRevealed2" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSEPath4:conditionAttachmentRE_OuterSoutheasternRidge_2:conditionAttachmentRE_OuterSoutheasternRidge_3"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer Southeastern Ridge:Gold-Stack-10"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSoutheasternRidgeRevealed3" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSEPath4:conditionAttachmentRE_OuterSoutheasternRidge_3:conditionAttachmentRE_OuterSoutheasternRidge_4"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer Southeastern Ridge:Gold-Stack-3"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSoutheasternRidgeRevealed4" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSEPath4:conditionAttachmentRE_OuterSoutheasternRidge_4:conditionAttachmentRE_OuterSoutheasternRidge_5"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer Southeastern Ridge:XP-Stack"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSoutheasternRidgeRevealed5" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSEPath4:conditionAttachmentRE_OuterSoutheasternRidge_5:conditionAttachmentRE_OuterSoutheasternRidge_6"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer Southeastern Ridge:Zombie"/>
+            <option name="placement" value="Outer Southeastern Ridge:Dead-Zombie"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSoutheasternRidgeRevealed6" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSEPath4:conditionAttachmentRE_OuterSoutheasternRidge_6:conditionAttachmentRE_OuterSoutheasternRidge_7"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer Southeastern Ridge:Giant-Scorpion"/>
+            <option name="placement" value="Outer Southeastern Ridge:Dead-Giant-Scorpion"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSoutheasternRidgeRevealed7" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSEPath4:conditionAttachmentRE_OuterSoutheasternRidge_7:conditionAttachmentRE_OuterSoutheasternRidge_8"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer Southeastern Ridge:Ghoul"/>
+            <option name="placement" value="Outer Southeastern Ridge:Dead-Ghoul"/>
+        </attachment>
+        <attachment name="triggerAttachment_RevealFrom_OuterSouthwesternRidge" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSouthwesternRidge"/>
+            <option name="when" value="before:HeroRandomization"/>
+            <option name="removeUnits" value="Outer SW Path 5:Unknown" count="1"/>
+            <option name="activateTrigger" value="triggerAttachment_RE_OuterSWPath5_1:1:false:false:false:true"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSWPath5Revealed1" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSouthwesternRidge:conditionAttachmentRE_OuterSWPath5_1:conditionAttachmentRE_OuterSWPath5_2"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SW Path 5:Potion-of-Wisdom"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSWPath5Revealed2" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSouthwesternRidge:conditionAttachmentRE_OuterSWPath5_2:conditionAttachmentRE_OuterSWPath5_3"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SW Path 5:Gold-Stack-10"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSWPath5Revealed3" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSouthwesternRidge:conditionAttachmentRE_OuterSWPath5_3:conditionAttachmentRE_OuterSWPath5_4"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SW Path 5:Gold-Stack-3"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSWPath5Revealed4" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSouthwesternRidge:conditionAttachmentRE_OuterSWPath5_4:conditionAttachmentRE_OuterSWPath5_5"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SW Path 5:XP-Stack"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSWPath5Revealed5" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSouthwesternRidge:conditionAttachmentRE_OuterSWPath5_5:conditionAttachmentRE_OuterSWPath5_6"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SW Path 5:Zombie"/>
+            <option name="placement" value="Outer SW Path 5:Dead-Zombie"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSWPath5Revealed6" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSouthwesternRidge:conditionAttachmentRE_OuterSWPath5_6:conditionAttachmentRE_OuterSWPath5_7"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SW Path 5:Giant-Scorpion"/>
+            <option name="placement" value="Outer SW Path 5:Dead-Giant-Scorpion"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSWPath5Revealed7" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSouthwesternRidge:conditionAttachmentRE_OuterSWPath5_7:conditionAttachmentRE_OuterSWPath5_8"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SW Path 5:Ghoul"/>
+            <option name="placement" value="Outer SW Path 5:Dead-Ghoul"/>
+        </attachment>
+        <attachment name="triggerAttachment_RevealFrom_OuterSoutheasternRidge" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSoutheasternRidge"/>
+            <option name="when" value="before:HeroRandomization"/>
+            <option name="removeUnits" value="Outer SE Path 5:Unknown" count="1"/>
+            <option name="activateTrigger" value="triggerAttachment_RE_OuterSEPath5_1:1:false:false:false:true"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSEPath5Revealed1" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSoutheasternRidge:conditionAttachmentRE_OuterSEPath5_1:conditionAttachmentRE_OuterSEPath5_2"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SE Path 5:Potion-of-Wisdom"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSEPath5Revealed2" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSoutheasternRidge:conditionAttachmentRE_OuterSEPath5_2:conditionAttachmentRE_OuterSEPath5_3"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SE Path 5:Gold-Stack-10"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSEPath5Revealed3" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSoutheasternRidge:conditionAttachmentRE_OuterSEPath5_3:conditionAttachmentRE_OuterSEPath5_4"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SE Path 5:Gold-Stack-3"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSEPath5Revealed4" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSoutheasternRidge:conditionAttachmentRE_OuterSEPath5_4:conditionAttachmentRE_OuterSEPath5_5"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SE Path 5:XP-Stack"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSEPath5Revealed5" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSoutheasternRidge:conditionAttachmentRE_OuterSEPath5_5:conditionAttachmentRE_OuterSEPath5_6"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SE Path 5:Zombie"/>
+            <option name="placement" value="Outer SE Path 5:Dead-Zombie"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSEPath5Revealed6" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSoutheasternRidge:conditionAttachmentRE_OuterSEPath5_6:conditionAttachmentRE_OuterSEPath5_7"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SE Path 5:Giant-Scorpion"/>
+            <option name="placement" value="Outer SE Path 5:Dead-Giant-Scorpion"/>
+        </attachment>
+        <attachment name="triggerAttachment_OuterSEPath5Revealed7" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSoutheasternRidge:conditionAttachmentRE_OuterSEPath5_7:conditionAttachmentRE_OuterSEPath5_8"/>
+            <option name="conditionType" value="2"/>
+            <option name="when" value="after:HeroRandomization"/>
+            <option name="placement" value="Outer SE Path 5:Ghoul"/>
+            <option name="placement" value="Outer SE Path 5:Dead-Ghoul"/>
+        </attachment>
+
     <!-- end -->
 
     <!-- close off backwards progress and wipe out any stranded units -->
@@ -18193,6 +18726,87 @@
             <option name="territories" value="Entrance"/>
             <option name="territoryProperty" value="isImpassable" count="true"/>
         </attachment>
+        <attachment name="triggerAttachment_CloseOuterSWPath1" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSWPath2"/>
+            <option name="when" value="after:HeroNonCombatMove"/>
+            <option name="removeUnits" value="Outer SW Path 1:all" count="99"/>
+            <option name="territoryAttachmentName" value="TerritoryAttachment" count="territoryAttachment"/>
+            <option name="territories" value="Outer SW Path 1"/>
+            <option name="territoryProperty" value="isImpassable" count="true"/>
+        </attachment>
+        <attachment name="triggerAttachment_CloseOuterSEPath1" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSEPath2"/>
+            <option name="when" value="after:HeroNonCombatMove"/>
+            <option name="removeUnits" value="Outer SE Path 1:all" count="99"/>
+            <option name="territoryAttachmentName" value="TerritoryAttachment" count="territoryAttachment"/>
+            <option name="territories" value="Outer SE Path 1"/>
+            <option name="territoryProperty" value="isImpassable" count="true"/>
+        </attachment>
+        <attachment name="triggerAttachment_CloseOuterSWPath2" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSWPath3"/>
+            <option name="when" value="after:HeroNonCombatMove"/>
+            <option name="removeUnits" value="Outer SW Path 2:all" count="99"/>
+            <option name="territoryAttachmentName" value="TerritoryAttachment" count="territoryAttachment"/>
+            <option name="territories" value="Outer SW Path 2"/>
+            <option name="territoryProperty" value="isImpassable" count="true"/>
+        </attachment>
+        <attachment name="triggerAttachment_CloseOuterSEPath2" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSEPath3"/>
+            <option name="when" value="after:HeroNonCombatMove"/>
+            <option name="removeUnits" value="Outer SE Path 2:all" count="99"/>
+            <option name="territoryAttachmentName" value="TerritoryAttachment" count="territoryAttachment"/>
+            <option name="territories" value="Outer SE Path 2"/>
+            <option name="territoryProperty" value="isImpassable" count="true"/>
+        </attachment>
+        <attachment name="triggerAttachment_CloseOuterSWPath3" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSWPath4"/>
+            <option name="when" value="after:HeroNonCombatMove"/>
+            <option name="removeUnits" value="Outer SW Path 3:all" count="99"/>
+            <option name="territoryAttachmentName" value="TerritoryAttachment" count="territoryAttachment"/>
+            <option name="territories" value="Outer SW Path 3"/>
+            <option name="territoryProperty" value="isImpassable" count="true"/>
+        </attachment>
+        <attachment name="triggerAttachment_CloseOuterSEPath3" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSEPath4"/>
+            <option name="when" value="after:HeroNonCombatMove"/>
+            <option name="removeUnits" value="Outer SE Path 3:all" count="99"/>
+            <option name="territoryAttachmentName" value="TerritoryAttachment" count="territoryAttachment"/>
+            <option name="territories" value="Outer SE Path 3"/>
+            <option name="territoryProperty" value="isImpassable" count="true"/>
+        </attachment>
+        <attachment name="triggerAttachment_CloseOuterSWPath4" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSouthwesternRidge"/>
+            <option name="when" value="after:HeroNonCombatMove"/>
+            <option name="removeUnits" value="Outer SW Path 4:all" count="99"/>
+            <option name="territoryAttachmentName" value="TerritoryAttachment" count="territoryAttachment"/>
+            <option name="territories" value="Outer SW Path 4"/>
+            <option name="territoryProperty" value="isImpassable" count="true"/>
+        </attachment>
+        <attachment name="triggerAttachment_CloseOuterSEPath4" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSoutheasternRidge"/>
+            <option name="when" value="after:HeroNonCombatMove"/>
+            <option name="removeUnits" value="Outer SE Path 4:all" count="99"/>
+            <option name="territoryAttachmentName" value="TerritoryAttachment" count="territoryAttachment"/>
+            <option name="territories" value="Outer SE Path 4"/>
+            <option name="territoryProperty" value="isImpassable" count="true"/>
+        </attachment>
+        <attachment name="triggerAttachment_CloseOuterSouthwesternRidge" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSWPath5"/>
+            <option name="when" value="after:HeroNonCombatMove"/>
+            <option name="removeUnits" value="Outer Southwestern Ridge:all" count="99"/>
+            <option name="territoryAttachmentName" value="TerritoryAttachment" count="territoryAttachment"/>
+            <option name="territories" value="Outer Southwestern Ridge"/>
+            <option name="territoryProperty" value="isImpassable" count="true"/>
+        </attachment>
+        <attachment name="triggerAttachment_CloseOuterSoutheasternRidge" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+            <option name="conditions" value="conditionRevealFrom_OuterSEPath5"/>
+            <option name="when" value="after:HeroNonCombatMove"/>
+            <option name="removeUnits" value="Outer Southeastern Ridge:all" count="99"/>
+            <option name="territoryAttachmentName" value="TerritoryAttachment" count="territoryAttachment"/>
+            <option name="territories" value="Outer Southeastern Ridge"/>
+            <option name="territoryProperty" value="isImpassable" count="true"/>
+        </attachment>
+
     <!-- end -->
 
     <!-- reset randomizer switches -->
@@ -28833,7 +29447,6 @@
         <property name="Damage From Bombing Done To Units Instead Of Territories" value="true" editable="false"><boolean/></property>
         <property name="Place in Any Territory" value="true" editable="false"><boolean/></property>
         <property name="Projection of Power" value="false" editable="false"><boolean/></property>
-        <property name="Selectable Zero Movement Units" value="true" editable="false"><boolean/></property>
         <property name="Suicide and Munition Casualties Restricted" value="true" editable="false"><boolean/></property>
         <property name="Triggered Victory" value="true" editable="false"><boolean/></property>
         <property name="Unplaced units live when not placed" value="true" editable="false"><boolean/></property>
@@ -28863,6 +29476,12 @@
                                 <p style="font-size:14px;color:FFFFFF">
                                     Make it to the center...
                                 </p><br>
+                                <h3 style="font-size:16px;color:F0D06B">Special Considerations:</h3>
+                                <ul>
+                                    <li style="font-size:14px;color:FFFFFF">For best results, please engage the "Lock Map" option when starting the map (Menu --> View --> Lock Map)</li>
+                                    <li style="font-size:14px;color:FFFFFF">Although its not enforced, it is recommended that you keep your forces together, as strange things may happen if you split up in the Labyrinth...</li>
+                                    <li style="font-size:14px;color:FFFFFF">Place-holder!</li>
+                                </ul><br>
                                 <h3 style="font-size:16px;color:F0D06B">Unit Information:</h3>
                                 <p style="font-size:14px;color:FFFFFF">
                                     To Be Determined!
