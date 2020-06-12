@@ -24555,6 +24555,10 @@
             <option name="conditions" value="conditionRemoveOldBones"/>
             <option name="text" value="EXAMINE_BONES"/>
         </attachment>
+        <attachment name="userActionAttachment_UseWisdomPotion" attachTo="Hero" javaClass="games.strategy.triplea.attachments.UserActionAttachment" type="player">
+            <option name="conditions" value="conditionRemoveWisdomPotion"/>
+            <option name="text" value="GAIN_WISDOM"/>
+        </attachment>
     <!-- end -->
 
     <!-- place used healing potion in the appropriate territory if applicable (what a pain!) -->
