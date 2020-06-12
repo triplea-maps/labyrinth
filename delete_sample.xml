@@ -1,113 +1,149 @@
-<!-- Pact of Steel User Action Attachment sample -->
-<attachment name="conditionAttachment_Americans_Aid_UK" attachTo="Americans" javaClass="games.strategy.triplea.attachments.RulesAttachment" type="player">
-    <option name="switch" value="true"/>
+<attachment name="triggerAttachment_ModifyXP30_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+    <option name="unitType" value="Dead-Grave-Golem"/>
+    <option name="unitProperty" value="createsResourcesList" count="9:Gold"/>
 </attachment>
-<attachment name="triggerAttachment_Americans_Aid_UK" attachTo="Americans" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
-    <option name="resource" value="PUs"/>
-    <option name="resourceCount" value="6"/>
-    <option name="players" value="British"/>
+<attachment name="triggerAttachment_ModifyXP29_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+    <option name="unitType" value="Dead-Clockwork-Golem"/>
+    <option name="unitProperty" value="createsResourcesList" count="9:Gold"/>
+    <option name="activateTrigger" value="triggerAttachment_ModifyXP30_Raider:1:false:false:false:false"/>
 </attachment>
-<attachment name="userActionAttachment_Americans_Aid_UK" attachTo="Americans" javaClass="games.strategy.triplea.attachments.UserActionAttachment" type="player">
-    <option name="conditions" value="conditionAttachment_Americans_Aid_UK"/>
-    <option name="activateTrigger" value="triggerAttachment_Americans_Aid_UK:1:false:false:false:false"/>
-    <option name="text" value="AMERICANS_AID_UK"/>
-    <option name="chance" value="6:6"/>
-    <option name="costResources" value="PUs" count="10"/>
-    <!--<option name="costResources" value="Fuel" count="5"/>-->
-    <option name="attemptsPerTurn" value="1"/>
-    <!--<option name="actionAccept" value="British"/>-->
+<attachment name="triggerAttachment_ModifyXP28_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+    <option name="unitType" value="Dead-Rakshasa"/>
+    <option name="unitProperty" value="createsResourcesList" count="8:Gold"/>
+    <option name="activateTrigger" value="triggerAttachment_ModifyXP29_Raider:1:false:false:false:false"/>
 </attachment>
-
-<!-- actionstext.properties formatting samples below -->
-AMERICANS_AID_UK.BUTTON=[cost=10 PUs] Send British 6 PUs
-AMERICANS_AID_UK.DESCRIPTION=Send aid and equipment worth 6 production units to the United Kingdom
-AMERICANS_AID_UK.NOTIFICATION_SUCCESS=Aid and equipment worth 6 production units have been sent.
-AMERICANS_AID_UK.OTHER_NOTIFICATION_SUCCESS=The British have received 6 production units of aid and equipment from the Americans.
-AMERICANS_AID_UK.NOTIFICATION_FAILURE=Our aid and equipment has been lost in the Atlantic to U-Boat attacks!
-AMERICANS_AID_UK.OTHER_NOTIFICATION_FAILURE=American convoys of aid and equipment bound for the United Kingdom have been lost at sea in the Atlantic. U-Boat attacks blamed!
-AMERICANS_AID_UK.ACCEPT_QUESTION=Do you accept aid from the Americans?
-
-Arthur_Level_2.BUTTON=
-Arthur_Level_2.DESCRIPTION=Advance Hero to level 2 (Miraculous-Healing)
-Arthur_Level_2.NOTIFICATION_SUCCESS=Arthur has reached level 2 (Miraculous-Healing)
-Arthur_Level_2.OTHER_NOTIFICATION_SUCCESS=Arthur has reached level 2 (Miraculous-Healing)
-Arthur_Level_2.NOTIFICATION_FAILURE=NONE
-Arthur_Level_2.OTHER_NOTIFICATION_FAILURE=NONE
-Arthur_Level_2.ACCEPT_QUESTION=NONE
-
-<!-- since unit property changes occur at end of turn, we have this trigger as attached to British so that it happens at the end of their turn (British go right before Japan does) -->
-<attachment name="triggerAttachmentJapanese7_KamikazeAttack" attachTo="British" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
-    <option name="conditions" value="conditionAttachmentJapaneseKamikaze1:conditionAttachmentJapaneseKamikaze2"/>
-    <option name="unitType" value="jp_fighter"/>
-    <option name="unitProperty" value="attack" count="5"/>
-    <option name="unitProperty" value="defense" count="3"/>
-    <option name="unitProperty" value="movement" count="3"/>
-    <option name="unitProperty" value="isSuicide" count="true"/>
-    <option name="unitProperty" value="isKamikaze" count="true"/>
-    <option name="uses" value="1"/>
+<attachment name="triggerAttachment_ModifyXP27_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+    <option name="unitType" value="Dead-Lich"/>
+    <option name="unitProperty" value="createsResourcesList" count="8:Gold"/>
+    <option name="activateTrigger" value="triggerAttachment_ModifyXP28_Raider:1:false:false:false:false"/>
 </attachment>
-
-
-<!-- template reveal trigger -->
-        <attachment name="triggerAttachment_RevealFrom_Entrance2" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
-            <option name="conditions" value="conditionRevealFrom_Entrance"/>
-            <option name="when" value="before:HeroRandomization"/>
-            <option name="removeUnits" value="Outer SE Path 1:Unknown" count="1"/>
-            <option name="activateTrigger" value="triggerAttachment_RE_OuterSEPath 1_1:1:false:false:false:true"/>
-        </attachment>
-        <attachment name="triggerAttachment_OuterSEPath_1Revealed1" attachTo="Maze" javaClass="TriggerAttachment" type="player">
-            <option name="conditions" value="conditionRevealFrom_Entrance:conditionAttachmentRE_OuterSEPath 1_1:conditionAttachmentRE_OuterSEPath 1_2"/>
-            <option name="conditionType" value="2"/>
-            <option name="when" value="after:HeroRandomization"/>
-            <option name="placement" value="Outer SE Path 1:Potion-of-Wisdom"/>
-        </attachment>
-        <attachment name="triggerAttachment_OuterSEPath_1Revealed2" attachTo="Maze" javaClass="TriggerAttachment" type="player">
-            <option name="conditions" value="conditionRevealFrom_Entrance:conditionAttachmentRE_OuterSEPath 1_2:conditionAttachmentRE_OuterSEPath 1_3"/>
-            <option name="conditionType" value="2"/>
-            <option name="when" value="after:HeroRandomization"/>
-            <option name="placement" value="Outer SE Path 1:Gold-Stack-10"/>
-        </attachment>
-        <attachment name="triggerAttachment_OuterSEPath_1Revealed3" attachTo="Maze" javaClass="TriggerAttachment" type="player">
-            <option name="conditions" value="conditionRevealFrom_Entrance:conditionAttachmentRE_OuterSEPath 1_3:conditionAttachmentRE_OuterSEPath 1_4"/>
-            <option name="conditionType" value="2"/>
-            <option name="when" value="after:HeroRandomization"/>
-            <option name="placement" value="Outer SE Path 1:Gold-Stack-3"/>
-        </attachment>
-        <attachment name="triggerAttachment_OuterSEPath_1Revealed4" attachTo="Maze" javaClass="TriggerAttachment" type="player">
-            <option name="conditions" value="conditionRevealFrom_Entrance:conditionAttachmentRE_OuterSEPath 1_4:conditionAttachmentRE_OuterSEPath 1_5"/>
-            <option name="conditionType" value="2"/>
-            <option name="when" value="after:HeroRandomization"/>
-            <option name="placement" value="Outer SE Path 1:XP-Stack"/>
-        </attachment>
-        <attachment name="triggerAttachment_OuterSEPath_1Revealed5" attachTo="Maze" javaClass="TriggerAttachment" type="player">
-            <option name="conditions" value="conditionRevealFrom_Entrance:conditionAttachmentRE_OuterSEPath 1_5:conditionAttachmentRE_OuterSEPath 1_6"/>
-            <option name="conditionType" value="2"/>
-            <option name="when" value="after:HeroRandomization"/>
-            <option name="placement" value="Outer SE Path 1:Chompy"/>
-            <option name="placement" value="Outer SE Path 1:Dead-Chompy"/>
-        </attachment>
-        <attachment name="triggerAttachment_OuterSEPath_1Revealed6" attachTo="Maze" javaClass="TriggerAttachment" type="player">
-            <option name="conditions" value="conditionRevealFrom_Entrance:conditionAttachmentRE_OuterSEPath 1_6:conditionAttachmentRE_OuterSEPath 1_7"/>
-            <option name="conditionType" value="2"/>
-            <option name="when" value="after:HeroRandomization"/>
-            <option name="placement" value="Outer SE Path 1:Ooze"/>
-            <option name="placement" value="Outer SE Path 1:Dead-Ooze"/>
-        </attachment>
-        <attachment name="triggerAttachment_OuterSEPath_1Revealed7" attachTo="Maze" javaClass="TriggerAttachment" type="player">
-            <option name="conditions" value="conditionRevealFrom_Entrance:conditionAttachmentRE_OuterSEPath 1_7:conditionAttachmentRE_OuterSEPath 1_8"/>
-            <option name="conditionType" value="2"/>
-            <option name="when" value="after:HeroRandomization"/>
-            <option name="placement" value="Outer SE Path 1:Skeleton"/>
-            <option name="placement" value="Outer SE Path 1:Dead-Skeleton"/>
-        </attachment>
-
-
-<!-- template close trigger -->
-        <attachment name="triggerAttachment_CloseEntrance1" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
-            <option name="conditions" value="conditionRevealFrom_OuterSWPath 1"/>
-            <option name="when" value="after:HeroNonCombatMove"/>
-            <option name="removeUnits" value="Entrance:all" count="99"/>
-            <option name="territoryAttachmentName" value="TerritoryAttachment" count="territoryAttachment"/>
-            <option name="territories" value="Entrance"/>
-            <option name="territoryProperty" value="isImpassable" count="true"/>
-        </attachment>
+<attachment name="triggerAttachment_ModifyXP26_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+    <option name="unitType" value="Dead-Magma-Golem"/>
+    <option name="unitProperty" value="createsResourcesList" count="8:Gold"/>
+    <option name="activateTrigger" value="triggerAttachment_ModifyXP27_Raider:1:false:false:false:false"/>
+</attachment>
+<attachment name="triggerAttachment_ModifyXP25_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+    <option name="unitType" value="Dead-Gazer"/>
+    <option name="unitProperty" value="createsResourcesList" count="7:Gold"/>
+    <option name="activateTrigger" value="triggerAttachment_ModifyXP26_Raider:1:false:false:false:false"/>
+</attachment>
+<attachment name="triggerAttachment_ModifyXP24_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+    <option name="unitType" value="Dead-Revenant"/>
+    <option name="unitProperty" value="createsResourcesList" count="7:Gold"/>
+    <option name="activateTrigger" value="triggerAttachment_ModifyXP25_Raider:1:false:false:false:false"/>
+</attachment>
+<attachment name="triggerAttachment_ModifyXP23_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+    <option name="unitType" value="Dead-Mummy"/>
+    <option name="unitProperty" value="createsResourcesList" count="7:Gold"/>
+    <option name="activateTrigger" value="triggerAttachment_ModifyXP24_Raider:1:false:false:false:false"/>
+</attachment>
+<attachment name="triggerAttachment_ModifyXP22_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+    <option name="unitType" value="Dead-Earth-Elemental"/>
+    <option name="unitProperty" value="createsResourcesList" count="2:Gold"/>
+    <option name="activateTrigger" value="triggerAttachment_ModifyXP23_Raider:1:false:false:false:false"/>
+</attachment>
+<attachment name="triggerAttachment_ModifyXP21_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+    <option name="unitType" value="Dead-Crystal-Golem"/>
+    <option name="unitProperty" value="createsResourcesList" count="6:Gold"/>
+    <option name="activateTrigger" value="triggerAttachment_ModifyXP22_Raider:1:false:false:false:false"/>
+</attachment>
+<attachment name="triggerAttachment_ModifyXP20_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+    <option name="unitType" value="Dead-Treant"/>
+    <option name="unitProperty" value="createsResourcesList" count="6:Gold"/>
+    <option name="activateTrigger" value="triggerAttachment_ModifyXP21_Raider:1:false:false:false:false"/>
+</attachment>
+<attachment name="triggerAttachment_ModifyXP19_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+    <option name="unitType" value="Dead-Ghost"/>
+    <option name="unitProperty" value="createsResourcesList" count="6:Gold"/>
+    <option name="activateTrigger" value="triggerAttachment_ModifyXP20_Raider:1:false:false:false:false"/>
+</attachment>
+<attachment name="triggerAttachment_ModifyXP18_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+    <option name="unitType" value="Dead-Fire-Elemental"/>
+    <option name="unitProperty" value="createsResourcesList" count="2:Gold"/>
+    <option name="activateTrigger" value="triggerAttachment_ModifyXP19_Raider:1:false:false:false:false"/>
+</attachment>
+<attachment name="triggerAttachment_ModifyXP17_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+    <option name="unitType" value="Dead-Banshee"/>
+    <option name="unitProperty" value="createsResourcesList" count="5:Gold"/>
+    <option name="activateTrigger" value="triggerAttachment_ModifyXP18_Raider:1:false:false:false:false"/>
+</attachment>
+<attachment name="triggerAttachment_ModifyXP16_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+    <option name="unitType" value="Dead-Wraith"/>
+    <option name="unitProperty" value="createsResourcesList" count="5:Gold"/>
+    <option name="activateTrigger" value="triggerAttachment_ModifyXP17_Raider:1:false:false:false:false"/>
+</attachment>
+<attachment name="triggerAttachment_ModifyXP15_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+    <option name="unitType" value="Dead-Werewolf"/>
+    <option name="unitProperty" value="createsResourcesList" count="5:Gold"/>
+    <option name="activateTrigger" value="triggerAttachment_ModifyXP16_Raider:1:false:false:false:false"/>
+</attachment>
+<attachment name="triggerAttachment_ModifyXP14_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+    <option name="unitType" value="Dead-Water-Elemental"/>
+    <option name="unitProperty" value="createsResourcesList" count="2:Gold"/>
+    <option name="activateTrigger" value="triggerAttachment_ModifyXP15_Raider:1:false:false:false:false"/>
+</attachment>
+<attachment name="triggerAttachment_ModifyXP13_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+    <option name="unitType" value="Dead-Spectre"/>
+    <option name="unitProperty" value="createsResourcesList" count="4:Gold"/>
+    <option name="activateTrigger" value="triggerAttachment_ModifyXP14_Raider:1:false:false:false:false"/>
+</attachment>
+<attachment name="triggerAttachment_ModifyXP12_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+    <option name="unitType" value="Dead-Hag"/>
+    <option name="unitProperty" value="createsResourcesList" count="4:Gold"/>
+    <option name="activateTrigger" value="triggerAttachment_ModifyXP13_Raider:1:false:false:false:false"/>
+</attachment>
+<attachment name="triggerAttachment_ModifyXP11_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+    <option name="unitType" value="Dead-Giant-Crab"/>
+    <option name="unitProperty" value="createsResourcesList" count="2:Gold"/>
+    <option name="activateTrigger" value="triggerAttachment_ModifyXP12_Raider:1:false:false:false:false"/>
+</attachment>
+<attachment name="triggerAttachment_ModifyXP10_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+    <option name="unitType" value="Dead-Ghast"/>
+    <option name="unitProperty" value="createsResourcesList" count="2:Gold"/>
+    <option name="activateTrigger" value="triggerAttachment_ModifyXP11_Raider:1:false:false:false:false"/>
+</attachment>
+<attachment name="triggerAttachment_ModifyXP9_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+    <option name="unitType" value="Dead-Air-Elemental"/>
+    <option name="unitProperty" value="createsResourcesList" count="2:Gold"/>
+    <option name="activateTrigger" value="triggerAttachment_ModifyXP10_Raider:1:false:false:false:false"/>
+</attachment>
+<attachment name="triggerAttachment_ModifyXP8_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+    <option name="unitType" value="Dead-Wight"/>
+    <option name="unitProperty" value="createsResourcesList" count="3:Gold"/>
+    <option name="activateTrigger" value="triggerAttachment_ModifyXP9_Raider:1:false:false:false:false"/>
+</attachment>
+<attachment name="triggerAttachment_ModifyXP7_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+    <option name="unitType" value="Dead-Succubus"/>
+    <option name="unitProperty" value="createsResourcesList" count="4:Gold"/>
+    <option name="activateTrigger" value="triggerAttachment_ModifyXP8_Raider:1:false:false:false:false"/>
+</attachment>
+<attachment name="triggerAttachment_ModifyXP6_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+    <option name="unitType" value="Dead-Giant-Spider"/>
+    <option name="unitProperty" value="createsResourcesList" count="2:Gold"/>
+    <option name="activateTrigger" value="triggerAttachment_ModifyXP7_Raider:1:false:false:false:false"/>
+</attachment>
+<attachment name="triggerAttachment_ModifyXP5_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+    <option name="unitType" value="Dead-Ghoul"/>
+    <option name="unitProperty" value="createsResourcesList" count="3:Gold"/>
+    <option name="activateTrigger" value="triggerAttachment_ModifyXP6_Raider:1:false:false:false:false"/>
+</attachment>
+<attachment name="triggerAttachment_ModifyXP4_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+    <option name="unitType" value="Dead-Giant-Scorpion"/>
+    <option name="unitProperty" value="createsResourcesList" count="2:Gold"/>
+    <option name="activateTrigger" value="triggerAttachment_ModifyXP5_Raider:1:false:false:false:false"/>
+</attachment>
+<attachment name="triggerAttachment_ModifyXP3_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+    <option name="unitType" value="Dead-Zombie"/>
+    <option name="unitProperty" value="createsResourcesList" count="3:Gold"/>
+    <option name="activateTrigger" value="triggerAttachment_ModifyXP4_Raider:1:false:false:false:false"/>
+</attachment>
+<attachment name="triggerAttachment_ModifyXP2_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+    <option name="unitType" value="Dead-Skeleton"/>
+    <option name="unitProperty" value="createsResourcesList" count="3:Gold"/>
+    <option name="activateTrigger" value="triggerAttachment_ModifyXP3_Raider:1:false:false:false:false"/>
+</attachment>
+<attachment name="triggerAttachment_ModifyXP1_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+    <option name="unitType" value="Dead-Ooze"/>
+    <option name="unitProperty" value="createsResourcesList" count="3:Gold"/>
+    <option name="activateTrigger" value="triggerAttachment_ModifyXP2_Raider:1:false:false:false:false"/>
+</attachment>
