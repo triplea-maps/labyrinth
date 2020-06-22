@@ -1,149 +1,155 @@
-<attachment name="triggerAttachment_ModifyXP30_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
-    <option name="unitType" value="Dead-Grave-Golem"/>
-    <option name="unitProperty" value="createsResourcesList" count="9:Gold"/>
+<attachment name="conditionAttachment_Explore1_InnerSouthwesternRidge5" attachTo="Hero" javaClass="RulesAttachment" type="player">
+    <option name="switch" value="false"/>
 </attachment>
-<attachment name="triggerAttachment_ModifyXP29_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
-    <option name="unitType" value="Dead-Clockwork-Golem"/>
-    <option name="unitProperty" value="createsResourcesList" count="9:Gold"/>
-    <option name="activateTrigger" value="triggerAttachment_ModifyXP30_Raider:1:false:false:false:false"/>
+<attachment name="conditionAttachment_Explore2_InnerSouthwesternRidge5" attachTo="Hero" javaClass="RulesAttachment" type="player">
+    <option name="switch" value="false"/>
 </attachment>
-<attachment name="triggerAttachment_ModifyXP28_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
-    <option name="unitType" value="Dead-Rakshasa"/>
-    <option name="unitProperty" value="createsResourcesList" count="8:Gold"/>
-    <option name="activateTrigger" value="triggerAttachment_ModifyXP29_Raider:1:false:false:false:false"/>
+<attachment name="conditionAttachment_Explore3_InnerSouthwesternRidge5" attachTo="Hero" javaClass="RulesAttachment" type="player">
+    <option name="switch" value="false"/>
 </attachment>
-<attachment name="triggerAttachment_ModifyXP27_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
-    <option name="unitType" value="Dead-Lich"/>
-    <option name="unitProperty" value="createsResourcesList" count="8:Gold"/>
-    <option name="activateTrigger" value="triggerAttachment_ModifyXP28_Raider:1:false:false:false:false"/>
+<attachment name="conditionAttachment_Explore4_InnerSouthwesternRidge5" attachTo="Hero" javaClass="RulesAttachment" type="player">
+    <option name="switch" value="false"/>
 </attachment>
-<attachment name="triggerAttachment_ModifyXP26_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
-    <option name="unitType" value="Dead-Magma-Golem"/>
-    <option name="unitProperty" value="createsResourcesList" count="8:Gold"/>
-    <option name="activateTrigger" value="triggerAttachment_ModifyXP27_Raider:1:false:false:false:false"/>
+<attachment name="conditionAttachment_Explore5_InnerSouthwesternRidge5" attachTo="Hero" javaClass="RulesAttachment" type="player">
+    <option name="switch" value="false"/>
 </attachment>
-<attachment name="triggerAttachment_ModifyXP25_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
-    <option name="unitType" value="Dead-Gazer"/>
-    <option name="unitProperty" value="createsResourcesList" count="7:Gold"/>
-    <option name="activateTrigger" value="triggerAttachment_ModifyXP26_Raider:1:false:false:false:false"/>
+
+
+<attachment name="conditionAttachment_Unexplored_InnerSouthwesternRidge5" attachTo="Hero" javaClass="RulesAttachment" type="player">
+    <option name="switch" value="true"/>
 </attachment>
-<attachment name="triggerAttachment_ModifyXP24_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
-    <option name="unitType" value="Dead-Revenant"/>
-    <option name="unitProperty" value="createsResourcesList" count="7:Gold"/>
-    <option name="activateTrigger" value="triggerAttachment_ModifyXP25_Raider:1:false:false:false:false"/>
+
+
+<attachment name="triggerAttachment_FlipExploreSwitches_5_InnerSouthwesternRidge5" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+    <option name="chance" value="6:8"/>
+    <option name="players" value="Hero"/>
+    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachment_Explore5_InnerSouthwesternRidge5"/>
+    <option name="playerProperty" value="switch" count="true"/>
 </attachment>
-<attachment name="triggerAttachment_ModifyXP23_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
-    <option name="unitType" value="Dead-Mummy"/>
-    <option name="unitProperty" value="createsResourcesList" count="7:Gold"/>
-    <option name="activateTrigger" value="triggerAttachment_ModifyXP24_Raider:1:false:false:false:false"/>
+<attachment name="triggerAttachment_FlipExploreSwitches_4_InnerSouthwesternRidge5" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+    <option name="chance" value="6:8"/>
+    <option name="players" value="Hero"/>
+    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachment_Explore4_InnerSouthwesternRidge5"/>
+    <option name="playerProperty" value="switch" count="true"/>
+    <option name="activateTrigger" value="triggerAttachment_FlipExploreSwitches_5_InnerSouthwesternRidge5:1:false:false:false:true"/>
 </attachment>
-<attachment name="triggerAttachment_ModifyXP22_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
-    <option name="unitType" value="Dead-Earth-Elemental"/>
-    <option name="unitProperty" value="createsResourcesList" count="2:Gold"/>
-    <option name="activateTrigger" value="triggerAttachment_ModifyXP23_Raider:1:false:false:false:false"/>
+<attachment name="triggerAttachment_FlipExploreSwitches_3_InnerSouthwesternRidge5" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+    <option name="chance" value="6:8"/>
+    <option name="players" value="Hero"/>
+    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachment_Explore3_InnerSouthwesternRidge5"/>
+    <option name="playerProperty" value="switch" count="true"/>
+    <option name="activateTrigger" value="triggerAttachment_FlipExploreSwitches_4_InnerSouthwesternRidge5:1:false:false:false:true"/>
 </attachment>
-<attachment name="triggerAttachment_ModifyXP21_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
-    <option name="unitType" value="Dead-Crystal-Golem"/>
-    <option name="unitProperty" value="createsResourcesList" count="6:Gold"/>
-    <option name="activateTrigger" value="triggerAttachment_ModifyXP22_Raider:1:false:false:false:false"/>
+<attachment name="triggerAttachment_FlipExploreSwitches_2_InnerSouthwesternRidge5" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+    <option name="chance" value="5:8"/>
+    <option name="players" value="Hero"/>
+    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachment_Explore2_InnerSouthwesternRidge5"/>
+    <option name="playerProperty" value="switch" count="true"/>
+    <option name="activateTrigger" value="triggerAttachment_FlipExploreSwitches_3_InnerSouthwesternRidge5:1:false:false:false:true"/>
 </attachment>
-<attachment name="triggerAttachment_ModifyXP20_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
-    <option name="unitType" value="Dead-Treant"/>
-    <option name="unitProperty" value="createsResourcesList" count="6:Gold"/>
-    <option name="activateTrigger" value="triggerAttachment_ModifyXP21_Raider:1:false:false:false:false"/>
+<attachment name="triggerAttachment_FlipExploreSwitches_1_InnerSouthwesternRidge5" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+    <option name="players" value="Hero"/>
+    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachment_Explore1_InnerSouthwesternRidge5"/>
+    <option name="playerProperty" value="switch" count="true"/>
+    <option name="activateTrigger" value="triggerAttachment_FlipExploreSwitches_2_InnerSouthwesternRidge5:1:false:false:false:true"/>
 </attachment>
-<attachment name="triggerAttachment_ModifyXP19_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
-    <option name="unitType" value="Dead-Ghost"/>
-    <option name="unitProperty" value="createsResourcesList" count="6:Gold"/>
-    <option name="activateTrigger" value="triggerAttachment_ModifyXP20_Raider:1:false:false:false:false"/>
+
+
+<attachment name="userActionAttachment_ExploreCave_InnerSouthwesternRidge5" attachTo="Hero" javaClass="games.strategy.triplea.attachments.UserActionAttachment" type="player">
+    <option name="conditions" value="conditionRevealFrom_InnerSouthwesternRidge5:conditionAttachment_Unexplored_InnerSouthwesternRidge5"/>            
+    <option name="text" value="EXPLORE_CAVE"/>
+    <option name="activateTrigger" value="triggerAttachment_FlipExploreSwitches_1_InnerSouthwesternRidge5:1:true:false:false:false"/>
 </attachment>
-<attachment name="triggerAttachment_ModifyXP18_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
-    <option name="unitType" value="Dead-Fire-Elemental"/>
-    <option name="unitProperty" value="createsResourcesList" count="2:Gold"/>
-    <option name="activateTrigger" value="triggerAttachment_ModifyXP19_Raider:1:false:false:false:false"/>
+
+
+<attachment name="triggerAttachment_RevealExploration1_InnerSouthwesternRidge5" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+    <option name="conditions" value="conditionRevealFrom_InnerSouthwesternRidge5:conditionAttachment_Explore1_InnerSouthwesternRidge5:conditionAttachment_Explore2_InnerSouthwesternRidge5"/>
+    <option name="conditionType" value="2" />
+    <option name="when" value="after:HeroUserActions"/>
+    <option name="notification" value="Ex_Nothing"/>
+    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachment_Unexplored_InnerSouthwesternRidge5"/>
+    <option name="playerProperty" value="switch" count="false"/>
 </attachment>
-<attachment name="triggerAttachment_ModifyXP17_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
-    <option name="unitType" value="Dead-Banshee"/>
-    <option name="unitProperty" value="createsResourcesList" count="5:Gold"/>
-    <option name="activateTrigger" value="triggerAttachment_ModifyXP18_Raider:1:false:false:false:false"/>
+<attachment name="triggerAttachment_RevealExploration2_InnerSouthwesternRidge5" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+    <option name="conditions" value="conditionRevealFrom_InnerSouthwesternRidge5:conditionAttachment_Explore2_InnerSouthwesternRidge5:conditionAttachment_Explore3_InnerSouthwesternRidge5"/>
+    <option name="conditionType" value="2" />
+    <option name="when" value="after:HeroUserActions"/>
+    <option name="placement" value="Inner Southwestern Ridge 5:Loot5"/>
+    <option name="notification" value="Ex_Loot5"/>
+    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachment_Unexplored_InnerSouthwesternRidge5"/>
+    <option name="playerProperty" value="switch" count="false"/>
 </attachment>
-<attachment name="triggerAttachment_ModifyXP16_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
-    <option name="unitType" value="Dead-Wraith"/>
-    <option name="unitProperty" value="createsResourcesList" count="5:Gold"/>
-    <option name="activateTrigger" value="triggerAttachment_ModifyXP17_Raider:1:false:false:false:false"/>
+<attachment name="triggerAttachment_RevealExploration3_InnerSouthwesternRidge5" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+    <option name="conditions" value="conditionRevealFrom_InnerSouthwesternRidge5:conditionAttachment_Explore3_InnerSouthwesternRidge5:conditionAttachment_Explore4_InnerSouthwesternRidge5"/>
+    <option name="conditionType" value="2" />
+    <option name="when" value="after:HeroUserActions"/>
+    <option name="placement" value="Inner Southwestern Ridge 5:Potion-of-Healing"/>
+    <option name="notification" value="Ex_PotionofHealing"/>
+    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachment_Unexplored_InnerSouthwesternRidge5"/>
+    <option name="playerProperty" value="switch" count="false"/>
 </attachment>
-<attachment name="triggerAttachment_ModifyXP15_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
-    <option name="unitType" value="Dead-Werewolf"/>
-    <option name="unitProperty" value="createsResourcesList" count="5:Gold"/>
-    <option name="activateTrigger" value="triggerAttachment_ModifyXP16_Raider:1:false:false:false:false"/>
+<attachment name="triggerAttachment_RevealExploration4_InnerSouthwesternRidge5" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+    <option name="conditions" value="conditionRevealFrom_InnerSouthwesternRidge5:conditionAttachment_Explore4_InnerSouthwesternRidge5:conditionAttachment_Explore5_InnerSouthwesternRidge5"/>
+    <option name="conditionType" value="2" />
+    <option name="when" value="after:HeroUserActions"/>
+    <option name="placement" value="Inner Southwestern Ridge 5:Pitfall"/>
+    <option name="notification" value="Ex_Pitfall"/>
+    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachment_Unexplored_InnerSouthwesternRidge5"/>
+    <option name="playerProperty" value="switch" count="false"/>
 </attachment>
-<attachment name="triggerAttachment_ModifyXP14_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
-    <option name="unitType" value="Dead-Water-Elemental"/>
-    <option name="unitProperty" value="createsResourcesList" count="2:Gold"/>
-    <option name="activateTrigger" value="triggerAttachment_ModifyXP15_Raider:1:false:false:false:false"/>
+<attachment name="triggerAttachment_RevealExploration5_InnerSouthwesternRidge5" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+    <option name="conditions" value="conditionRevealFrom_InnerSouthwesternRidge5:conditionAttachment_Explore5_InnerSouthwesternRidge5"/>
+    <option name="when" value="after:HeroUserActions"/>
+    <option name="placement" value="Inner Southwestern Ridge 5:Spell-of-Earthquake"/>
+    <option name="notification" value="Ex_SpellofEarthquake"/>
+    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachment_Unexplored_InnerSouthwesternRidge5"/>
+    <option name="playerProperty" value="switch" count="false"/>
 </attachment>
-<attachment name="triggerAttachment_ModifyXP13_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
-    <option name="unitType" value="Dead-Spectre"/>
-    <option name="unitProperty" value="createsResourcesList" count="4:Gold"/>
-    <option name="activateTrigger" value="triggerAttachment_ModifyXP14_Raider:1:false:false:false:false"/>
+
+
+<attachment name="triggerAttachment_RemoveLoot_InnerSouthwesternRidge5" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+    <option name="conditions" value="conditionAttachment_Unexplored_InnerSouthwesternRidge5"/>
+    <option name="conditionType" value="0"/>
+    <option name="removeUnits" value="Inner Southwestern Ridge 5:Loot5"/>
+    <option name="removeUnits" value="Inner Southwestern Ridge 5:Pitfall"/>
+    <option name="players" value="Hero"/>
+    <option name="uses" value="1"/>
+    <option name="when" value="after:HeroEndTurn"/>
 </attachment>
-<attachment name="triggerAttachment_ModifyXP12_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
-    <option name="unitType" value="Dead-Hag"/>
-    <option name="unitProperty" value="createsResourcesList" count="4:Gold"/>
-    <option name="activateTrigger" value="triggerAttachment_ModifyXP13_Raider:1:false:false:false:false"/>
+
+
+<attachment name="triggerAttachment_Reset_Explore1_InnerSouthwesternRidge5" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+    <option name="conditions" value="conditionAttachment_Explore1_InnerSouthwesternRidge5"/>
+    <option name="when" value="before:MazeEndTurn"/>
+    <option name="players" value="Hero"/>
+    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachment_Explore1_InnerSouthwesternRidge5"/>
+    <option name="playerProperty" value="switch" count="false"/>
 </attachment>
-<attachment name="triggerAttachment_ModifyXP11_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
-    <option name="unitType" value="Dead-Giant-Crab"/>
-    <option name="unitProperty" value="createsResourcesList" count="2:Gold"/>
-    <option name="activateTrigger" value="triggerAttachment_ModifyXP12_Raider:1:false:false:false:false"/>
+<attachment name="triggerAttachment_Reset_Explore2_InnerSouthwesternRidge5" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+    <option name="conditions" value="conditionAttachment_Explore2_InnerSouthwesternRidge5"/>
+    <option name="when" value="before:MazeEndTurn"/>
+    <option name="players" value="Hero"/>
+    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachment_Explore2_InnerSouthwesternRidge5"/>
+    <option name="playerProperty" value="switch" count="false"/>
 </attachment>
-<attachment name="triggerAttachment_ModifyXP10_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
-    <option name="unitType" value="Dead-Ghast"/>
-    <option name="unitProperty" value="createsResourcesList" count="2:Gold"/>
-    <option name="activateTrigger" value="triggerAttachment_ModifyXP11_Raider:1:false:false:false:false"/>
+<attachment name="triggerAttachment_Reset_Explore3_InnerSouthwesternRidge5" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+    <option name="conditions" value="conditionAttachment_Explore3_InnerSouthwesternRidge5"/>
+    <option name="when" value="before:MazeEndTurn"/>
+    <option name="players" value="Hero"/>
+    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachment_Explore3_InnerSouthwesternRidge5"/>
+    <option name="playerProperty" value="switch" count="false"/>
 </attachment>
-<attachment name="triggerAttachment_ModifyXP9_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
-    <option name="unitType" value="Dead-Air-Elemental"/>
-    <option name="unitProperty" value="createsResourcesList" count="2:Gold"/>
-    <option name="activateTrigger" value="triggerAttachment_ModifyXP10_Raider:1:false:false:false:false"/>
+<attachment name="triggerAttachment_Reset_Explore4_InnerSouthwesternRidge5" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+    <option name="conditions" value="conditionAttachment_Explore4_InnerSouthwesternRidge5"/>
+    <option name="when" value="before:MazeEndTurn"/>
+    <option name="players" value="Hero"/>
+    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachment_Explore4_InnerSouthwesternRidge5"/>
+    <option name="playerProperty" value="switch" count="false"/>
 </attachment>
-<attachment name="triggerAttachment_ModifyXP8_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
-    <option name="unitType" value="Dead-Wight"/>
-    <option name="unitProperty" value="createsResourcesList" count="3:Gold"/>
-    <option name="activateTrigger" value="triggerAttachment_ModifyXP9_Raider:1:false:false:false:false"/>
-</attachment>
-<attachment name="triggerAttachment_ModifyXP7_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
-    <option name="unitType" value="Dead-Succubus"/>
-    <option name="unitProperty" value="createsResourcesList" count="4:Gold"/>
-    <option name="activateTrigger" value="triggerAttachment_ModifyXP8_Raider:1:false:false:false:false"/>
-</attachment>
-<attachment name="triggerAttachment_ModifyXP6_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
-    <option name="unitType" value="Dead-Giant-Spider"/>
-    <option name="unitProperty" value="createsResourcesList" count="2:Gold"/>
-    <option name="activateTrigger" value="triggerAttachment_ModifyXP7_Raider:1:false:false:false:false"/>
-</attachment>
-<attachment name="triggerAttachment_ModifyXP5_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
-    <option name="unitType" value="Dead-Ghoul"/>
-    <option name="unitProperty" value="createsResourcesList" count="3:Gold"/>
-    <option name="activateTrigger" value="triggerAttachment_ModifyXP6_Raider:1:false:false:false:false"/>
-</attachment>
-<attachment name="triggerAttachment_ModifyXP4_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
-    <option name="unitType" value="Dead-Giant-Scorpion"/>
-    <option name="unitProperty" value="createsResourcesList" count="2:Gold"/>
-    <option name="activateTrigger" value="triggerAttachment_ModifyXP5_Raider:1:false:false:false:false"/>
-</attachment>
-<attachment name="triggerAttachment_ModifyXP3_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
-    <option name="unitType" value="Dead-Zombie"/>
-    <option name="unitProperty" value="createsResourcesList" count="3:Gold"/>
-    <option name="activateTrigger" value="triggerAttachment_ModifyXP4_Raider:1:false:false:false:false"/>
-</attachment>
-<attachment name="triggerAttachment_ModifyXP2_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
-    <option name="unitType" value="Dead-Skeleton"/>
-    <option name="unitProperty" value="createsResourcesList" count="3:Gold"/>
-    <option name="activateTrigger" value="triggerAttachment_ModifyXP3_Raider:1:false:false:false:false"/>
-</attachment>
-<attachment name="triggerAttachment_ModifyXP1_Raider" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
-    <option name="unitType" value="Dead-Ooze"/>
-    <option name="unitProperty" value="createsResourcesList" count="3:Gold"/>
-    <option name="activateTrigger" value="triggerAttachment_ModifyXP2_Raider:1:false:false:false:false"/>
+<attachment name="triggerAttachment_Reset_Explore5_InnerSouthwesternRidge5" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+    <option name="conditions" value="conditionAttachment_Explore5_InnerSouthwesternRidge5"/>
+    <option name="when" value="before:MazeEndTurn"/>
+    <option name="players" value="Hero"/>
+    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachment_Explore5_InnerSouthwesternRidge5"/>
+    <option name="playerProperty" value="switch" count="false"/>
 </attachment>
