@@ -1,155 +1,155 @@
-<attachment name="conditionAttachment_Explore1_InnerSouthwesternRidge5" attachTo="Hero" javaClass="RulesAttachment" type="player">
+<attachment name="conditionAttachment_Explore1_InnerNEPath10" attachTo="Hero" javaClass="RulesAttachment" type="player">
     <option name="switch" value="false"/>
 </attachment>
-<attachment name="conditionAttachment_Explore2_InnerSouthwesternRidge5" attachTo="Hero" javaClass="RulesAttachment" type="player">
+<attachment name="conditionAttachment_Explore2_InnerNEPath10" attachTo="Hero" javaClass="RulesAttachment" type="player">
     <option name="switch" value="false"/>
 </attachment>
-<attachment name="conditionAttachment_Explore3_InnerSouthwesternRidge5" attachTo="Hero" javaClass="RulesAttachment" type="player">
+<attachment name="conditionAttachment_Explore3_InnerNEPath10" attachTo="Hero" javaClass="RulesAttachment" type="player">
     <option name="switch" value="false"/>
 </attachment>
-<attachment name="conditionAttachment_Explore4_InnerSouthwesternRidge5" attachTo="Hero" javaClass="RulesAttachment" type="player">
+<attachment name="conditionAttachment_Explore4_InnerNEPath10" attachTo="Hero" javaClass="RulesAttachment" type="player">
     <option name="switch" value="false"/>
 </attachment>
-<attachment name="conditionAttachment_Explore5_InnerSouthwesternRidge5" attachTo="Hero" javaClass="RulesAttachment" type="player">
+<attachment name="conditionAttachment_Explore5_InnerNEPath10" attachTo="Hero" javaClass="RulesAttachment" type="player">
     <option name="switch" value="false"/>
 </attachment>
 
 
-<attachment name="conditionAttachment_Unexplored_InnerSouthwesternRidge5" attachTo="Hero" javaClass="RulesAttachment" type="player">
+<attachment name="conditionAttachment_Unexplored_InnerNEPath10" attachTo="Hero" javaClass="RulesAttachment" type="player">
     <option name="switch" value="true"/>
 </attachment>
 
 
-<attachment name="triggerAttachment_FlipExploreSwitches_5_InnerSouthwesternRidge5" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+<attachment name="triggerAttachment_FlipExploreSwitches_5_InnerNEPath10" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
     <option name="chance" value="6:8"/>
     <option name="players" value="Hero"/>
-    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachment_Explore5_InnerSouthwesternRidge5"/>
+    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachment_Explore5_InnerNEPath10"/>
     <option name="playerProperty" value="switch" count="true"/>
 </attachment>
-<attachment name="triggerAttachment_FlipExploreSwitches_4_InnerSouthwesternRidge5" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+<attachment name="triggerAttachment_FlipExploreSwitches_4_InnerNEPath10" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
     <option name="chance" value="6:8"/>
     <option name="players" value="Hero"/>
-    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachment_Explore4_InnerSouthwesternRidge5"/>
+    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachment_Explore4_InnerNEPath10"/>
     <option name="playerProperty" value="switch" count="true"/>
-    <option name="activateTrigger" value="triggerAttachment_FlipExploreSwitches_5_InnerSouthwesternRidge5:1:false:false:false:true"/>
+    <option name="activateTrigger" value="triggerAttachment_FlipExploreSwitches_5_InnerNEPath10:1:false:false:false:true"/>
 </attachment>
-<attachment name="triggerAttachment_FlipExploreSwitches_3_InnerSouthwesternRidge5" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+<attachment name="triggerAttachment_FlipExploreSwitches_3_InnerNEPath10" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
     <option name="chance" value="6:8"/>
     <option name="players" value="Hero"/>
-    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachment_Explore3_InnerSouthwesternRidge5"/>
+    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachment_Explore3_InnerNEPath10"/>
     <option name="playerProperty" value="switch" count="true"/>
-    <option name="activateTrigger" value="triggerAttachment_FlipExploreSwitches_4_InnerSouthwesternRidge5:1:false:false:false:true"/>
+    <option name="activateTrigger" value="triggerAttachment_FlipExploreSwitches_4_InnerNEPath10:1:false:false:false:true"/>
 </attachment>
-<attachment name="triggerAttachment_FlipExploreSwitches_2_InnerSouthwesternRidge5" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+<attachment name="triggerAttachment_FlipExploreSwitches_2_InnerNEPath10" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
     <option name="chance" value="5:8"/>
     <option name="players" value="Hero"/>
-    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachment_Explore2_InnerSouthwesternRidge5"/>
+    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachment_Explore2_InnerNEPath10"/>
     <option name="playerProperty" value="switch" count="true"/>
-    <option name="activateTrigger" value="triggerAttachment_FlipExploreSwitches_3_InnerSouthwesternRidge5:1:false:false:false:true"/>
+    <option name="activateTrigger" value="triggerAttachment_FlipExploreSwitches_3_InnerNEPath10:1:false:false:false:true"/>
 </attachment>
-<attachment name="triggerAttachment_FlipExploreSwitches_1_InnerSouthwesternRidge5" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+<attachment name="triggerAttachment_FlipExploreSwitches_1_InnerNEPath10" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
     <option name="players" value="Hero"/>
-    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachment_Explore1_InnerSouthwesternRidge5"/>
+    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachment_Explore1_InnerNEPath10"/>
     <option name="playerProperty" value="switch" count="true"/>
-    <option name="activateTrigger" value="triggerAttachment_FlipExploreSwitches_2_InnerSouthwesternRidge5:1:false:false:false:true"/>
+    <option name="activateTrigger" value="triggerAttachment_FlipExploreSwitches_2_InnerNEPath10:1:false:false:false:true"/>
 </attachment>
 
 
-<attachment name="userActionAttachment_ExploreCave_InnerSouthwesternRidge5" attachTo="Hero" javaClass="games.strategy.triplea.attachments.UserActionAttachment" type="player">
-    <option name="conditions" value="conditionRevealFrom_InnerSouthwesternRidge5:conditionAttachment_Unexplored_InnerSouthwesternRidge5"/>            
-    <option name="text" value="EXPLORE_CAVE"/>
-    <option name="activateTrigger" value="triggerAttachment_FlipExploreSwitches_1_InnerSouthwesternRidge5:1:true:false:false:false"/>
+<attachment name="userActionAttachment_ExploreCave_InnerNEPath10" attachTo="Hero" javaClass="games.strategy.triplea.attachments.UserActionAttachment" type="player">
+    <option name="conditions" value="conditionRevealFrom_InnerNEPath10:conditionAttachment_Unexplored_InnerNEPath10"/>            
+    <option name="text" value="INVESTIGATE_SHRINE"/>
+    <option name="activateTrigger" value="triggerAttachment_FlipExploreSwitches_1_InnerNEPath10:1:true:false:false:false"/>
 </attachment>
 
 
-<attachment name="triggerAttachment_RevealExploration1_InnerSouthwesternRidge5" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
-    <option name="conditions" value="conditionRevealFrom_InnerSouthwesternRidge5:conditionAttachment_Explore1_InnerSouthwesternRidge5:conditionAttachment_Explore2_InnerSouthwesternRidge5"/>
+<attachment name="triggerAttachment_RevealExploration1_InnerNEPath10" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+    <option name="conditions" value="conditionRevealFrom_InnerNEPath10:conditionAttachment_Explore1_InnerNEPath10:conditionAttachment_Explore2_InnerNEPath10"/>
     <option name="conditionType" value="2" />
     <option name="when" value="after:HeroUserActions"/>
     <option name="notification" value="Ex_Nothing"/>
-    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachment_Unexplored_InnerSouthwesternRidge5"/>
+    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachment_Unexplored_InnerNEPath10"/>
     <option name="playerProperty" value="switch" count="false"/>
 </attachment>
-<attachment name="triggerAttachment_RevealExploration2_InnerSouthwesternRidge5" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
-    <option name="conditions" value="conditionRevealFrom_InnerSouthwesternRidge5:conditionAttachment_Explore2_InnerSouthwesternRidge5:conditionAttachment_Explore3_InnerSouthwesternRidge5"/>
+<attachment name="triggerAttachment_RevealExploration2_InnerNEPath10" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+    <option name="conditions" value="conditionRevealFrom_InnerNEPath10:conditionAttachment_Explore2_InnerNEPath10:conditionAttachment_Explore3_InnerNEPath10"/>
     <option name="conditionType" value="2" />
     <option name="when" value="after:HeroUserActions"/>
-    <option name="placement" value="Inner Southwestern Ridge 5:Loot5"/>
-    <option name="notification" value="Ex_Loot5"/>
-    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachment_Unexplored_InnerSouthwesternRidge5"/>
+    <option name="placement" value="Inner NE Path 10:Loot3"/>
+    <option name="notification" value="Ex_Loot3"/>
+    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachment_Unexplored_InnerNEPath10"/>
     <option name="playerProperty" value="switch" count="false"/>
 </attachment>
-<attachment name="triggerAttachment_RevealExploration3_InnerSouthwesternRidge5" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
-    <option name="conditions" value="conditionRevealFrom_InnerSouthwesternRidge5:conditionAttachment_Explore3_InnerSouthwesternRidge5:conditionAttachment_Explore4_InnerSouthwesternRidge5"/>
+<attachment name="triggerAttachment_RevealExploration3_InnerNEPath10" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+    <option name="conditions" value="conditionRevealFrom_InnerNEPath10:conditionAttachment_Explore3_InnerNEPath10:conditionAttachment_Explore4_InnerNEPath10"/>
     <option name="conditionType" value="2" />
     <option name="when" value="after:HeroUserActions"/>
-    <option name="placement" value="Inner Southwestern Ridge 5:Potion-of-Healing"/>
-    <option name="notification" value="Ex_PotionofHealing"/>
-    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachment_Unexplored_InnerSouthwesternRidge5"/>
+    <option name="placement" value="Inner NE Path 10:Loot7"/>
+    <option name="notification" value="Ex_Loot7"/>
+    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachment_Unexplored_InnerNEPath10"/>
     <option name="playerProperty" value="switch" count="false"/>
 </attachment>
-<attachment name="triggerAttachment_RevealExploration4_InnerSouthwesternRidge5" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
-    <option name="conditions" value="conditionRevealFrom_InnerSouthwesternRidge5:conditionAttachment_Explore4_InnerSouthwesternRidge5:conditionAttachment_Explore5_InnerSouthwesternRidge5"/>
+<attachment name="triggerAttachment_RevealExploration4_InnerNEPath10" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+    <option name="conditions" value="conditionRevealFrom_InnerNEPath10:conditionAttachment_Explore4_InnerNEPath10:conditionAttachment_Explore5_InnerNEPath10"/>
     <option name="conditionType" value="2" />
     <option name="when" value="after:HeroUserActions"/>
-    <option name="placement" value="Inner Southwestern Ridge 5:Pitfall"/>
-    <option name="notification" value="Ex_Pitfall"/>
-    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachment_Unexplored_InnerSouthwesternRidge5"/>
+    <option name="placement" value="Inner NE Path 10:DeusEx"/>
+    <option name="notification" value="Ex_DeusEx"/>
+    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachment_Unexplored_InnerNEPath10"/>
     <option name="playerProperty" value="switch" count="false"/>
 </attachment>
-<attachment name="triggerAttachment_RevealExploration5_InnerSouthwesternRidge5" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
-    <option name="conditions" value="conditionRevealFrom_InnerSouthwesternRidge5:conditionAttachment_Explore5_InnerSouthwesternRidge5"/>
-    <option name="when" value="after:HeroUserActions"/>
-    <option name="placement" value="Inner Southwestern Ridge 5:Spell-of-Earthquake"/>
-    <option name="notification" value="Ex_SpellofEarthquake"/>
-    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachment_Unexplored_InnerSouthwesternRidge5"/>
+<attachment name="triggerAttachment_RevealExploration5_InnerNEPath10" attachTo="Hero" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+    <option name="conditions" value="conditionRevealFrom_InnerNEPath10:conditionAttachment_Explore5_InnerNEPath10"/>
+    <option name="when" value="after:HeroUserActions"/>    
+     <option name="placement" value="Inner NE Path 10:DeusEx"/>
+    <option name="notification" value="Ex_DeusEx"/>
+    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachment_Unexplored_InnerNEPath10"/>
     <option name="playerProperty" value="switch" count="false"/>
 </attachment>
 
 
-<attachment name="triggerAttachment_RemoveLoot_InnerSouthwesternRidge5" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
-    <option name="conditions" value="conditionAttachment_Unexplored_InnerSouthwesternRidge5"/>
+<attachment name="triggerAttachment_RemoveLoot_InnerNEPath10" attachTo="Maze" javaClass="games.strategy.triplea.attachments.TriggerAttachment" type="player">
+    <option name="conditions" value="conditionAttachment_Unexplored_InnerNEPath10"/>
     <option name="conditionType" value="0"/>
-    <option name="removeUnits" value="Inner Southwestern Ridge 5:Loot5"/>
-    <option name="removeUnits" value="Inner Southwestern Ridge 5:Pitfall"/>
+    <option name="removeUnits" value="Inner NE Path 10:Loot3"/>
+    <option name="removeUnits" value="Inner NE Path 10:Loot7"/>
     <option name="players" value="Hero"/>
     <option name="uses" value="1"/>
     <option name="when" value="after:HeroEndTurn"/>
 </attachment>
 
 
-<attachment name="triggerAttachment_Reset_Explore1_InnerSouthwesternRidge5" attachTo="Maze" javaClass="TriggerAttachment" type="player">
-    <option name="conditions" value="conditionAttachment_Explore1_InnerSouthwesternRidge5"/>
+<attachment name="triggerAttachment_Reset_Explore1_InnerNEPath10" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+    <option name="conditions" value="conditionAttachment_Explore1_InnerNEPath10"/>
     <option name="when" value="before:MazeEndTurn"/>
     <option name="players" value="Hero"/>
-    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachment_Explore1_InnerSouthwesternRidge5"/>
+    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachment_Explore1_InnerNEPath10"/>
     <option name="playerProperty" value="switch" count="false"/>
 </attachment>
-<attachment name="triggerAttachment_Reset_Explore2_InnerSouthwesternRidge5" attachTo="Maze" javaClass="TriggerAttachment" type="player">
-    <option name="conditions" value="conditionAttachment_Explore2_InnerSouthwesternRidge5"/>
+<attachment name="triggerAttachment_Reset_Explore2_InnerNEPath10" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+    <option name="conditions" value="conditionAttachment_Explore2_InnerNEPath10"/>
     <option name="when" value="before:MazeEndTurn"/>
     <option name="players" value="Hero"/>
-    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachment_Explore2_InnerSouthwesternRidge5"/>
+    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachment_Explore2_InnerNEPath10"/>
     <option name="playerProperty" value="switch" count="false"/>
 </attachment>
-<attachment name="triggerAttachment_Reset_Explore3_InnerSouthwesternRidge5" attachTo="Maze" javaClass="TriggerAttachment" type="player">
-    <option name="conditions" value="conditionAttachment_Explore3_InnerSouthwesternRidge5"/>
+<attachment name="triggerAttachment_Reset_Explore3_InnerNEPath10" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+    <option name="conditions" value="conditionAttachment_Explore3_InnerNEPath10"/>
     <option name="when" value="before:MazeEndTurn"/>
     <option name="players" value="Hero"/>
-    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachment_Explore3_InnerSouthwesternRidge5"/>
+    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachment_Explore3_InnerNEPath10"/>
     <option name="playerProperty" value="switch" count="false"/>
 </attachment>
-<attachment name="triggerAttachment_Reset_Explore4_InnerSouthwesternRidge5" attachTo="Maze" javaClass="TriggerAttachment" type="player">
-    <option name="conditions" value="conditionAttachment_Explore4_InnerSouthwesternRidge5"/>
+<attachment name="triggerAttachment_Reset_Explore4_InnerNEPath10" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+    <option name="conditions" value="conditionAttachment_Explore4_InnerNEPath10"/>
     <option name="when" value="before:MazeEndTurn"/>
     <option name="players" value="Hero"/>
-    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachment_Explore4_InnerSouthwesternRidge5"/>
+    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachment_Explore4_InnerNEPath10"/>
     <option name="playerProperty" value="switch" count="false"/>
 </attachment>
-<attachment name="triggerAttachment_Reset_Explore5_InnerSouthwesternRidge5" attachTo="Maze" javaClass="TriggerAttachment" type="player">
-    <option name="conditions" value="conditionAttachment_Explore5_InnerSouthwesternRidge5"/>
+<attachment name="triggerAttachment_Reset_Explore5_InnerNEPath10" attachTo="Maze" javaClass="TriggerAttachment" type="player">
+    <option name="conditions" value="conditionAttachment_Explore5_InnerNEPath10"/>
     <option name="when" value="before:MazeEndTurn"/>
     <option name="players" value="Hero"/>
-    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachment_Explore5_InnerSouthwesternRidge5"/>
+    <option name="playerAttachmentName" value="RulesAttachment" count="conditionAttachment_Explore5_InnerNEPath10"/>
     <option name="playerProperty" value="switch" count="false"/>
 </attachment>
