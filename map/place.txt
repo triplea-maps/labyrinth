@@ -65,7 +65,7 @@ The Precipice  (2020,3921)  (1915,3933)  (2123,3939)  (1813,3986)  (2225,3993)  
 Inner West Path North 2  (785,1757)  (850,1880)  (733,1875)  | overflowToLeft=true
 Inner West Path North 1  (523,1887)  (578,1760)  (461,1761)  | overflowToLeft=true
 Inner West Path North 5  (1542,1911)  (1590,1790)  (1478,1804)  | overflowToLeft=true
-Inner West Path North 4  (1324,1752)  (1324,1752)  (1328,1865)  (1215,1871)  | overflowToLeft=true
+Inner West Path North 4  (1324,1752)  (1324,1834)  (1241,1834)  | overflowToLeft=true
 Inner West Path North 3  (1039,1885)  (1086,1773)  (979,1769)  | overflowToLeft=true
 Scenic Vista  (2172,2366)  (2169,2494)  (2055,2366)  (2051,2491)  (1940,2367)  (1930,2497)  (1826,2365)  (1815,2503)  | overflowToLeft=true
 Outer SE Path 1  (2528,3706)  (2411,3773)  (2404,3650)  | overflowToLeft=true
